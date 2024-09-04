@@ -1,20 +1,51 @@
+#import "@preview/cetz:0.2.2": canvas, draw, vector, matrix
+
 #set text(lang: "sv")
 #set page(numbering: "1", header: align(center, smallcaps[FMAB22: Lineär algebra]))
 
 #let hr = line(length: 100%, stroke: 0.5pt)
+
+#let e1 = $overline(e_1)$
+#let e2 = $overline(e_2)$
+#let e3 = $overline(e_3)$
+#let en = $overline(e_n)$
+
+#let u1 = $overline(u_1)$
+#let u2 = $overline(u_2)$
+#let u3 = $overline(u_3)$
+#let un = $overline(u_n)$
+
+#let vu = $overline(u)$
+#let v1 = $overline(v_1)$
+#let v2 = $overline(v_2)$
+#let v3 = $overline(v_3)$
+#let vv = $overline(v)$
+
+#let zv = $overline(0)$
+
+#outline(indent: 1em)
+#pagebreak(weak: true)
+
+#let important(content) = rect(fill: red.lighten(90%), stroke: red, content)
+
+#let lecture = (month, day, content) => [
+  == #datetime(year: 2024, month: month, day: day).display()
+
+  #content
+]
 
 // #outline(indent: 1em)
 // #pagebreak(weak: true)
 
 = Den stora ekvivalensen
 
-$F$ är en linjär avbildning $RR^n->RR^n$ som ges av matrisen $A$ i bas $(e_1,e_2,dots.c,e_n)$. Följande påståenden är ekvivalenta:
+$F$ är en linjär avbildning $RR^n->RR^n$ som ges av matrisen $A$ i bas $(e1,e2,dots.c,en)$. Följande påståenden är ekvivalenta:
 
 - $F$ är injektiv
 - $F$ är surjektiv
 - $F$ är bijektiv
-- $F(u)=0 "omm" u=0$
-- $(F(e_1),F(e_2),dots.c,F(e_n))$ är en bas för $RR^n$
+- $F(vu)=zv "omm" vu=zv$
+- $(F(e1),F(e2),dots.c,F(en))$ är en bas för $RR^n$
 - $dim N(F)=0$
 - $dim V(F)=n$
 - Kolonnvektorer i $A$ är linjärt oberoende
@@ -23,14 +54,13 @@ $F$ är en linjär avbildning $RR^n->RR^n$ som ges av matrisen $A$ i bas $(e_1,e
 - $det A!=0$
 - $A$ kan reduceras till $E$ genom elementära radoperationer
 - $A X=Y$ har unik lösning för alla $Y$
-- $A X=0$ har endast den triviala lösningen
+- $A X=zv$ har endast den triviala lösningen
 - $F^(-1)$ existerar och har matris $A^(-1)$
 - $0$ är inte ett egenvärde till $A$
 
 = Föreläsningar
 
-== 2024-09-02
-
+#lecture(9, 2)[
 Ett homogent linjärt ekvationssystem med fler variabler än ekvationer har oändligt många lösningar.
 
 Ett homogent system med 1 ekvation och minst 2 variabler har oändligt många lösningar:
@@ -66,23 +96,65 @@ $ mat(
 ) $
 
 Vi har ett nytt ekvationssystem med $p-1$ ekvationer och $n-1$ obekanta.
+]
 
-== 2024-09-03
-
-Givet basen $(e_1, e_2)$ och vektorn $u$ med koordinaterna $(x_1, x_2)$, är $x_1 e_1$ $u$:s projektion på $e_1$ i riktning $e_2$.
+#lecture(9, 3)[
+Givet basen $(e1, e2)$ och vektorn $u$ med koordinaterna $(x_1, x_2)$, är $x_1 e1$ $u$:s projektion på $e1$ i riktning $e2$.
 
 #hr
 
-Vektorerna $u_1, u_2, dots.c, u_n$ kallas linjärt beroende om
+Vektorerna $u1, u2, dots.c, un$ kallas linjärt beroende om
 
-$ arrow(0) = x_1 u_1 + x_2 u_2+dots.c+x_n u_n $ där minst en av $x_1, x_2, dots.c, x_n$ är nollskild.
+$ zv = x_1 u1 + x_2 u2+dots.c+x_n un $ där minst en av $x_1, x_2, dots.c, x_n$ är nollskild.
 
 #hr
 
 Om
-$ u=x_1 e_1+x_2 e_2+x_3 e_3=y_1 e_1+y_2 e_2+y_3 e_3 $
-i basen $(e_1,e_2,e_3)$ där
+$ u=x_1 e1+x_2 e2+x_3 e3=y_1 e1+y_2 e2+y_3 e3 $
+i basen $(e1,e2,e3)$ där
 $ (x_1,x_2,x_3)!=(y_1,y_2,y_3) $
 så är
-$ (y_1-x_1)e_1+(y_2-x_2)e_2+(y_3-x_3)e_3=arrow(0) $
-men då finns det minst en nollskild skalär, så $(e_1,e_2,e_3)$ är linjärt beroende och ej en bas. #emoji.sparkles
+$ (y_1-x_1)e1+(y_2-x_2)e2+(y_3-x_3)e3=zv $
+men då finns det minst en nollskild skalär, så $(e1,e2,e3)$ är linjärt beroende och ej en bas. #emoji.sparkles
+
+#hr
+
+#important[Ett homogent linjärt ekvationssystem kan bara ha en (den triviala) eller oändligt många lösningar:
+
+Antag att det finns _en_ lösning $L=(x_1, x_2, dots.c, x_n)$ till systemet
+$ cases(a_(1,1)x_1+a_(1,2)x_2+dots.c+a_(1,p)=0,
+ a_(2,1)x_1+a_(2,2)x_2+dots.c+a_(2,p)=0,
+ dots.v,
+ a_(n,1)x_1+a_(n,2)x_2+dots.c+a_(n,p)=0,
+). $
+Om $L$ gör så att varje ekvation blir $0$, måste $lambda L$ (där $lambda$ är ett godtyckligt tal) också göra det, eftersom $0 lambda=0$. Det finns oändligt många $lambda$, så det finns oändligt många lösningar. #emoji.sparkles
+]
+]
+
+#lecture(9,4)[
+=== Linjer och plan i rummet på parameterform
+
+Givet en linje $L$ och två olika punkter på linjen, $P$ och $P_0$, kan linjen beskrivas på parameterform -- en startpunkt plus en riktningsvektor som skalas för att peka någonstans på linjen.
+
+Ortsvektor $overline(O P_0)$ pekar på linjens startpunkt, och vektorn $overline(P_0 P)$ avgör linjens riktning.
+
+Alla punkter på $L$ ges av
+$ overline(O P_0) + t overline(P_0 P) $ där $t in RR$.
+
+På ett liknande sätt kan ett plan $M$ i rummet skrivas på parameterform givet en godtycklig punkt på planet $P_0$ samt två nollskilda vektorer $vu$ och $vv$ och två parametrar $s, t in RR$:
+
+$ overline(O P_0) + t vu + s vv $
+
+=== Skärning mellan plan och linje i rummet
+
+En linje och ett plan kan skära varandra i noll, en eller oändligt många punkter.
+
+#important[Varje sak (linje, plan) på parameterform har _egna_, unika parametrar $s, t, dots.c$. Det går inte att använda samma parameter till flera olika saker.]
+
+=== Plan på affin form
+
+Varje plan i rummet kan skrivas på affin form#footnote[Affin form kallas även för normalform.]:
+
+$ A x+B y+C z+D=0 $
+där $A,B,C,D in RR.$
+]
