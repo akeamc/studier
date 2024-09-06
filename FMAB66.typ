@@ -19,5 +19,11 @@
 
   $ underbrace(3, "3 delar detta") $
 
-  $ 0 in.not NN $
+  $ underbrace(0 in.not NN, "Åke håller ej med") $
+]
+
+#lecture(9, 6)[
+  $ {x in RR; x = -4} $
+
+  $ 2x+3=x-1 $
 ]
