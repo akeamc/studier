@@ -1,14 +1,20 @@
 #import "@preview/cetz:0.2.2": canvas, draw, vector, matrix
 
 #set text(lang: "sv")
+#set par(justify: true)
 #set page(numbering: "1", header: align(center, smallcaps[FMAB22: Lineär algebra]))
+#set heading(numbering: "1.1")
+#set math.equation(numbering: "(1)")
 
 #let hr = line(length: 100%, stroke: 0.5pt)
 
+#let ve = $overline(e)$
 #let e1 = $overline(e_1)$
 #let e2 = $overline(e_2)$
 #let e3 = $overline(e_3)$
 #let en = $overline(e_n)$
+#let ei = $overline(e_i)$
+#let ej = $overline(e_j)$
 
 #let u1 = $overline(u_1)$
 #let u2 = $overline(u_2)$
@@ -16,6 +22,7 @@
 #let un = $overline(u_n)$
 
 #let vu = $overline(u)$
+#let vup = $overline(u')$
 #let v1 = $overline(v_1)$
 #let v2 = $overline(v_2)$
 #let v3 = $overline(v_3)$
@@ -23,13 +30,15 @@
 
 #let zv = $overline(0)$
 
+#let scalar(u, v) = $(#u | #v)$
+
 #outline(indent: 1em)
 #pagebreak(weak: true)
 
 #let important(content) = rect(fill: red.lighten(90%), stroke: red, content)
 
-#let lecture = (month, day, content) => [
-  == #datetime(year: 2024, month: month, day: day).display()
+#let lecture = (month, day, title, content) => [
+  == #datetime(year: 2024, month: month, day: day).display() -- #title
 
   #content
 ]
@@ -60,7 +69,7 @@ $F$ är en linjär avbildning $RR^n->RR^n$ som ges av matrisen $A$ i bas $(e1,e2
 
 = Föreläsningar
 
-#lecture(9, 2)[
+#lecture(9, 2, [Gausseliminering])[
 Ett homogent linjärt ekvationssystem med fler variabler än ekvationer har oändligt många lösningar.
 
 Ett homogent system med 1 ekvation och minst 2 variabler har oändligt många lösningar:
@@ -98,7 +107,7 @@ $ mat(
 Vi har ett nytt ekvationssystem med $p-1$ ekvationer och $n-1$ obekanta.
 ]
 
-#lecture(9, 3)[
+#lecture(9, 3, [Linjärt beroende])[
 Givet basen $(e1, e2)$ och vektorn $u$ med koordinaterna $(x_1, x_2)$, är $x_1 e1$ $u$:s projektion på $e1$ i riktning $e2$.
 
 #hr
@@ -131,8 +140,8 @@ Om $L$ gör så att varje ekvation blir $0$, måste $lambda L$ (där $lambda$ ä
 ]
 ]
 
-#lecture(9,4)[
-=== Linjer och plan i rummet på parameterform
+#lecture(9,4, [Linjer och plan])[
+=== Parameterform
 
 Givet en linje $L$ och två olika punkter på linjen, $P$ och $P_0$, kan linjen beskrivas på parameterform -- en startpunkt plus en riktningsvektor som skalas för att peka någonstans på linjen.
 
@@ -156,5 +165,34 @@ En linje och ett plan kan skära varandra i noll, en eller oändligt många punk
 Varje plan i rummet kan skrivas på affin form#footnote[Affin form kallas även för normalform.]:
 
 $ A x+B y+C z+D=0 $
-där $A,B,C,D in RR.$
+där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
+]
+
+#lecture(9, 9, [Skalärprodukt])[
+  $ scalar(vu, vv) = vu dot vv = |vu| |vv| cos theta $
+
+  - kommutativ
+  - distributiv
+
+  === Ortogonal projektion
+
+  $vu$ projiceras på $ve$ (där $|ve|=1$) och ger $vup$.
+
+  $ cos theta=(|vup|)/(|vu|) <=> |vup|=|vu|cos theta=scalar(vu, ve) <=> vup = scalar(vu, ve) ve $
+
+  === Koordinatform
+
+  I planet givet $vu=x_1 e_1+x_2 e_2$ och $vv=y_1 e_1+x_2 e_2$:
+
+  $ scalar(vu,vv)=scalar(x_1 e1+x_2 e2, y_1 e1+y_2 e2) \ =x_1 y_1 scalar(e1,e1)+x_1 y_2 scalar(e1,e2)+x_2 y_1 scalar(e2,e1)+x_2 y_2 scalar(e2,e2) $
+
+  Allt blir lättare om baserna är ortonormerade, dvs. $scalar(ei,ej)=delta_(i j)$ där $delta_(i j)$ är Kronecker-deltat som definieras som
+
+  $ delta_(i j)=cases(0 "om" i!=j, 1 "om" i=j) space . $ <kronecker>
+
+  === "Roliga trigonometriska formler"
+
+  Två vektorer $vu=(cos beta, sin beta)$ och $vv=(cos alpha, sin alpha)$ ligger på enhetscirkelns rand med varsin vinkel $alpha$ respektive $beta$. Vinkeln mellan dem är $alpha-beta$.
+
+  $ scalar(vu,vv)=1dot 1 dot cos(alpha-beta)=cos alpha cos beta + sin alpha sin beta quad #emoji.sparkles $
 ]

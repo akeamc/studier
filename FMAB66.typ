@@ -19,11 +19,19 @@
 
   $ underbrace(3, "3 delar detta") $
 
-  $ underbrace(0 in.not NN, "Åke håller ej med") $
+  $ underbrace(0 in.not NN, "Varken Albert eller Åke håller med") $
 ]
 
 #lecture(9, 6)[
   $ {x in RR; x = -4} $
 
   $ 2x+3=x-1 $
+]
+
+#lecture(9, 9)[
+  $ (n(n-1)(n-2) dots.c (n-(k+1)))/k! $
+
+  $ n in RR #emoji.face.surprise $
+
+  $ underbrace(1 <= m <= n-1, "Ett rätt så godtyckligt" m) $
 ]
