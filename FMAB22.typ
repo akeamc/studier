@@ -186,7 +186,7 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 
   $ scalar(vu,vv)=scalar(x_1 e1+x_2 e2, y_1 e1+y_2 e2) \ =x_1 y_1 scalar(e1,e1)+x_1 y_2 scalar(e1,e2)+x_2 y_1 scalar(e2,e1)+x_2 y_2 scalar(e2,e2) $
 
-  Allt blir lättare om baserna är ortonormerade, dvs. $scalar(ei,ej)=delta_(i j)$ där $delta_(i j)$ är Kronecker-deltat som definieras som
+  Allt blir lättare om baserna är ortonormerade, dvs. $scalar(ei,ej)=delta_(i j)$ där $delta_(i j)$ är Kroneckerdeltat som definieras som
 
   $ delta_(i j)=cases(0 "om" i!=j, 1 "om" i=j) space . $ <kronecker>
 
@@ -195,4 +195,10 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   Två vektorer $vu=(cos beta, sin beta)$ och $vv=(cos alpha, sin alpha)$ ligger på enhetscirkelns rand med varsin vinkel $alpha$ respektive $beta$. Vinkeln mellan dem är $alpha-beta$.
 
   $ scalar(vu,vv)=1dot 1 dot cos(alpha-beta)=cos alpha cos beta + sin alpha sin beta quad #emoji.sparkles $
+]
+
+#lecture(9, 10, [Ellipser, hyberbler och parabler])[
+  "Cirkel" -- perfekt rundning
+
+  $ < approx > $
 ]
