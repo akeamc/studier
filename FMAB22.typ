@@ -1,12 +1,11 @@
-#import "@preview/cetz:0.2.2": canvas, draw, vector, matrix
+#import "template.typ": conf, lecture
+#import "@preview/physica:0.9.3": *
 
-#set text(lang: "sv")
-#set par(justify: true)
-#set page(numbering: "1", header: align(center, smallcaps[FMAB22: Lineär algebra]))
-#set heading(numbering: "1.1")
-#set math.equation(numbering: "(1)")
+#show: doc => conf("FMAB22", "Lineär algebra", doc)
 
 #let hr = line(length: 100%, stroke: 0.5pt)
+
+#let bold_vector(name) = $bold(name)$
 
 #let ve = $overline(e)$
 #let e1 = $overline(e_1)$
@@ -27,21 +26,13 @@
 #let v2 = $overline(v_2)$
 #let v3 = $overline(v_3)$
 #let vv = $overline(v)$
+#let vw = $overline(w)$
 
 #let zv = $overline(0)$
 
 #let scalar(u, v) = $(#u | #v)$
 
-#outline(indent: 1em)
-#pagebreak(weak: true)
-
 #let important(content) = rect(fill: red.lighten(90%), stroke: red, content)
-
-#let lecture = (month, day, title, content) => [
-  == #datetime(year: 2024, month: month, day: day).display() -- #title
-
-  #content
-]
 
 // #outline(indent: 1em)
 // #pagebreak(weak: true)
@@ -69,7 +60,7 @@ $F$ är en linjär avbildning $RR^n->RR^n$ som ges av matrisen $A$ i bas $(e1,e2
 
 = Föreläsningar
 
-#lecture(9, 2, [Gausseliminering])[
+#lecture(2024, 9, 2, [Gausseliminering])[
 Ett homogent linjärt ekvationssystem med fler variabler än ekvationer har oändligt många lösningar.
 
 Ett homogent system med 1 ekvation och minst 2 variabler har oändligt många lösningar:
@@ -107,7 +98,7 @@ $ mat(
 Vi har ett nytt ekvationssystem med $p-1$ ekvationer och $n-1$ obekanta.
 ]
 
-#lecture(9, 3, [Linjärt beroende])[
+#lecture(2024, 9, 3, [Linjärt beroende])[
 Givet basen $(e1, e2)$ och vektorn $u$ med koordinaterna $(x_1, x_2)$, är $x_1 e1$ $u$:s projektion på $e1$ i riktning $e2$.
 
 #hr
@@ -140,7 +131,7 @@ Om $L$ gör så att varje ekvation blir $0$, måste $lambda L$ (där $lambda$ ä
 ]
 ]
 
-#lecture(9,4, [Linjer och plan])[
+#lecture(2024, 9, 4, [Linjer och plan])[
 === Parameterform
 
 Givet en linje $L$ och två olika punkter på linjen, $P$ och $P_0$, kan linjen beskrivas på parameterform -- en startpunkt plus en riktningsvektor som skalas för att peka någonstans på linjen.
@@ -168,7 +159,7 @@ $ A x+B y+C z+D=0 $
 där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 ]
 
-#lecture(9, 9, [Skalärprodukt])[
+#lecture(2024, 9, 9, [Skalärprodukt])[
   $ scalar(vu, vv) = vu dot vv = |vu| |vv| cos theta $
 
   - kommutativ
@@ -197,8 +188,49 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   $ scalar(vu,vv)=1dot 1 dot cos(alpha-beta)=cos alpha cos beta + sin alpha sin beta quad #emoji.sparkles $
 ]
 
-#lecture(9, 10, [Ellipser, hyberbler och parabler])[
+#lecture(2024, 9, 10, [Ellipser, hyberbler och parabler])[
   "Cirkel" -- perfekt rundning
 
   $ < approx > $
+]
+
+#lecture(2024, 9, 11, [Vektor- och volymsprodukt])[
+  === Vektorprodukt
+  
+  Maxwells ekvationer:
+  
+  $ cases(
+    nabla times E = -pdv(B,t),
+    nabla times H = J + pdv(D, t),
+    nabla dot D = rho,
+    nabla times B = 0
+  ) $
+
+  $ F = q v times B $
+
+  "_En_ parallellogram och _ett_ prisma." Vad i hela friden, Svenska Akademien?
+
+  I en HON-bas:
+
+  $ (x_1, x_2, x_3) times (y_1, y_2, y_3) = mat(
+    delim: "|",
+    x_1, y_1, e1;
+    x_2, y_2, e2;
+    x_3, y_3, e3;
+  )\ 
+  =x_1 y_2 e3+y_1 e2 x_3+e1 x_2 y_3-x_3 y_2 e1-y_3 e2 x_1-e3 x_2 y_1\
+  =(x_2 y_3-x_3 y_2)e1+(x_3 y_3-x_1 y_3)e2+(x_1 y_2-x_2 y_1)e3
+  $
+
+  === Volymsprodukt (_parallellepiped_)
+
+  Volymsprodukten ges av $ V = plus.minus "basarea" dot "höjd" $ så $ V=(vu times vv) dot vw . $
+
+  Den kan beräknas med determinanten:
+
+  $ V(vu,vv,vw)=mat(delim: "|",
+    x_1,y_1,z_1;
+    x_2,y_2,z_2;
+    x_3,y_3,z_3;
+  ) V(e1,e2,e3) $
 ]
