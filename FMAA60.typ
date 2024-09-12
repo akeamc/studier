@@ -69,8 +69,16 @@ Varje icketom delmängd av $RR$ begränsad ovanifrån har ett supremum.
 
 == Arkimediska egenskapen
 
-$ forall a in RR quad exists space n in ZZ, n>a $
+$ forall a in RR quad exists space n in ZZ: n>a $
 
 ==
 
 Givet $a in RR$ och $epsilon>0$ existerar (minst) ett $r in QQ; |a-r|<epsilon$.
+
+== Triangelolikheten
+
+För $a_1, a_2, dots.c, a_n in RR$ gäller att
+
+$ |a_1+a_2+dots.c+a_n|<=|a_1|+|a_2|+dots.c+|a_n| $
+
+= Talföljder

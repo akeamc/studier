@@ -29,10 +29,11 @@
 #let vw = $overline(w)$
 
 #let zv = $overline(0)$
+#let zm = $bold(0)$
 
 #let scalar(u, v) = $(#u | #v)$
 
-#let important(content) = rect(fill: red.lighten(90%), stroke: red, content)
+#let important(content) = rect(fill: red.lighten(90%), stroke: red, content, width: 100%)
 
 // #outline(indent: 1em)
 // #pagebreak(weak: true)
@@ -57,6 +58,21 @@ $F$ är en linjär avbildning $RR^n->RR^n$ som ges av matrisen $A$ i bas $(e1,e2
 - $A X=zv$ har endast den triviala lösningen
 - $F^(-1)$ existerar och har matris $A^(-1)$
 - $0$ är inte ett egenvärde till $A$
+
+= Räkneregler
+
+#columns(2)[
+  == Vektorprodukt
+
+  $(vu + vv) times vw = vu times vw + vv times vw$
+
+  $(vu times vv) times vw underbrace(!=, "I allmänhet") vu times (vv times vw)$
+
+  == Determinant
+
+  $det A det B=det(A B)$
+
+]
 
 = Föreläsningar
 
@@ -234,3 +250,76 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
     x_3,y_3,z_3;
   ) V(e1,e2,e3) $
 ]
+
+#lecture(2024, 9, 12, [Matriser])[
+  $ A = mat(
+    a_(1,1), a_(1,2), a_(1,3), dots.c, a_(1,n);
+    a_(2,1), a_(2,2), a_(2,3), dots.c, a_(2,n);
+    a_(3,1), a_(3,2), a_(3,3), dots.c, a_(3,n);
+    dots.v, dots.v, dots.v, dots.down, dots.v;
+    a_(p,1), a_(p,2), a_(p,3), dots.c, a_(p,n);
+  ) $
+
+  === Matrismultiplikation
+
+  Givet $A=(a_(i,j))_(p times m)$, $B=(b_(i,j))_(m times n)$ och $C=(c_(i,j))_(p times n)=A B$ är
+  $ c_(i,j)=sum_(k=1)^m a_(i,k) b_(k,j). $
+
+  Notera att $ 2 != 1. $
+
+  I domkyrkans krypta finns kolonner#footnote[Se även #link("https://web.archive.org/web/20240912090440/https://sv.wiktionary.org/wiki/kolonnett")[_kolonnett_].]. De har ett cirkulärt tvärsnitt och bär upp taket. Jätten Finn står och omfamnar en av dem. Lägg märke till att
+
+  $ "Kolonnetter" subset.eq "Kolonner" subset.eq "Pelare". $
+
+  === Invers av matriser
+
+  $ E=(delta_(i,j))_(p times n)=mat(
+    1, 0, dots.c, 0;
+    0, 1, dots.c, 0;
+    dots.v, dots.v, dots.down, dots.v;
+    0, 0, dots.c, 1;
+  ) $
+
+  $delta$: se @kronecker.
+
+  #hr
+
+  Det finns exakt en invers per inverterbar matris $A$. Antag att det finns två inverser $B$ och $C$. Då är
+
+  $ B = B E = B(A C)=(B A)C=E C=C $
+
+  så $B=C$ och det finns sålunda exakt en invers.
+
+  $ A "inverterbar" <=> A X=Y "har entydig lösning för något" Y $
+
+  #hr
+
+  Om $A X=Y$ har mer än en lösning så finns oändligt många lösningar:
+
+  Antag att $X_1$ och $X_2$ är två olika lösningar. Sätt $X=t X_1+(1-t)X_2$. Då är
+
+  $ A X=A(t X_1 + (1-t)X_2)=t A X_1+(1-t)A X_2=t Y+(1-t)Y=Y $
+
+  så $X$ är en lösning. Det finns oändligt många $X$.
+]
+
+#pagebreak(weak: true)
+
+= Redovisningsuppgift
+
+Låt $U$ vara det linjära rummet av $n times n$-matriser. Matrisen $A$ är en okänd $n times n$-matris. Definiera den linjära avbildningen $F: U -> U$ genom $F(X)=A X A$.
+
+Visa att följande påståenden är ekvivalenta!
+
+1. $N(F)={zm}$.
+2. $V(F)=U$.
+3. Det finns en matris $X_0$ i $U$ sådan att $F(X_0)=E$.
+4. Matrisen $A$ är inverterbar.
+
+Visa att $3 <=> 4$:
+
+$ F(X_0)=A X_0 A=(A X_0)A=A(X_0 A)=E\
+=> A^(-1)=A X_0=X_0 A\
+=> X_0=A^(-1) A^(-1) $
+
+Ta-da!

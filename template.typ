@@ -4,6 +4,7 @@
   set page(header: align(center, smallcaps[#id: #title]), numbering: "1")
   set heading(numbering: "1.1")
   set math.equation(numbering: "(1)")
+  set par(justify: true)
 
   outline(indent: 1em)
   pagebreak(weak: true)
