@@ -72,6 +72,9 @@ $F$ är en linjär avbildning $RR^n->RR^n$ som ges av matrisen $A$ i bas $(e1,e2
 
   $det A det B=det(A B)$
 
+  == Matriser
+
+  $(A B)^(-1)=B^(-1) A^(-1)$
 ]
 
 = Föreläsningar
@@ -148,7 +151,7 @@ Om $L$ gör så att varje ekvation blir $0$, måste $lambda L$ (där $lambda$ ä
 ]
 
 #lecture(2024, 9, 4, [Linjer och plan])[
-=== Parameterform
+= Parameterform
 
 Givet en linje $L$ och två olika punkter på linjen, $P$ och $P_0$, kan linjen beskrivas på parameterform -- en startpunkt plus en riktningsvektor som skalas för att peka någonstans på linjen.
 
@@ -161,13 +164,13 @@ På ett liknande sätt kan ett plan $M$ i rummet skrivas på parameterform givet
 
 $ overline(O P_0) + t vu + s vv $
 
-=== Skärning mellan plan och linje i rummet
+= Skärning mellan plan och linje i rummet
 
 En linje och ett plan kan skära varandra i noll, en eller oändligt många punkter.
 
 #important[Varje sak (linje, plan) på parameterform har _egna_, unika parametrar $s, t, dots.c$. Det går inte att använda samma parameter till flera olika saker.]
 
-=== Plan på affin form
+= Plan på affin form
 
 Varje plan i rummet kan skrivas på affin form#footnote[Affin form kallas även för normalform.]:
 
@@ -181,13 +184,13 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   - kommutativ
   - distributiv
 
-  === Ortogonal projektion
+  = Ortogonal projektion
 
   $vu$ projiceras på $ve$ (där $|ve|=1$) och ger $vup$.
 
   $ cos theta=(|vup|)/(|vu|) <=> |vup|=|vu|cos theta=scalar(vu, ve) <=> vup = scalar(vu, ve) ve $
 
-  === Koordinatform
+  = Koordinatform
 
   I planet givet $vu=x_1 e_1+x_2 e_2$ och $vv=y_1 e_1+x_2 e_2$:
 
@@ -197,7 +200,7 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 
   $ delta_(i j)=cases(0 "om" i!=j, 1 "om" i=j) space . $ <kronecker>
 
-  === "Roliga trigonometriska formler"
+  = "Roliga trigonometriska formler"
 
   Två vektorer $vu=(cos beta, sin beta)$ och $vv=(cos alpha, sin alpha)$ ligger på enhetscirkelns rand med varsin vinkel $alpha$ respektive $beta$. Vinkeln mellan dem är $alpha-beta$.
 
@@ -211,7 +214,7 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 ]
 
 #lecture(2024, 9, 11, [Vektor- och volymsprodukt])[
-  === Vektorprodukt
+  = Vektorprodukt
   
   Maxwells ekvationer:
   
@@ -238,7 +241,7 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   =(x_2 y_3-x_3 y_2)e1+(x_3 y_3-x_1 y_3)e2+(x_1 y_2-x_2 y_1)e3
   $
 
-  === Volymsprodukt (_parallellepiped_)
+  = Volymsprodukt (_parallellepiped_)
 
   Volymsprodukten ges av $ V = plus.minus "basarea" dot "höjd" $ så $ V=(vu times vv) dot vw . $
 
@@ -260,7 +263,7 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
     a_(p,1), a_(p,2), a_(p,3), dots.c, a_(p,n);
   ) $
 
-  === Matrismultiplikation
+  = Matrismultiplikation
 
   Givet $A=(a_(i,j))_(p times m)$, $B=(b_(i,j))_(m times n)$ och $C=(c_(i,j))_(p times n)=A B$ är
   $ c_(i,j)=sum_(k=1)^m a_(i,k) b_(k,j). $
@@ -271,7 +274,7 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 
   $ "Kolonnetter" subset.eq "Kolonner" subset.eq "Pelare". $
 
-  === Invers av matriser
+  = Invers av matriser
 
   $ E=(delta_(i,j))_(p times n)=mat(
     1, 0, dots.c, 0;
@@ -303,6 +306,39 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   så $X$ är en lösning. Det finns oändligt många $X$.
 ]
 
+#lecture(2024, 9, 16, [Linjära rum])[
+  Mängden $V$ kallas för ett linjärt rum#footnote[Eller vektorrum.] om addition av element (vektorer) i $V$ och multiplikation med skalär är definierade och att dessa uppfyller följande:
+  - $vu, vv in V => vu + vv in V$
+  - $vu in V, alpha in RR => alpha vu in V$
+  - $vu + vv = vv + vu$
+  - $vu + (vv + vw)=(vu + vv) + vw$
+  - $1 vu = vu$
+  - $(alpha + beta) vu = alpha vu + beta vu$
+  - $alpha(vu + vv)=alpha vu + alpha vv$
+  - $exists space zv in V; space zv vu = zv => vu + zv = vu, space vu + (-1 vu)=zv$
+
+  = Exempel på linjära rum
+
+  - vektorerna i rummet
+  - mängden $p times n$-matriser
+  - $PP_n$, alla polynom av grad $<= n$
+  - $PP_infinity$, alla polynom
+  - $C[a,b]={"alla kontinuerliga funktioner" f:[a,b] -> RR}$
+  - $L^2[a,b]={"alla" f:[a,b]->RR "så att" integral_a^b f(x)^2 dd(x) != plus.minus infinity}$
+  - $RR^n={x_1, dots.c, x_n in RR : (x_1, dots.c, x_n)}$
+
+  = Linjärt underrum
+
+  $U subset.eq V$ är ett underrum till det linjära rummet $V$ om $U$ är ett linjärt rum. Framför allt viktigt att
+  - $vu, vv in U => vu+vv in U$
+  - $vu in U, alpha in RR => alpha vu in U$
+  - $exists space zv in U$
+
+  "Det är en oändlig linje men eftersom kritan är ändlig så ritar jag den så."
+
+  Det heter _subspace_, inte _underroom_ på engelska. På samma sätt heter det _Unterraum_, inte _Nebenzimmer_ på tyska.
+]
+
 #pagebreak(weak: true)
 
 = Redovisningsuppgift
@@ -316,6 +352,8 @@ Visa att följande påståenden är ekvivalenta!
 3. Det finns en matris $X_0$ i $U$ sådan att $F(X_0)=E$.
 4. Matrisen $A$ är inverterbar.
 
+#hr
+
 Visa att $3 <=> 4$:
 
 $ F(X_0)=A X_0 A=(A X_0)A=A(X_0 A)=E\
@@ -323,3 +361,5 @@ $ F(X_0)=A X_0 A=(A X_0)A=A(X_0 A)=E\
 => X_0=A^(-1) A^(-1) $
 
 Ta-da!
+
+$ V(A)={Y in RR^n:A X=Y "har lösning"} $

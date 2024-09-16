@@ -7,7 +7,7 @@
 #lecture(2024, 9, 2, [Intro])[]
 
 #lecture(2024, 9, 4, [])[
-  === Analysens dödliga vapen
+  = Analysens dödliga vapen
 
   1. 1
   2. Konjugat
@@ -36,15 +36,15 @@
 
   $ "d"(overline(u), overline(v))=====|overline(u), overline(v)| $
 
-  === Omvända triangelolikheten
+  = Omvända triangelolikheten
 
   Om $a,b in RR$ så:
 
   $ |a-b|>=||a|-|b|| $
 
-  === Vad händer (för stora $n$ med uttrycket $1000^(1slash n)$)?
+  = Vad händer (för stora $n$ med uttrycket $1000^(1slash n)$)?
 
-  === $lim_(n->infinity)n^(1 slash n)$
+  = $lim_(n->infinity)n^(1 slash n)$
 
   $ n^(1 slash n)&<1,001 \
   n &< 1,001^n $

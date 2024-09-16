@@ -13,7 +13,10 @@
 }
 
 #let lecture = (year, month, day, title, content) => [
+
   == #datetime(year: year, month: month, day: day).display() -- #title
+  
+  #set heading(offset: 2)
 
   #content
 ]
