@@ -13,6 +13,8 @@
 #let en = $overline(e_n)$
 #let ei = $overline(e_i)$
 #let ej = $overline(e_j)$
+#let ek = $overline(e_k)$
+#let ek1 = $overline(e_(k+1))$
 
 #let u1 = $overline(u_1)$
 #let u2 = $overline(u_2)$
@@ -368,6 +370,68 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   $ qty("440", "Hz") $
 
   #smallcaps[Ellipsanalys på industriell skala]
+]
+
+#lecture(2024, 9, 19, [Dimensionssatsen är dagens höjdpunkt])[
+  $ 1, dots.c, 2 $
+
+  $F:U->V$ kallas för en linjär avbildning om det för $lambda in RR$ och $vu, vv in U$ gäller att
+  - $F(vu+vv)=F(vu)+F(vv)$
+  - $F(lambda vu)=lambda F(vu)$
+
+  #hr
+
+  "Det välvilliga universitetet har nämligen tillhandahållit pinnar av erforderligt antal." _Tomas demonstrerar vektorsumma i $RR^3$._
+
+  #hr
+
+  Givet $p times n$-matrisen $A$ är $ dim N(A)+dim V(A)=n. $
+
+  Enligt dimensionssatsen är
+  - $2+1=3$
+  - $1+2=3$
+  - $1+1=2$
+
+  == Bevis  med den linjära avbildningen $F:U -> V$.
+
+  Låt $dim U=n$.
+
+  Antag att $k=dim N(F)$. Det finns en bas $e1, dots.c, ek$ för $N(F)$.
+
+  Lägg till vektorer $ek1, dots.c, en$ så att $e1, dots.c, ek, dots.c, en$ är en bas för $U$.
+
+  Vi vill visa att $F(ek1), dots.c, F(en)$ är en bas för $V(F)$ -- att $ek1, dots.c, en$ 1) är linjärt oberoende och 2) genererar $V(F)$.
+
+  1. #[
+    $F(ek1), dots.c, F(en)$ är linjärt oberoende:
+
+    $ &x_(k+1)F(ek1)+dots.c+x_n F(en)=zv\ <=>&F(x_(k+1)ek1+dots.c+x_n en)=zv\ <=>&x_(k+1)ek1+dots.c+x_n en in N(F)\ <=>& x_(k+1)=dots.c=x_n=0 $
+  ]
+  2. #[
+    $F(ek1), dots.c, F(en)$ genererar $V(F)$.
+
+    $vv in V(F) => vv=F)vu "för något" vu in U$.
+
+    Vi skriver $vu=x_1 e1+dots.c+x_n en$.
+
+    Då är $ vv=&F(vu)=F(x_1 e_1+dots.c+x_n en)\ =&x_1 underbrace(F(e1), =zv)+dots.c+x_k underbrace(F(ek), =zv)+x_(k+1)F(ek1)+dots.c+x_n F(en)\ =&x_(k+1)F(ek1)+dots.c+x_n F(en). $
+
+    Färdigt #emoji.face.happy
+  ]
+
+  == Bevis med matrisen $A_(p times n)$
+
+  $ A=mat(A_1, dots.c, A_n) quad V(A)={"linjärkombination av" A_1, dots.c, A_n} $
+
+  Vi vill undersöka om $A_1, dots.c, A_n$ är linjärt oberoende.
+  
+  $ &A X=0 <=> A mat(x_1; dots.v; x_n)=mat(0; dots.v; 0) $
+
+  Antag att vi Gausseliminerar. Vi får $k$ överhoppade trappsteg, så $dim N(A)=k$. Om vi tar ut $n-k$ kolonner med trappsteg, så är dessa linjärt oberoende. Leder till att $dim V(A)=n-k$.
+
+  #hr
+
+  Den kanoniska basen är kanon.
 ]
 
 #pagebreak(weak: true)
