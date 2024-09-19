@@ -1,6 +1,4 @@
 #import "template.typ": conf, lecture
-#set text(lang: "sv")
-#set page(header: align(center, smallcaps[FMAA60: Introduktion till reell analys]))
 
 #show: doc => conf("FMAB66", [Introduktion till reell analys], doc)
 
@@ -82,3 +80,15 @@ För $a_1, a_2, dots.c, a_n in RR$ gäller att
 $ |a_1+a_2+dots.c+a_n|<=|a_1|+|a_2|+dots.c+|a_n| $
 
 = Talföljder
+
+== Cauchyföljden
+
+$(a_k)$ Cauchyföljd om $forall space epsilon > 0 space exists space N in NN; |a_k-a_l| < epsilon quad k, l > N$.
+
+== Delföljd
+
+Om $(a_k)$ talföljd och $(n_k)$ strängt växande följd av naturliga tal så är $(b_k)=(a_((n_k)))$ delföljd av $(a_k)$.
+
+== Bolzano-Weierstraß
+
+Varje begränsad följd har en konvergent delföljd.

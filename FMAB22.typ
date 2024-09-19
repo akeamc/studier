@@ -1,9 +1,8 @@
-#import "template.typ": conf, lecture
+#import "template.typ": conf, lecture, hr
 #import "@preview/physica:0.9.3": *
+#import "@preview/unify:0.6.0": qty
 
 #show: doc => conf("FMAB22", "Lineär algebra", doc)
-
-#let hr = line(length: 100%, stroke: 0.5pt)
 
 #let bold_vector(name) = $bold(name)$
 
@@ -19,6 +18,7 @@
 #let u2 = $overline(u_2)$
 #let u3 = $overline(u_3)$
 #let un = $overline(u_n)$
+#let uk = $overline(u_k)$
 
 #let vu = $overline(u)$
 #let vup = $overline(u')$
@@ -30,7 +30,6 @@
 
 #let zv = $overline(0)$
 #let zm = $bold(0)$
-
 #let scalar(u, v) = $(#u | #v)$
 
 #let important(content) = rect(fill: red.lighten(90%), stroke: red, content, width: 100%)
@@ -65,8 +64,6 @@ $F$ är en linjär avbildning $RR^n->RR^n$ som ges av matrisen $A$ i bas $(e1,e2
   == Vektorprodukt
 
   $(vu + vv) times vw = vu times vw + vv times vw$
-
-  $(vu times vv) times vw underbrace(!=, "I allmänhet") vu times (vv times vw)$
 
   == Determinant
 
@@ -274,6 +271,8 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 
   $ "Kolonnetter" subset.eq "Kolonner" subset.eq "Pelare". $
 
+  #figure(image("finn.jpeg", width: 10%), caption: [Jätten Finn kramar sin kolonn.])
+
   = Invers av matriser
 
   $ E=(delta_(i,j))_(p times n)=mat(
@@ -339,6 +338,38 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   Det heter _subspace_, inte _underroom_ på engelska. På samma sätt heter det _Unterraum_, inte _Nebenzimmer_ på tyska.
 ]
 
+#lecture(2024, 9, 17, [Nollrum och värderum])[
+  $A$ är en $p times n$-matris. Värderummet ges av
+
+  $ N(A)={X in RR^n : A X=0} $
+
+  och nollrummet av
+
+  $ V(A)=(Y in RR^p : A X=Y "har en lösning"). $
+
+  #hr
+
+  Mängden av alla linjärkombinationer av $u1, u2, dots.c, uk$ betecknas $[u1, u2, dots.c, uk]$ och kallas för det linjära höljet till $u1, u2, dots.c, uk$. Vektorerna är inte nödvändigtvis linjärt oberoende.
+
+  Om $A=mat(A_1, A_2, dots.c, A_n)$ så är $ V(A)=[A_1, A_2, dots.c, A_n] $ ty $ A mat(x_1; dots.v; x_n)=x_1 A_1+x_2 A_2 + dots.c + x_n A_n $ som är en linjärkombination av kolonnerna i $A$.
+
+  #figure(image("MazurGes.jpeg"), caption: [Per Enflo får en gås av Stanisław Mazur.])
+
+  = Baser
+
+  I $RR^n$ har vi standardbasen $ (1, 0, dots.c, 0)\ (0, 1, 0, dots.c, 0)\ dots.v\ (0, dots.c, 0, 1). $
+
+  I $PP_n$ har vi basen $ 1, x, x^2, dots.c, x^n. $
+
+  Om $e1, dots.c, en$ är en bas till $V$ och $k>n$ så är $u1, dots.c, uk$ linjärt beroende.
+]
+
+#lecture(2024, 9, 18, [Uppgiftslösningar])[
+  $ qty("440", "Hz") $
+
+  #smallcaps[Ellipsanalys på industriell skala]
+]
+
 #pagebreak(weak: true)
 
 = Redovisningsuppgift
@@ -354,7 +385,7 @@ Visa att följande påståenden är ekvivalenta!
 
 #hr
 
-Visa att $3 <=> 4$:
+== Visa att $3 <=> 4$
 
 $ F(X_0)=A X_0 A=(A X_0)A=A(X_0 A)=E\
 => A^(-1)=A X_0=X_0 A\
@@ -362,4 +393,16 @@ $ F(X_0)=A X_0 A=(A X_0)A=A(X_0 A)=E\
 
 Ta-da!
 
-$ V(A)={Y in RR^n:A X=Y "har lösning"} $
+== Visa att $4 => 2$
+
+Värderummet $V(F)$ definieras av
+
+$ V(F)={Y in U:F(X)=Y "har lösning"}. $
+
+$ A "inverterbar"\ => Y=F(X)\ => A^(-1)F(X)A^(-1)=A^-1(A X A)A^(-1)=E X E=X\ => F^(-1)(Y)=A^(-1)Y A^(-1) $
+
+Så det finns en lösning $X=F^(-1)(Y)$ till varje $Y in U$. Således är $ V(F)=U. $
+
+== Visa att $4 => 1$
+
+Om $A$, och därmed $F(X)$, är inverterbar så är $F$ bijektiv; det finns bara ett $X$ som avbildas på $zm$. Den matrisen är $ F^(-1)(zm)=A^(-1) zm A^(-1)=zm. $ Sålunda är $ N(F)={zm}. $

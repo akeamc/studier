@@ -1,4 +1,5 @@
-#import "template.typ": conf, lecture
+#import "template.typ": conf, lecture, hr
+#import "@preview/cetz:0.2.2": canvas, plot
 
 #show: doc => conf("FMAB66", [Endimensionell analys], doc)
 
@@ -53,4 +54,25 @@
   &=mat(n;0)+mat(n;1)dot 0,001+mat(n;2)dot 0,001^2+dots.c+mat(n;n)dot 0,001^n\
   &> 1+n dot 0,001 + n(n-1)/2 dot 0,001^2 \
   &> n(n-1)/2 dot 0,001^2 $
+]
+
+#lecture(2024, 9, 18, [Funktioner])[
+  För Euler (1748) var en funktion "en formel": $ y=cases(x"," x => 0, -x"," x < 0) $ tyckte han var två funktioner. Dummer.
+
+  Fourier (1822) tyckte att $ sin x -1/2 sin 2x+1/3 sin 3x - dots.c=x/2. $
+
+  #hr
+
+  $ f:x |-> x^2 $
+
+  "En konstant funktion är både växande och avtagande. Känns det jobbigt?"
+
+  #canvas({
+    plot.plot(size: (5,5), y-label: $x_2$, x-label: $x_1$, x-tick-step: 0.5, y-tick-step: 1, {
+      plot.add(domain: (0, 2), x => x * x,
+      samples: 100, style: (mark: (stroke: blue)))
+    })
+  })
+
+  $ &y_1^2+y_1 y_2+y_2^2+1\ =&(y_1+1/2 y_2)^2-1/4y_2^2+y_2^2+1\ =&(y_1+1/2 y_2)^2+3/4 y_2^2+1\ >&0 $
 ]
