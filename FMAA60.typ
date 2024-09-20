@@ -92,3 +92,26 @@ Om $(a_k)$ talföljd och $(n_k)$ strängt växande följd av naturliga tal så �
 == Bolzano-Weierstraß
 
 Varje begränsad följd har en konvergent delföljd.
+
+= Topologi _(platslära)_
+
+- $epsilon > 0$, #sym.epsilon\-omgigning till punkt $a in RR$ är mängden $B(a, epsilon)=(a-epsilon, a+epsilon)$. #footnote[$B$ kommer från _boll_ eftersom det ser ut som en boll i högre dimensioner. $B(a, epsilon)$ uttalas "#sym.epsilon\-bollen kring $a$".]
+- En omgivning av punkten $a in RR$ är en #sym.epsilon\-omgivning.
+- En punkterad omgivning till punkten $a in RR$ är en omgivning till $a$ utan $a$. $(a-epsilon,a+epsilon)\\ {a}$.
+
+Låt $E in RR$. Följande ekvivalenta:
+1. $E$ är sluten och begränsad (sämsta definitionen för kompakthet)
+2. $E$ är kompakt
+3. $E$ är följdkompakt
+
+"Det här är kul."
+
+"Öppenhet är väldigt viktigt."
+
+= Exponentialfunktionen
+
+$ a>0, x>0 $
+
+$ a ^b=e^(b ln a) $ men vad är $e^x$?
+
+$ e^x:=&lim_(n->infinity) (1+1/n)^(n x) quad "låt" k=n x\ =&lim_(n->infinity) (1+x/k)^k $
