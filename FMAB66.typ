@@ -67,12 +67,16 @@
 
   "En konstant funktion är både växande och avtagande. Känns det jobbigt?"
 
-  #canvas({
-    plot.plot(size: (5,5), y-label: $x_2$, x-label: $x_1$, x-tick-step: 0.5, y-tick-step: 1, {
+  #figure(canvas({
+    plot.plot(size: (5,5), axis-style: "school-book", x-grid: true, y-grid: true, y-label: $x_2$, x-label: $x_1$, x-tick-step: 0.5, y-tick-step: 1, {
       plot.add(domain: (0, 2), x => x * x,
       samples: 100, style: (mark: (stroke: blue)))
     })
-  })
+  }), caption: [$x_2=x_1^2$.])
 
   $ &y_1^2+y_1 y_2+y_2^2+1\ =&(y_1+1/2 y_2)^2-1/4y_2^2+y_2^2+1\ =&(y_1+1/2 y_2)^2+3/4 y_2^2+1\ >&0 $
+]
+
+#lecture(2024, 9, 20, [Polynom])[
+  Antag att heltalspolynomet $ f(x)=f_0+f_1 x+dots.c+f_n x^n $ har ett rationellt nollställe $x=p/q$ (förkortat!). Då är $p$ en delare till $f_0$ och $q$ en delare till $f_n$.
 ]
