@@ -30,6 +30,12 @@
 #let vv = $overline(v)$
 #let vw = $overline(w)$
 
+#let w1 = $overline(w_1)$
+#let w2 = $overline(w_2)$
+#let w3 = $overline(w_3)$
+#let wk = $overline(w_k)$
+#let wn = $overline(w_n)$
+
 #let zv = $overline(0)$
 #let zm = $bold(0)$
 #let scalar(u, v) = $(#u | #v)$
@@ -432,6 +438,84 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   #hr
 
   Den kanoniska basen är kanon.
+]
+
+#lecture(2024, 9, 23, [Euklidiska rum med mera])[
+  Antag att det finns $V$ och $H$ så att $ V A&=E\ A H&=E. $
+
+  Existens av $V$ ger $ A X=0 => V A X=E X=0 <=> X=0. $
+
+  Existens av $H$ ger $ A X=Y arrow.double.l X = H Y. $
+
+  #hr
+
+  $V$ kallas för ett euklidiskt rum om det är linjärt och om det finns en skalärprodukt.
+
+  $scalar(dot,dot)$ kallas för #underline[en] skalärprodukt om det uppfyller
+  - $scalar(vu+vv,vw)=scalar(vu,vw)+scalar(vv,vw)$
+  - $scalar(alpha vu,vv)=alpha scalar(vu,vv)$
+  - $scalar(vu,vv)=scalar(vv,vu)$
+  - $scalar(vu,vu)>=0$ med likhet om och endast om $vu=zv$
+
+  #figure(image("lemongrab.png", width: 20%), caption: [$scalar(dot,dot)$])
+
+  I $RR^n$ är $ scalar((x_1,dots.c,x_n),(y_1,dots.c,y_n))=mat(x_1;dots.v;x_n)^t mat(y_1;dots.v;y^n). $
+
+  Om $A$ är en $n times n$-matris så definierar $ scalar(X,Y)=X^t A Y $ #text(size: 100pt, fill: gradient.linear(..color.map.rainbow))[ibland] en skalärprodukt. I så fall kallas $A$ för en positivt definit matris.
+
+  = Pythagoras sats
+
+  $ |vu+vv|^2=&scalar(vu+vv, vu+vv)\ =&scalar(vu,vu)+scalar(vu,vv)+scalar(vu,vu)+scalar(vv,vv)\ =&|vu|^2+|vv|^2+2scalar(vu,vv). $
+
+  = Cauchy--Bunjakovskij--Schwarz olikhet
+
+  $ |scalar(vu,vv)|<=|vu| |vv| $
+
+  Cauchy visade olikheten för $RR^n$, Bunjakovski för knasiga $L$-rum och Schwarz gjorde samma sak en gång till.
+
+  #hr
+
+  Vektorerna $e1,dots.c,en$ kallas för en ortonormerad mängd om $ scalar(ei,ej)=delta_(i j). $
+
+  Om de dessutom är en bas så kallas de, otroligt nog, för en ortonormerad bas.
+
+  = Det gram--schmidtska ortogonaliseringsförfarandet
+
+  "Om man inte har en ortonormerad bas kan man kan skaffa sig en sådan på postnorder från Gram--Schmidt."
+
+  Antag att $w1,dots.c,wn$ är en bas. Vi söker en ON-bas för samma rum.
+
+  $ e1'=&w1\ e2'=&w2+s_(1,2)w1 $
+
+  Välj $s_(1,2)$ så att $scalar(e1',e2')=0$.
+
+  Därefter
+  
+  $ e3'=w3+s_(2,3)w2+s_(1,3)w1. $
+
+  Välj $s_(2,3)$ och $s_(1,3)$ så att $scalar(e3',e1')=scalar(e3',e2')=0$.
+
+  Och så vidare. Slutligen normeras $e1',dots.c,en'$.
+
+  "$e3'$ är tydligt ortogonal mot $e1'$." ($e3'=(1/3,-1/3,1/3,1)$ och $e1'=(1,1,0,0)$). _\~TP senses._
+
+  = Ortogonala (egentligen ortonormerade) matriser
+
+  Om $A$ är $n times n$ så kallas $A$ för ortogonal om kolonnerna är en O#underline[N]-bas. De kallas ofta för $Q$ av någon anledning.
+
+  Observation:
+
+  $ Q "ortogonal" <=> Q^t Q=E <=> Q^(-1)=Q^t $
+
+  eftersom $Q^t Q$ innehåller alla kombinationer av skalärprodukter av kolonnerna i $Q$, som ju per definition är antingen 0 eller 1 beroende på om kolonnerna skalärmultipliceras med sig själva (det gör de endast på diagonalen).
+
+  = QR-faktorisering
+
+  Om $A$ är inverterbar så är kolonnerna en bas. Då kan man göra Gram-Schmidt på kolonnerna och få en ortogonal matris $Q$.
+
+  $ A=(a_(i j))_(n times n)=Q R $
+
+  där $R$ är en högertriangulär/övertriangulär matris; $a_(i j)=0$ för alla $j>i$. Detta är en naturlig följd av Gram-Schmidts process.
 ]
 
 #pagebreak(weak: true)
