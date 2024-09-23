@@ -115,3 +115,17 @@ $ a>0, x>0 $
 $ a ^b=e^(b ln a) $ men vad är $e^x$?
 
 $ e^x:=&lim_(n->infinity) (1+1/n)^(n x) quad "låt" k=n x\ =&lim_(n->infinity) (1+x/k)^k $
+
+= Kontinuerliga funktioner
+
+$f:D_f->RR$ är kontinuerlig i punkten $a in D_f$ om $forall epsilon > 0, exists delta > 0$ så att
+
+$ x in D_f \& |x-a|<delta => |f(x|-f(a)|<epsilon $
+
+En kontinuerlig funktion $f:D_f->RR$ är kontinuerlig om den är kontinuerlig i alla punkter på $D_f$.
+
+Det kontrapositiva påståendet till
+
+$ forall epsilon >0(exists delta > 0 (x in D_f \& |x-a|<delta => |f(x)-f(a)<epsilon)) $
+
+är $ exists epsilon > 0 (forall delta > 0 (x in D_f \& |x-a|<delta "men" |f(x)-f(a)|>=epsilon)). $

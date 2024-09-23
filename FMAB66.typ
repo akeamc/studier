@@ -123,3 +123,5 @@
   [Ö14], [10.{34, 38, 40, 44, 45, 49, 60, 65}],
   [LV8], [Ö15], [Repetition]
 )
+
+$ log_b x = log_b a log_a x = log_b a^(log_a x) = log_b x $

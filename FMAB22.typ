@@ -554,3 +554,11 @@ Så det finns en lösning $X=F^(-1)(Y)$ till varje $Y in U$. Således är $ V(F)
 == Visa att $4 => 1$
 
 Om $A$, och därmed $F(X)$, är inverterbar så är $F$ bijektiv; det finns bara ett $X$ som avbildas på $zm$. Den matrisen är $ F^(-1)(zm)=A^(-1) zm A^(-1)=zm. $ Sålunda är $ N(F)={zm}. $
+
+== Visa att $2 => 3$
+
+$ E in U => exists space X_0 in U : F(X_0)=E $
+
+== Visa att $1 <=> 2$
+
+Dimensionssatsen ger $ dim N(F)=0 <=> dim V(F)=dim U <=> V(F)=U. $
