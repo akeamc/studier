@@ -533,32 +533,32 @@ Visa att följande påståenden är ekvivalenta!
 
 #hr
 
+== Visa att $1 <=> 2$
+
+Dimensionssatsen ger $ dim N(F)=0 <=> dim V(F)=dim U <=> V(F)=U. $
+
+== Visa att $2 => 3$
+
+$ V(F)=U in.rev E => exists space X_0 in U : F(X_0)=E $
+
 == Visa att $3 <=> 4$
 
 $ F(X_0)=A X_0 A=(A X_0)A=A(X_0 A)=E\
 => A^(-1)=A X_0=X_0 A\
 => X_0=A^(-1) A^(-1) $
 
-Ta-da!
+// == Visa att $4 => 2$
 
-== Visa att $4 => 2$
+// Värderummet $V(F)$ definieras av
 
-Värderummet $V(F)$ definieras av
+// $ V(F)={Y in U:F(X)=Y "har lösning"}. $
 
-$ V(F)={Y in U:F(X)=Y "har lösning"}. $
+// $ A "inverterbar"\ => Y=F(X)\ => A^(-1)F(X)A^(-1)=A^-1(A X A)A^(-1)=E X E=X\ => F^(-1)(Y)=A^(-1)Y A^(-1) $
 
-$ A "inverterbar"\ => Y=F(X)\ => A^(-1)F(X)A^(-1)=A^-1(A X A)A^(-1)=E X E=X\ => F^(-1)(Y)=A^(-1)Y A^(-1) $
-
-Så det finns en lösning $X=F^(-1)(Y)$ till varje $Y in U$. Således är $ V(F)=U. $
+// Så det finns en lösning $X=F^(-1)(Y)$ till varje $Y in U$. Således är $ V(F)=U. $
 
 == Visa att $4 => 1$
 
+$ exists space A^(-1) in U : A^(-1)A=A A^(-1)=E\ => F^(-1)(Y)=A^(-1)Y A^(-1) $
+
 Om $A$, och därmed $F(X)$, är inverterbar så är $F$ bijektiv; det finns bara ett $X$ som avbildas på $zm$. Den matrisen är $ F^(-1)(zm)=A^(-1) zm A^(-1)=zm. $ Sålunda är $ N(F)={zm}. $
-
-== Visa att $2 => 3$
-
-$ E in U => exists space X_0 in U : F(X_0)=E $
-
-== Visa att $1 <=> 2$
-
-Dimensionssatsen ger $ dim N(F)=0 <=> dim V(F)=dim U <=> V(F)=U. $
