@@ -501,6 +501,8 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 
   = Ortogonala (egentligen ortonormerade) matriser
 
+  #figure(image("grannysmith.jpeg", width: 50%), caption: [Äppelsorten Granny Smith.])
+
   Om $A$ är $n times n$ så kallas $A$ för ortogonal om kolonnerna är en O#underline[N]-bas. De kallas ofta för $Q$ av någon anledning.
 
   Observation:
@@ -513,9 +515,47 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 
   Om $A$ är inverterbar så är kolonnerna en bas. Då kan man göra Gram-Schmidt på kolonnerna och få en ortogonal matris $Q$.
 
-  $ A=(a_(i j))_(n times n)=Q R $
+  $ A=Q R $
 
-  där $R$ är en högertriangulär/övertriangulär matris; $a_(i j)=0$ för alla $j>i$. Detta är en naturlig följd av Gram-Schmidts process.
+  där $R$ är en högertriangulär/övertriangulär matris. Detta är en naturlig följd av Gram-Schmidts process.
+]
+
+#lecture(2024, 9, 24, [Mer om QR])[
+  "Detta har vi i närvarande [sic] tillstånd ingen nytta av."
+
+  $ L^p ([0,1]) ={f: integral_0^1 underbrace(|f(x)|, "Se"#footnote("Vi tar absolutbeloppet för att det är så obehagligt att upphöja negativa tal till icke-heltal."))^p dd(x) < infinity } $ är ett icke-euklidiskt rum.
+
+  _Utläggning om $L^p$-normer._ "... och det förekommer i verkligheten."
+
+  "Manhattan är ett exempel på ett icke-euklidiskt rum."
+
+  = Ortogonala komplement
+
+  Antag att $U$ är ett underrrum till $V$. Det ortogonala komplementet till $U$ är
+
+  $ U^perp ={vv in V : scalar(vu, vv)=0 space forall space vu in U}. $
+
+  #hr
+
+  Om $U$ är ett underrum till $V$ och $dim U < infinity$, så kan varje $vv in V$ skrivas entydigt som $ vv=vv'+vv'' $ där $vv' in U$ och $vv'' in U^perp$.
+
+  $ vv' quad v^(-1) $
+
+  -- Kan man alltid använda samma siffror för att skapa fina ON-basvektorer?
+
+  -- Nej. o.o
+
+  = Rang
+
+  / Radrang: $"radrang" A = dim V(A^t)$
+
+  $ V(A)^perp=N(A^t) $
+
+  $ A^perp ^perp=A $
+
+  "Det är inget samband som man har någon praktisk nytta av."
+
+  "Nästa gång ska vi göra något mycket konkret, nämligen minsta kvadratmetoden."
 ]
 
 #pagebreak(weak: true)
@@ -535,7 +575,9 @@ Visa att följande påståenden är ekvivalenta!
 
 == Visa att $1 <=> 2$
 
-Dimensionssatsen ger $ dim N(F)=0 <=> dim V(F)=dim U <=> V(F)=U. $
+Dimensionssatsen ger
+
+$ N(F)=zm <=> dim N(F)=0 <=> dim V(F)=dim U <=> V(F)=U. $
 
 == Visa att $2 => 3$
 
@@ -543,22 +585,38 @@ $ V(F)=U in.rev E => exists space X_0 in U : F(X_0)=E $
 
 == Visa att $3 <=> 4$
 
-$ F(X_0)=A X_0 A=(A X_0)A=A(X_0 A)=E\
-=> A^(-1)=A X_0=X_0 A\
-=> X_0=A^(-1) A^(-1) $
+$
+&F(X_0)=A X_0 A=(A X_0)A=A(X_0 A)=E\
+=>& A^(-1)=A X_0=X_0 A\
+=>& X_0=A^(-1) A^(-1)
+$
 
-// == Visa att $4 => 2$
+== Visa att $4 => 2$
 
-// Värderummet $V(F)$ definieras av
+Värderummet $V(F)$ definieras av
 
-// $ V(F)={Y in U:F(X)=Y "har lösning"}. $
+$ V(F)={Y in U:F(X)=Y "har lösning"}. $
 
-// $ A "inverterbar"\ => Y=F(X)\ => A^(-1)F(X)A^(-1)=A^-1(A X A)A^(-1)=E X E=X\ => F^(-1)(Y)=A^(-1)Y A^(-1) $
+$
+&exists space A^(-1) in U : A^(-1)A=A A^(-1)=E\
+=>& A^(-1)F(X)A^(-1)=A^(-1)(A X A)A^(-1)=underbrace((A^(-1)A), E) X underbrace((A A^(-1)), "E") = X \
+=>& F^(-1)(Y)=A^(-1)Y A^(-1)
+$
 
-// Så det finns en lösning $X=F^(-1)(Y)$ till varje $Y in U$. Således är $ V(F)=U. $
+så det finns en lösning $X=F^(-1)(Y)$ till varje $Y in U$. Således är $ V(F)=U. $
 
-== Visa att $4 => 1$
+// == Visa att $4 => 1$
 
-$ exists space A^(-1) in U : A^(-1)A=A A^(-1)=E\ => F^(-1)(Y)=A^(-1)Y A^(-1) $
+// $
+// &exists space A^(-1) in U : A^(-1)A=A A^(-1)=E\
+// =>& A^(-1)F(X)A^(-1)=A^(-1)(A X A)A^(-1)=underbrace((A^(-1)A), E) X underbrace((A A^(-1)), "E") = X \
+// =>& F^(-1)(Y)=A^(-1)Y A^(-1)
+// $
 
-Om $A$, och därmed $F(X)$, är inverterbar så är $F$ bijektiv; det finns bara ett $X$ som avbildas på $zm$. Den matrisen är $ F^(-1)(zm)=A^(-1) zm A^(-1)=zm. $ Sålunda är $ N(F)={zm}. $
+// ty $F(X)$ är inverterbar och därmed bijektiv; det finns bara en matris $X$ som avbildas på $zm$. Den matrisen ges av
+
+// $ F^(-1)(zm)=A^(-1) zm A^(-1)=zm $
+
+// så
+
+// $ N(F)={zm}. $
