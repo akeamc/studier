@@ -81,6 +81,44 @@
   Antag att heltalspolynomet $ f(x)=f_0+f_1 x+dots.c+f_n x^n $ har ett rationellt nollställe $x=p/q$ (förkortat!). Då är $p$ en delare till $f_0$ och $q$ en delare till $f_n$.
 ]
 
+#lecture(2024, 9, 25, [Trigonometriska funktioner])[
+  $ cot alpha=1/(tan alpha) $
+
+  #let formatter(v) = if v == calc.pi {$pi$} else if v == -calc.pi {$-pi$} else if v != 0 {$#{v/calc.pi} pi$} else {$0$}
+
+  #figure(canvas({
+    plot.plot(size: (10, 5), axis-style: "school-book", x-grid: true, y-grid: true, y-label: $y$, x-label: $x$, x-tick-step: 0.5 * calc.pi, y-tick-step: 1, x-format: formatter, {
+      plot.add(domain: (0, 2 * calc.pi), x => calc.cos(x),
+      samples: 101, style: (mark: (stroke: blue)))
+    })
+  }), caption: [$y=cos x$.])
+
+  #figure(canvas({
+    plot.plot(size: (10, 10), axis-style: "school-book", x-grid: true, y-grid: true, y-label: $y$, x-label: $x$, x-tick-step: 0.5 * calc.pi, y-min: -10, y-max: 10, y-tick-step: 5, x-format: formatter, {
+      plot.add(domain: (-calc.pi, calc.pi), x => calc.tan(x),
+      samples: 101, style: (mark: (stroke: blue)))
+    })
+  }), caption: [$y=tan x$.])
+
+  = Cyklometriska funktioner (arcusfunktioner)
+
+  "Här är funktionen nere på sin botten" _(pekar på $sin(-pi/2)$)_ "den har en dålig dag."
+
+  #let ticks = ((-calc.pi/2,$-pi slash 2$),-1, 1, (calc.pi/2, $pi slash 2$))
+
+  #figure(canvas({
+    plot.plot(size: (10, 10), axis-style: "school-book", x-grid: true, y-grid: true, y-label: $y$, x-label: $x$, x-tick-step: none, x-ticks: ticks, y-tick-step: none, y-ticks: ticks, {
+      plot.add(domain: (-calc.pi/2, calc.pi/2), x => calc.sin(x),
+      samples: 101, style: (mark: (stroke: blue)))
+
+      plot.add(domain: (-1, 1), x => calc.asin(x).rad(),
+      samples: 101, style: (mark: (stroke: red)))
+    })
+  }), caption: [$y=sin x$ och $y=arcsin x$.])
+
+  "Om vi ska införa $arctan$ måste vi ha grafen för $tan$. Den hade jag här. Det hade inte ni!"
+]
+
 #pagebreak(weak: true)
 
 = Övningar
