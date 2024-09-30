@@ -1,6 +1,7 @@
 #import "template.typ": conf, lecture, hr
 #import "@preview/physica:0.9.3": *
 #import "@preview/unify:0.6.0": qty
+#import "@preview/cetz:0.2.2": canvas, draw, plot
 
 #show: doc => conf("FMAB22", "Lineär algebra", doc)
 
@@ -331,7 +332,7 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   - $PP_n$, alla polynom av grad $<= n$
   - $PP_infinity$, alla polynom
   - $C[a,b]={"alla kontinuerliga funktioner" f:[a,b] -> RR}$
-  - $L^2[a,b]={"alla" f:[a,b]->RR "så att" integral_a^b f(x)^2 dd(x) != plus.minus infinity}$
+  - $cal(L)^2[a,b]={"alla" f:[a,b]->RR "så att" integral_a^b f(x)^2 dd(x) != plus.minus infinity}$
   - $RR^n={x_1, dots.c, x_n in RR : (x_1, dots.c, x_n)}$
 
   = Linjärt underrum
@@ -471,7 +472,7 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 
   $ |scalar(vu,vv)|<=|vu| |vv| $
 
-  Cauchy visade olikheten för $RR^n$, Bunjakovski för knasiga $L$-rum och Schwarz gjorde samma sak en gång till.
+  Cauchy visade olikheten för $RR^n$, Bunjakovski för knasiga $cal(L)$-rum och Schwarz gjorde samma sak en gång till.
 
   #hr
 
@@ -523,9 +524,9 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 #lecture(2024, 9, 24, [Mer om QR])[
   "Detta har vi i närvarande [sic] tillstånd ingen nytta av."
 
-  $ L^p ([0,1]) ={f: integral_0^1 underbrace(|f(x)|, "Se"#footnote("Vi tar absolutbeloppet för att det är så obehagligt att upphöja negativa tal till icke-heltal."))^p dd(x) < infinity } $ är ett icke-euklidiskt rum.
+  $ cal(L)^p ([0,1]) ={f: integral_0^1 underbrace(|f(x)|, "Se"#footnote("Vi tar absolutbeloppet för att det är så obehagligt att upphöja negativa tal till icke-heltal."))^p dd(x) < infinity } $ är ett icke-euklidiskt rum.
 
-  _Utläggning om $L^p$-normer._ "... och det förekommer i verkligheten."
+  _Utläggning om $cal(L)^p$-normer._ "... och det förekommer i verkligheten."
 
   "Manhattan är ett exempel på ett icke-euklidiskt rum."
 
@@ -555,7 +556,53 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 
   "Det är inget samband som man har någon praktisk nytta av."
 
-  "Nästa gång ska vi göra något mycket konkret, nämligen minsta kvadratmetoden."
+  "Nästa gång ska vi göra något mycket konkret, nämligen minstakvadratmetoden."
+]
+
+#lecture(2024, 9, 26, [Minstakvadratmetoden])[
+  Givet ett antal mätpunkter $(x_i, y_i)$ för $i=1,dots.c,n$ söker vi en linje $y=k x+m$ så att
+
+  $ cases(k x_1+m&=y_1, k x_2+m&=y_2, &#h(0.25em) dots.v, k x_n+m&=y_n) <=> underbrace(mat(x_1, 1; x_2, 1; dots.v, dots.v; x_n, 1), A) underbrace(mat(k; m), X)=underbrace(mat(y_1; y_2; dots.v; y_n), Y). $
+
+  Vi har $A X=Y$ med fler ekvationer än obekanta, så vi söker en approximativ lösning.
+
+  Projicera $Y$ på $V(A)$ (där $Y'$ är projektionen av $Y$ på $V(A)$) så att alla $Y$ för vilka $A X=Y$ saknar lösning plötsligt får en _approximativ_ lösning! #emoji.face.surprise
+
+  Vi söker $X$ så att
+
+  $ Y''=Y-Y'=Y- A X in V(A)^perp. $
+
+  Vi har
+
+  $ &Y-A X in V(A)^perp\
+  <=>&Y-A X perp vu space forall space vu in V(A)\
+  <=>&Y-A X perp A_1, A_2, dots.c, A_n\
+  <=>&A_1^t (Y-A X)=0, A_2^t (Y-A X)=0, dots.c\
+  <=>&A^t (Y-A X)=zv\
+  <=>& A^t A X=A^t Y. $
+
+  = Ett konkret räkneexempel med så att säga riktiga siffror
+
+  // plot the points (0,0), (0,1), (1,1) and (2,1) with cetz
+  // #figure(canvas({
+  //   plot.plot(size: (10, 10), axis-style: "school-book", x-grid: true, y-grid: true, y-label: $y$, x-label: $x$, x-tick-step: 0.5 * calc.pi, y-min: -10, y-max: 10, y-tick-step: 5, {
+  //     plot.add(((0,1)), style: (mark: (stroke: blue)))
+  //   })
+  // }), caption: [$y=tan x$.])
+
+  Vi vill att $ mat(0, 1; 0, 1; 1, 1; 2, 1)mat(k; m)=mat(0; 1; 1; 1) $
+
+  så vi löser $ mat(0, 0, 1, 2; 1, 1, 1, 1)mat(0, 1; 0, 1; 1, 1; 2, 1) mat(k; m)=mat(0, 0, 1, 2; 1, 1,1,1) mat(0; 1; 1; 1). $
+
+  = LU-faktorisering
+
+  #figure(image("lu.png", width: 20%), caption: [LU i LU-faktorisering.])
+
+  "Jag har valt bokstäverna f och #sym.pi för att ni läser #sym.pi och f."
+
+  Mer allmänt: $P L U$-faktorisering.
+
+  Choleskyfaktorisering :o
 ]
 
 #pagebreak(weak: true)
@@ -575,9 +622,7 @@ Visa att följande påståenden är ekvivalenta!
 
 == Visa att $1 <=> 2$
 
-Dimensionssatsen ger
-
-$ N(F)=zm <=> dim N(F)=0 <=> dim V(F)=dim U <=> V(F)=U. $
+$ N(F)={zm} <=> underbrace(dim N(F)=0 <=> dim V(F)=dim U, "Dimensionssatsen") <=> V(F)=U. $
 
 == Visa att $2 => 3$
 
@@ -588,7 +633,7 @@ $ V(F)=U in.rev E => exists space X_0 in U : F(X_0)=E $
 $
 &F(X_0)=A X_0 A=(A X_0)A=A(X_0 A)=E\
 =>& A^(-1)=A X_0=X_0 A\
-=>& X_0=A^(-1) A^(-1)
+=>& X_0=A^(-1) A^(-1) "ty" F(A^(-1) A^(-1))=A(A^(-1) A^(-1))A=E.
 $
 
 == Visa att $4 => 2$

@@ -1,4 +1,4 @@
-#import "template.typ": conf, lecture
+#import "template.typ": conf, lecture, hr
 
 #show: doc => conf("FMAB66", [Introduktion till reell analys], doc)
 
@@ -129,3 +129,56 @@ Det kontrapositiva påståendet till
 $ forall epsilon >0(exists delta > 0 (x in D_f \& |x-a|<delta => |f(x)-f(a)<epsilon)) $
 
 är $ exists epsilon > 0 (forall delta > 0 (x in D_f \& |x-a|<delta "men" |f(x)-f(a)|>=epsilon)). $
+
+#hr
+
+$f:D_f-> RR$ sägs vara följdkontinuerlig i punkten $a in D_f$ om för varje följd $(a_k)$ i $D_f$ så att $a_k -> a$ gäller $f(a_k)->f(a)$.
+
+$cal(C)([a,b])$ betecknar alla kontinuerliga funktioner på $[a,b]$.
+
+En funktion $f in cal(C)([a,b])$ som uppfyller $f(a)<0<f(b)$ har minst ett nollställe i $[a,b]$. Intervallinkapsling (i vårt fall binärsök efter $f(x)=0$) ger
+
+$ exists space xi in sect.big_(k=1)^infinity I_k $
+
+$ a_k -> xi$ och $b_k -> xi$, men gäller $f(xi)=0$?
+
+Ja.
+
+#hr
+
+#figure(image("antipod.jpeg", width: 100%), caption: [Apropå antipod.])
+
+#hr
+
+$ cal(U)={U_c:c in [a,b]} $
+
+== Weierstraß extremvärdessats (extremväderssats?)
+
+"Det mesta i den här kursen är väldigt självklart tills man ser beviset."
+
+"Så fort du ruckar på kontinuiteten kan du få vad du vill, nästan."
+
+== Heines sats
+
+Om $f in cal(C)([a,b])$ så är $f$ likformigt kontinuerlig.
+
+#figure(image("heine.jpeg", width: 40%), caption: [Tomas Persson?])
+
+== Favoritvariabler
+
+- $alpha$
+- $x$
+- $xi$
+
+= Övning 26/5
+
+#text(size: 40pt)[
+  #table(
+    columns: 2,
+    table.cell(colspan: 2)[LaTeX],
+    [Typst],
+    [Hejsan],
+  )
+
+  $ mat(delim: "|", 1, 2, 3; 4, 5, 6; 7, 8, 9) $
+]
