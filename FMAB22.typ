@@ -605,6 +605,41 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   Choleskyfaktorisering :o
 ]
 
+#lecture(2024, 9, 30, [])[
+  (Frånvarande)
+]
+
+#lecture(2024, 10, 1, [Mer om determinanter])[
+  Tomas shell: `tomasp@strauss`
+
+  EMACS.
+
+  = Cramers regel
+
+  Antag att $A$ är inverterbar. Då är lösningen till $ A X=Y$ där $Y=mat(y_1; dots.v; y_n)$ och $X=mat)x_1; dots.v; x_n$
+
+  $ x_i=(det mat(A_1, dots.c, underbrace(Y, i), dots.c, A_n)t)/(det A). $
+
+  Hotell Kramer finns faktiskt: #link("https://www.scandichotels.se/hotell/sverige/malmo/scandic-kramer")[Scandic Kramer].
+
+  "Det kanske inte är en beräkningsmässigt sund metod, men det är trevligt att ha en formel i varje fall."
+
+  = Det
+
+  Om $A$ är en inverterbar $n times n$-matris så är
+
+  $ A^(-1)=1/(det A) mat(
+    (-1)^(1+1) det A^((1,1)), (-1)^(1+2) det A^((1,2)), dots.c, (-1)^(1+n)det A^((1,n));
+    (-1)^(2+1) det A^((2,1)), (-1)^(2+2) det A^((2,2)), dots.c, (-1)^(2+n)det A^((2,n));
+    dots.v, dots.v, dots.down, dots.v;
+    (-1)^(n+1) det A^((n,1)), (-1)^(n+2) det A^((n,2)), dots.c, (-1)^(n+n)det A^((n,n))
+  )^t $
+
+  där $A^((i,j))$ betecknar matrisen som erhålls genom att stryka rad $i$ och kolonn $j$ från $A$.
+
+  Strukturen för $2 times 2$-matriser är att de är så jäkla små.
+]
+
 #pagebreak(weak: true)
 
 = Redovisningsuppgift
@@ -626,29 +661,26 @@ $ N(F)={zm} <=> underbrace(dim N(F)=0 <=> dim V(F)=dim U, "Dimensionssatsen") <=
 
 == Visa att $2 => 3$
 
-$ V(F)=U in.rev E => exists space X_0 in U : F(X_0)=E $
+$ V(F)=U in.rev E => exists space X_0 in U : F(X_0)=E. $
 
-== Visa att $3 <=> 4$
+== Visa att $3 => 4$
 
 $
 &F(X_0)=A X_0 A=(A X_0)A=A(X_0 A)=E\
-=>& A^(-1)=A X_0=X_0 A\
-=>& X_0=A^(-1) A^(-1) "ty" F(A^(-1) A^(-1))=A(A^(-1) A^(-1))A=E.
+=>& A^(-1)=A X_0=X_0 A
+//\ =>& X_0=A^(-1) A^(-1) "ty" F(A^(-1) A^(-1))=A(A^(-1) A^(-1))A=E
+.
 $
 
 == Visa att $4 => 2$
 
-Värderummet $V(F)$ definieras av
-
-$ V(F)={Y in U:F(X)=Y "har lösning"}. $
-
 $
 &exists space A^(-1) in U : A^(-1)A=A A^(-1)=E\
 =>& A^(-1)F(X)A^(-1)=A^(-1)(A X A)A^(-1)=underbrace((A^(-1)A), E) X underbrace((A A^(-1)), "E") = X \
-=>& F^(-1)(Y)=A^(-1)Y A^(-1)
+=>& F^(-1)(Y)=A^(-1)Y A^(-1).
 $
 
-så det finns en lösning $X=F^(-1)(Y)$ till varje $Y in U$. Således är $ V(F)=U. $
+så det finns en lösning $X=F^(-1)(Y)$ till varje $Y in U$. Därmed är $ V(F)=U. $
 
 // == Visa att $4 => 1$
 
