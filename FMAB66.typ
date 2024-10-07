@@ -119,6 +119,53 @@
   "Om vi ska införa $arctan$ måste vi ha grafen för $tan$. Den hade jag här. Det hade inte ni!"
 ]
 
+#lecture(2024, 10, 2, [Kontinuitet])[
+  $ 0 in NN ~> underbrace(0 in.not NN, "Låt stå") $
+
+  Han är bra.
+
+  #hr
+
+  "Vi kommer inte att gå härifrån klanderfria. Vi kommer ha lite smutsiga händer och så."
+
+  $ e^t = \& $
+
+  Min favoritligatur $e^t$.
+
+  $ "språng" ~~> --> "hål i def.-mängd" $
+
+  Man $lim_(h->0)$-mar ihop funktionerna.
+
+  #let tier(content) = table.cell(align(center, content))
+
+  #figure(table(
+    columns: (auto, 1fr),
+    inset: (x: 6pt, y: 8pt),
+    stroke: (x: none, y: 0.5pt),
+    tier[S], [$NN$, $ZZ$],
+    tier[A], [$xi$],
+    tier[B], [$in.rev$, $Sigma$],
+    tier[C], [$sect$],
+    tier[D], [],
+    tier[E], [$emptyset$],
+    tier[F], [$exists$],
+  ), caption: [Symboltierlist.])
+
+  = Mikaels pannkaksproblem
+
+  == Det första pannkaksproblemet
+
+  Om man ska steka pannkakor, som man gör lite då och då, kanske med sin käresta, men bara har en pannkaka (för CSN har inte kommit än) och vill dela pannkakan så att båda får lika mycket kant och pannkaka -- hur gör man?
+
+  == Det andra pannkaksproblemet
+
+  Nu har CSN kommit. Går det att göra ett enda snitt genom två pannkakor så att båda får lika mycket pannkaka?
+
+  == Det tredje pannkaksproblemet
+
+  Du vill dela en pannkaka med tre kamrater (det är återigen slutet av månaden och bistra tider). Går det att göra två vinkelräta snitt så att alla får lika mycket pannkaka?
+]
+
 #pagebreak(weak: true)
 
 = Övningar

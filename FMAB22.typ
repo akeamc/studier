@@ -620,7 +620,7 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
 
   $ x_i=(det mat(A_1, dots.c, underbrace(Y, i), dots.c, A_n)t)/(det A). $
 
-  Hotell Kramer finns faktiskt: #link("https://www.scandichotels.se/hotell/sverige/malmo/scandic-kramer")[Scandic Kramer].
+  Hotell Kramer finns faktiskt: #link("https://web.archive.org/web/20240907053427/https://www.scandichotels.se/hotell/sverige/malmo/scandic-kramer")[Scandic Kramer].
 
   "Det kanske inte är en beräkningsmässigt sund metod, men det är trevligt att ha en formel i varje fall."
 
@@ -638,6 +638,20 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   där $A^((i,j))$ betecknar matrisen som erhålls genom att stryka rad $i$ och kolonn $j$ från $A$.
 
   Strukturen för $2 times 2$-matriser är att de är så jäkla små.
+]
+
+#lecture(2024, 10, 2, [Seminarium])[
+  = En fullständig parentes (Riemann--Lebesgue)
+
+  "Det här är enklare att göra om man räknar med komplexa tal."
+
+  ${e^(i 2 pi k x)}_(k=-infinity)^(infinity)$ är en ON-mängd i $cal(L)^2([0,1])$.
+
+  $scalar(f, e^(i 2pi k x))=integral_0^1 f(x) e^(-i 2pi k x) dd(x)$
+
+  och $ sum_(k=-infinity)^infinity (integral_0^1 f(x) e^(-i 2 pi k x) dd(x)) <= integral_0^1 |f(x)|^2 dd(x) < infinity $
+
+  så $ integral_0^1 f(x) e^(-i 2pi k x) dd(x)->0 "då" k -> infinity. $
 ]
 
 #pagebreak(weak: true)
