@@ -6,7 +6,7 @@
   set math.equation(numbering: "(1)")
   set par(justify: true)
 
-  outline(indent: 1em)
+  outline(indent: 1em, depth: 3)
   pagebreak(weak: true)
 
   doc

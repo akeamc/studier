@@ -35,7 +35,7 @@ class PressureWave(Scene):
 
 class Intro(Scene):
     def construct(self):
-        text = Tex("Åke Amcoff").scale(2).center()
+        text = Tex("3Myror1Elefant").scale(2).center()
         self.add(text)
         self.play(Write(text, run_time=3))
         self.wait()
@@ -176,6 +176,7 @@ class SineWaves(Scene):
         self.play(FadeIn(wave1[1]))
 
         self.set_wave_param(wave1, "omega", TAU)
+        self.wait()
         self.set_wave_param(wave1, "omega", PI / 2)
         self.wait()
         self.set_wave_param(wave1, "phi", PI)
@@ -226,7 +227,6 @@ class SineWaves(Scene):
         )
         self.add(wave3)
 
-
         self.set_wave_param(wave1, "phi", PI / 2)
         self.wait()
 
@@ -234,11 +234,92 @@ class SineWaves(Scene):
         self.change_all_params(wave2, 0.5, PI, PI / 4)
         self.wait()
 
-        phase_diff = always_redraw(lambda: MathTex(rf"\phi_1 - \phi_2 = {wave1.trackers[2].get_value() - wave2.trackers[2].get_value():.2f}").move_to(axes3.c2p(0.5, -1.5), DL))
+        phase_diff = always_redraw(
+            lambda: MathTex(
+                rf"\phi_1 - \phi_2 = {wave1.trackers[2].get_value() - wave2.trackers[2].get_value():.2f}",
+                font_size=24,
+            ).next_to(axes3, LEFT, MED_LARGE_BUFF)
+        )
         self.add(phase_diff)
+        self.play(Create(phase_diff))
         self.wait()
 
         self.set_wave_param(wave2, "phi", 9 * PI / 4)
         self.wait()
         self.set_wave_param(wave2, "phi", 5 * PI / 4)
         self.wait()
+
+
+class ThreeD(ThreeDScene):
+    def construct(self):
+        self.set_camera_orientation(phi=60 * DEGREES, theta=45 * DEGREES)
+        axes = ThreeDAxes()
+
+        def wave_func(x, t):
+            wavelength = 2
+            return 0.5 * np.sin(2 * PI * (x / wavelength - t))
+
+        def time():
+            return self.renderer.time
+
+        speaker_l = always_redraw(
+            lambda: Dot3D(point=axes.c2p(-4, -2, wave_func(0, time())), color=RED)
+        )
+        speaker_r = always_redraw(
+            lambda: Dot3D(point=axes.c2p(-4, 2, wave_func(0, time())), color=RED)
+        )
+
+        def wave_line(start, x, color):
+            return Line(
+                start=start,
+                end=start + np.array([0, 0, wave_func(x, time())]),
+                color=color,
+            )
+
+        def wave(origin, to=axes.c2p([0, 0, 0]), color=WHITE):
+            origin = np.array(origin)
+            to = np.array(to)
+            direction = to - origin
+            max_x = np.linalg.norm(to - origin)
+
+            return VGroup(
+                FunctionGraph(
+                    lambda x: wave_func(x, time()),
+                    x_range=[0, max_x],
+                    color=color,
+                )
+                .move_to(origin, LEFT)
+                .rotate(PI / 2, RIGHT, about_point=origin)
+                .rotate(angle_of_vector(to - origin), OUT, about_point=origin),
+                # add arrows from y=0 to wave
+                *(
+                    wave_line(
+                        origin + direction * i / max_x / 10,
+                        i / 10,
+                        color.to_rgba_with_alpha(0.25),
+                    )
+                    for i in range(0, int(max_x * 10) + 1)
+                ),
+            )
+
+        dest_y = ValueTracker(0)
+        y_label = always_redraw(
+            lambda: MathTex(f"y = {dest_y.get_value():.2f}").next_to(speaker_l, UP)
+        )
+
+        wave_l = always_redraw(
+            lambda: wave(axes.c2p(-4, -2, 0), axes.c2p(4, dest_y.get_value(), 0))
+        )
+        wave_r = always_redraw(
+            lambda: wave(
+                axes.c2p(-4, 2, 0), axes.c2p(4, dest_y.get_value(), 0), color=YELLOW
+            )
+        )
+
+        self.add(axes, speaker_l, speaker_r, wave_l, wave_r, dest_y, y_label)
+        # self.begin_ambient_camera_rotation(rate=0.1)
+        self.wait(2, frozen_frame=False)
+        self.play(dest_y.animate.set_value(-1.7), run_time=4)
+        # self.wait(2)
+        # self.play(dest_y.animate.set_value(0.5), run_time=4)
+        # self.stop_ambient_camera_rotation()

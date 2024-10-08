@@ -166,6 +166,12 @@
   Du vill dela en pannkaka med tre kamrater (det är återigen slutet av månaden och bistra tider). Går det att göra två vinkelräta snitt så att alla får lika mycket pannkaka?
 ]
 
+#lecture(2024, 10, 7, [Derivator])[
+  Om det inte finns någon tangent att $lim$-ma på så är funktionen inte deriverbar i den punkten.
+
+  $ "deriverbara funktioner" subset "kontinuerliga funktioner" subset "funktioner". $
+]
+
 #pagebreak(weak: true)
 
 = Övningar

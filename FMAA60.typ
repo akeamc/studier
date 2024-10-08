@@ -170,15 +170,73 @@ Om $f in cal(C)([a,b])$ så är $f$ likformigt kontinuerlig.
 - $x$
 - $xi$
 
-= Övning 26/5
+= Derivator
 
-#text(size: 40pt)[
-  #table(
-    columns: 2,
-    table.cell(colspan: 2)[LaTeX],
-    [Typst],
-    [Hejsan],
-  )
+== Extrem värdesundersökning #emoji.fire
 
-  $ mat(delim: "|", 1, 2, 3; 4, 5, 6; 7, 8, 9) $
-]
+== Fermats princip
+
+Antag att $f$ har ett lokalt maximum eller minimum i $c in D_f$. Om $f$ är deriverbar i $c$ och $c$ är en hopningspunkt till både $(-infinity,c) sect D_f$ och $(c, infinity) sect D_f$ så är $f'(c)=0$.
+
+== Idealt#footnote[Anton läste fel.]/lokalt maximum
+
+$ qed $
+
+== Rolles sats
+
+#figure(
+  stack(
+    spacing: 4pt,
+    image("rulle.png", width: 20%),
+    image("rolle.jpeg", width: 20%),
+  ),
+  caption: [Rulle/Rolle Yeah.],
+)
+
+#let derivcont(a: $a$, b: $b$) = $cal(C)([#a,#b]) sect cal(D)^1((#a,#b))$
+
+Antag att $f in derivcont()$ och att $f(a)=f(b)$. Då finns ett $xi in (a,n)$ så att $f'(xi)=0$.
+
+== Lagranges medelvärdessats
+
+Antag att $f in derivcont()$.  Då finns ett $xi in (a,b)$ så att $ f'(xi)=(f(b)-f(a))/(b-a). $
+
+== Cauchys medelvärdessats
+
+Antag $f,g in derivcont()$. Då finns ett $xi in (a,b)$ så att $ f'(xi)(g(b)-g(a))=g'(xi)(f(b)-f(a)). $
+
+== Monotonicitet
+
+(För trist för att antecknas.)
+
+Gött mos.
+
+== $exp$
+
+$exp(x)$ definieras enligt
+
+1. $lim_(n->infinity)(1+x/n)^n$
+2. $sum_(k=0)^infinity x^k/(k!)$
+3. $f in cal(D)'(RR)$ så att $f(0)=1$ och $f'(x)=f(x)$
+4. $f in cal(C)(RR)$ så att $f(1)=e$ och $f(x+y)=f(x)f(y)$
+
+== L'Hôpitalsession
+
+=== Lill-l'Hôpital
+
+Om $f$ och $g$ är deriverbara i $a$ $f(a)=g(a)=0$ och $g'(a) != 0$ så gäller $ lim_(x->a) f(x)/g(x)=(f'(a))/(g'(a)). $
+
+=== Stor-l'Hôpital
+
+Låt $a in I$ vara en inre punkt till intervallet $I$. Låt $f,g in cal(D)^1(I)$ så att
+$ f(a)=g(a)=0 $
+och $ g'(x) != 0 $
+för alla $x$ i en punkterad omvigning av $a$.
+
+Om gränsvärdet $lim_(x->a)(f'(x))/(g'(x))$ existerar så existerar även $lim_(x-a)(f(x))/(g(x))$ och
+
+$ lim_(x->a) (f(x))/(g(x))=lim_(x->a) (f'(x))/(g'(x)). $
+
+==== Bevis
+
+Låt $eta$ vara.

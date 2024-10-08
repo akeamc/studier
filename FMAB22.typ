@@ -654,6 +654,18 @@ där $A,B,C,D in RR.$ Planet har normalvektorn $(A,B,C)$.
   så $ integral_0^1 f(x) e^(-i 2pi k x) dd(x)->0 "då" k -> infinity. $
 ]
 
+#lecture(2024, 10, 7, [Allmänna projektioner])[
+  "Där ligger någon som gömt en krita."
+
+  Om $V=U_1+U_2$ och $U_1 sect U_2={zv}$ så skriver vi $ V=U_1 plus.circle U_2. $
+
+  #hr
+
+  $ P^2=P <=> P "är en projektion". $
+
+  $ plus.circle.big_(k=0)^infinity U_k $
+]
+
 #pagebreak(weak: true)
 
 = Redovisningsuppgift
