@@ -252,8 +252,8 @@ class SineWaves(Scene):
 
 class ThreeD(ThreeDScene):
     def construct(self):
-        self.set_camera_orientation(phi=60 * DEGREES, theta=45 * DEGREES)
-        axes = ThreeDAxes()
+        axes = ThreeDAxes().move_to([-2, 0, 0])
+        self.set_camera_orientation(phi=60 * DEGREES, theta=135 * DEGREES)
 
         def wave_func(x, t):
             wavelength = 2
@@ -302,24 +302,36 @@ class ThreeD(ThreeDScene):
                 ),
             )
 
+        dest_x = ValueTracker(0)
         dest_y = ValueTracker(0)
-        y_label = always_redraw(
-            lambda: MathTex(f"y = {dest_y.get_value():.2f}").next_to(speaker_l, UP)
-        )
+        # y_label = always_redraw(
+        #     lambda: MathTex(f"y = {dest_y.get_value():.2f}").next_to(speaker_l, UP)
+        # )
 
-        wave_l = always_redraw(
-            lambda: wave(axes.c2p(-4, -2, 0), axes.c2p(4, dest_y.get_value(), 0))
-        )
-        wave_r = always_redraw(
-            lambda: wave(
-                axes.c2p(-4, 2, 0), axes.c2p(4, dest_y.get_value(), 0), color=YELLOW
+        def p():
+            return axes.c2p(dest_x.get_value(), dest_y.get_value(), 0)
+
+        wave_l = always_redraw(lambda: wave(axes.c2p(-4, -2, 0), p()))
+        wave_r = always_redraw(lambda: wave(axes.c2p(-4, 2, 0), p(), color=YELLOW))
+
+        def arr_z():
+            wl_x = np.linalg.norm(p() - axes.c2p(-4, -2, 0))
+            wr_x = np.linalg.norm(p() - axes.c2p(-4, 2, 0))
+            return wave_func(wl_x, time()) + wave_func(wr_x, time())
+
+        arr = always_redraw(
+            lambda: Dot3D(
+                point=p() + np.array([0, 0, arr_z()]),
+                color=GREEN,
             )
         )
 
-        self.add(axes, speaker_l, speaker_r, wave_l, wave_r, dest_y, y_label)
-        # self.begin_ambient_camera_rotation(rate=0.1)
+        self.add(axes, speaker_l, speaker_r, wave_l, wave_r, dest_y, arr)
+        self.move_camera(phi=75 * DEGREES, theta=60 * DEGREES, run_time=2)
+        self.wait(8, frozen_frame=False)
+        self.play(dest_x.animate.set_value(6), run_time=4)
         self.wait(2, frozen_frame=False)
+        self.play(dest_x.animate.set_value(4), run_time=4)
+        self.wait(3, frozen_frame=False)
         self.play(dest_y.animate.set_value(-1.7), run_time=4)
-        # self.wait(2)
-        # self.play(dest_y.animate.set_value(0.5), run_time=4)
-        # self.stop_ambient_camera_rotation()
+        self.wait(8, frozen_frame=False)
