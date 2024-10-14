@@ -371,6 +371,120 @@
   dots.v\ dv(v,t,2)+v=0 $
 ]
 
+#lecture(2024, 10, 11, smallcaps[Den sista föreläsningen med ny teori])[
+  $c$ är en stationär punkt för $f$ om $f'(c)=0$.
+
+  $c$ är en kritisk punkt för $f$ om $f'(c)=0$ eller om $f$ inte är deriverbar i $c$.
+
+  #hr
+
+  $f(x)=|x|$, $x in [-1,1]$ antar sitt minsta värde i en kritisk punkt.
+
+  _Kritiska punkter i det inre_ #emoji.hands
+
+  #let pol = x => -(x + 1) * (x - 2)
+
+  // draw a graph of f(x) = |x| and mark the minimum
+  #figure(canvas({
+    plot.plot(
+      size: (5, 5),
+      axis-style: "school-book",
+      x-tick-step: none,
+      y-tick-step: none,
+      {
+        plot.add(
+          domain: (-1.5, 3),
+          x => {
+            if x < 2 {
+              pol(x)
+            } else {
+              3 * (x - 2) + pol(2)
+            }
+          },
+          samples: 100,
+        )
+      },
+    )
+  }), )
+
+  = Skördetider
+
+  Givet $f in cal(C)([x_1,x_2]) sect cal(D)((x_1,x_2))$ och ett $xi in (x_1,x_2)$ så är
+
+  $ f(x_2)-f(x_1)=f'(xi)(x_2-x_1). $
+
+  - Om $f'(x)=0$ för alla $x in [x_1,x_2]$ så är $f$ konstant på intervallet.
+  - Om $f'(x)>0$ för alla $x in [x_1,x_2]$ så är $f$ strängt växande på intervallet.
+  - Om $f'(x)<0$ för alla $x in [x_1,x_2]$ så är $f$ strängt avtagande på intervallet.
+
+  #hr
+
+  $f(x)=x-sin x$ är strängt växande på $[0,2pi]$ ty $f'(x)=1-cos x>0$ för alla $x in (0,2pi)$.
+
+  #hr
+
+  $ x/(1+x)<ln(1+x)<x, quad x > 0. $
+
+  Låt
+
+  $ f(x)=ln(1+x)-x/(1+x), quad x>=0. $
+
+  Vi vill visa att $f(x)>0$ för alla $x>0$, det vill säga att $f(0)=0$ och att $f'(x)>0$ för alla $x>0$.
+
+  $ f'(x)=1/(1+x)-1/(1+x)^2=x/(1+x)^2 > 0, quad x > 0. $
+
+  #hr
+
+  För alla $a,b in RR$ är $ |arctan a - arctan b| <= |a-b|. $
+
+  $ f(x)=arctan x => f'(x)=1/(1+x^2). $
+
+  Tag $a,b in RR$. Då finns ett $xi$ mellan $a$ och $b$ så att $f(b)-f(a)=f'(xi)(b-a)$ dvs.
+
+  $ arctan b - arctan a &= 1/(1+xi^2)(b-a)\
+  |arctan b-arctan a|&=underbracket(|1/(1+xi^2)|, <= 1)|b-a|<=|b-a| $
+
+  #hr
+
+  $ f(x)=cases(x^2+2x\, space &x<=1, 4x-1\, space &x>1) $
+
+  Det gäller att
+
+  - $f(x) -> 3$ då $x->1$ både från vänster och höger,
+  - $f'(x) -> 4$ då $x->1$ från båda håll
+
+  så $f$ är deriverbar i $x=1$.
+
+  = L'Hôpitals regel
+  
+  == "Musse Pigg-varianten"
+
+  Om $f$ och $g$ är deriverbara i $x=a$, $f(a)=g(a)=0$ men $g'(a)!=0$ så gäller
+
+  $ f(x)/g(x)=(f(x)-f(a))/(g(x)-g(a))=(f(x)-f(a))/(x-a) slash.big (g(x)-g(a))/(x-a) --> (f'(a))/(g'(a)), x -> a quad #emoji.sparkles $
+
+  == Elaka varianten
+
+  Givet $f, g in cal(C([a,b])) sect cal(C)((a,b))$ där $f(a)=g(a)=0$ och $g'(x)!=0$ i någon punkterad omgivning av $a$. Om
+
+  $ lim_(x->a^+) (f'(x))/(g'(x))=A "så" lim_(x->a^+)f(x)/g(x)=A. $
+
+  Motsvarande gäller för $x->a^-$.
+
+  #hr
+
+  $ lim_(x->0) (sin x - x)/(x - tan x) $
+
+  $ f(x)&=sin x - x\
+  g(x)&=x-tan x\
+  f'(x)&=cos x -1\
+  g'(x)=1-(1+tan^2 x)&=-tan^2 x\
+  f''(x)&=-sin x\
+  g''(x)&=-2 tan x (1 + tan^2 x) $
+
+  $ lim_(x->0)(f''(x))/(g''(x))=lim_(x->0)(sin x)/(-2 tan x (1+tan^2x))=lim_(x->0)1/(-2/(cos x)(1 + tan^2 x))=-1/2=lim_(x->0)f(x)/g(x). $
+]
+
 #pagebreak(weak: true)
 
 = Övningar

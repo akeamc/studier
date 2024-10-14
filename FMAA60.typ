@@ -195,7 +195,7 @@ $ qed $
 
 #let derivcont(a: $a$, b: $b$) = $cal(C)([#a,#b]) sect cal(D)^1((#a,#b))$
 
-Antag att $f in derivcont()$ och att $f(a)=f(b)$. Då finns ett $xi in (a,n)$ så att $f'(xi)=0$.
+Antag att $f in derivcont()$ och att $f(a)=f(b)$. Då finns ett $xi in (a,b)$ så att $f'(xi)=0$.
 
 == Lagranges medelvärdessats
 
