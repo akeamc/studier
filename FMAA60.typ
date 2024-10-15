@@ -10,7 +10,8 @@ Notation: $A = B => A subset B <=> A subset.eq B$
 
 En funktion $f: X -> Y $ avbildar värden i definitionsmängden $X$ i målmängden $Y$.
 
-Värdemängden $f(X)$ är inte nödvändigtvis hela målmängden, dvs. $f(X) subset Y$ (och inte $f(X)=Y$).
+Värdemängden $f(X)$ är inte nödvändigtvis hela målmängden, dvs. $f(X) subset Y$ (och
+inte $f(X)=Y$).
 
 Bilden av $A subset X$ under $f$: $f(A)={f(x); x in A}$.
 
@@ -38,7 +39,8 @@ För $a,b,c in RR$ gäller:
 - kommutativitet: $a+b=b+a$, $a b=b a$
 - associativitet: $(a+b)+c=a+(b+c)$, $(a b)c=a(b c)$
 - distributivitet: $a(b+c)=a b+a c$
-- identiteter/neutrala element: additiv identitet ($0$) och multiplikativ identitet ($1$). $0!=1$
+- identiteter/neutrala element: additiv identitet ($0$) och multiplikativ
+  identitet ($1$). $0!=1$
 - inversa element: för varje $forall a in RR exists (-a); a+(-a)=0$
 - multiplikativ invers: $forall a in RR\\{0} exists a^-1 in RR; a a^-1=1$
 
@@ -87,7 +89,8 @@ $(a_k)$ Cauchyföljd om $forall space epsilon > 0 space exists space N in NN; |a
 
 == Delföljd
 
-Om $(a_k)$ talföljd och $(n_k)$ strängt växande följd av naturliga tal så är $(b_k)=(a_((n_k)))$ delföljd av $(a_k)$.
+Om $(a_k)$ talföljd och $(n_k)$ strängt växande följd av naturliga tal så är $(b_k)=(a_((n_k)))$ delföljd
+av $(a_k)$.
 
 == Bolzano-Weierstraß
 
@@ -95,7 +98,8 @@ Varje begränsad följd har en konvergent delföljd.
 
 = Topologi _(platslära)_
 
-- $epsilon > 0$, #sym.epsilon\-omgigning till punkt $a in RR$ är mängden $B(a, epsilon)=(a-epsilon, a+epsilon)$. #footnote[$B$ kommer från _boll_ eftersom det ser ut som en boll i högre dimensioner. $B(a, epsilon)$ uttalas "#sym.epsilon\-bollen kring $a$".]
+- $epsilon > 0$, #sym.epsilon\-omgigning till punkt $a in RR$ är mängden $B(a, epsilon)=(a-epsilon, a+epsilon)$. #footnote[$B$ kommer från _boll_ eftersom det ser ut som en boll i högre dimensioner. $B(a, epsilon)$ uttalas "#sym.epsilon\-bollen
+    kring $a$".]
 - En omgivning av punkten $a in RR$ är en #sym.epsilon\-omgivning.
 - En punkterad omgivning till punkten $a in RR$ är en omgivning till $a$ utan $a$. $(a-epsilon,a+epsilon)\\ {a}$.
 
@@ -118,11 +122,13 @@ $ e^x:=&lim_(n->infinity) (1+1/n)^(n x) quad "låt" k=n x\ =&lim_(n->infinity) (
 
 = Kontinuerliga funktioner
 
-$f:D_f->RR$ är kontinuerlig i punkten $a in D_f$ om $forall epsilon > 0, exists delta > 0$ så att
+$f:D_f->RR$ är kontinuerlig i punkten $a in D_f$ om $forall epsilon > 0, exists delta > 0$ så
+att
 
 $ x in D_f \& |x-a|<delta => |f(x|-f(a)|<epsilon $
 
-En kontinuerlig funktion $f:D_f->RR$ är kontinuerlig om den är kontinuerlig i alla punkter på $D_f$.
+En kontinuerlig funktion $f:D_f->RR$ är kontinuerlig om den är kontinuerlig i
+alla punkter på $D_f$.
 
 Det kontrapositiva påståendet till
 
@@ -132,11 +138,14 @@ $ forall epsilon >0(exists delta > 0 (x in D_f \& |x-a|<delta => |f(x)-f(a)<epsi
 
 #hr
 
-$f:D_f-> RR$ sägs vara följdkontinuerlig i punkten $a in D_f$ om för varje följd $(a_k)$ i $D_f$ så att $a_k -> a$ gäller $f(a_k)->f(a)$.
+$f:D_f-> RR$ sägs vara följdkontinuerlig i punkten $a in D_f$ om för varje följd $(a_k)$ i $D_f$ så
+att $a_k -> a$ gäller $f(a_k)->f(a)$.
 
 $cal(C)([a,b])$ betecknar alla kontinuerliga funktioner på $[a,b]$.
 
-En funktion $f in cal(C)([a,b])$ som uppfyller $f(a)<0<f(b)$ har minst ett nollställe i $[a,b]$. Intervallinkapsling (i vårt fall binärsök efter $f(x)=0$) ger
+En funktion $f in cal(C)([a,b])$ som uppfyller $f(a)<0<f(b)$ har minst ett
+nollställe i $[a,b]$. Intervallinkapsling (i vårt fall binärsök efter $f(x)=0$)
+ger
 
 $ exists space xi in sect.big_(k=1)^infinity I_k $
 
@@ -176,7 +185,9 @@ Om $f in cal(C)([a,b])$ så är $f$ likformigt kontinuerlig.
 
 == Fermats princip
 
-Antag att $f$ har ett lokalt maximum eller minimum i $c in D_f$. Om $f$ är deriverbar i $c$ och $c$ är en hopningspunkt till både $(-infinity,c) sect D_f$ och $(c, infinity) sect D_f$ så är $f'(c)=0$.
+Antag att $f$ har ett lokalt maximum eller minimum i $c in D_f$. Om $f$ är
+deriverbar i $c$ och $c$ är en hopningspunkt till både $(-infinity,c) sect D_f$ och $(c, infinity) sect D_f$ så
+är $f'(c)=0$.
 
 == Idealt#footnote[Anton läste fel.]/lokalt maximum
 
@@ -184,22 +195,20 @@ $ qed $
 
 == Rolles sats
 
-#figure(
-  stack(
-    spacing: 4pt,
-    image("rulle.png", width: 20%),
-    image("rolle.jpeg", width: 20%),
-  ),
-  caption: [Rulle/Rolle Yeah.],
-)
+#figure(stack(
+  spacing: 4pt,
+  image("rulle.png", width: 20%),
+  image("rolle.jpeg", width: 20%),
+), caption: [Rulle/Rolle Yeah.])
 
 #let derivcont(a: $a$, b: $b$) = $cal(C)([#a,#b]) sect cal(D)^1((#a,#b))$
 
-Antag att $f in derivcont()$ och att $f(a)=f(b)$. Då finns ett $xi in (a,b)$ så att $f'(xi)=0$.
+Antag att $f in derivcont()$ och att $f(a)=f(b)$. Då finns ett $xi in (a,b)$ så
+att $f'(xi)=0$.
 
 == Lagranges medelvärdessats
 
-Antag att $f in derivcont()$.  Då finns ett $xi in (a,b)$ så att $ f'(xi)=(f(b)-f(a))/(b-a). $
+Antag att $f in derivcont()$. Då finns ett $xi in (a,b)$ så att $ f'(xi)=(f(b)-f(a))/(b-a). $
 
 == Cauchys medelvärdessats
 
@@ -228,7 +237,8 @@ Om $f$ och $g$ är deriverbara i $a$ $f(a)=g(a)=0$ och $g'(a) != 0$ så gäller 
 
 === Stor-l'Hôpital
 
-Låt $a in I$ vara en inre punkt till intervallet $I$. Låt $f,g in cal(D)^1(I)$ så att
+Låt $a in I$ vara en inre punkt till intervallet $I$. Låt $f,g in cal(D)^1(I)$ så
+att
 $ f(a)=g(a)=0 $
 och $ g'(x) != 0 $
 för alla $x$ i en punkterad omvigning av $a$.

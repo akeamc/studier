@@ -808,7 +808,7 @@ Strukturen för $2 times 2$-matriser är att de är så jäkla små.
   2024,
   10,
   8,
-  [Spektralteori],
+  [Egenvärden och egenvektorer],
 )[
   = Ordinära differentialekvationer
 
@@ -868,6 +868,73 @@ Strukturen för $2 times 2$-matriser är att de är så jäkla små.
     Visa att
     $ N(A)^perp = V(A^t). $
   ]
+]
+
+#lecture(
+  2024,
+  10,
+  14,
+  [Dagens höjdpunkt är spektralsatsen],
+)[
+  #smallcaps[Lederhosen]
+
+  Den algebraiska multipliciteten av ett egenvärde $mu$ är antalet faktorer $(lambda - mu)$ i $det(A-lambda E)$.
+
+  Den geometriska multipliciteten av ett egenvärde $mu$ är dimensionen av $N(A-mu E)$.
+
+  #hr
+
+  För varje egenvärde $mu$ är $ op("geometrisk multiplicitet")(mu)<=op("algebraisk multiplicitet")(mu). $
+
+  "$1=1$ och $2=2$ men det behöver inte alltid vara så."
+
+  #hr
+
+  Om det finns ett egenvärde $lambda$ med $op("algebraisk multiplicitet")(lambda)>op("geometrisk multiplicitet")(lambda)$ så
+  är matrisen ej diagonaliserbar.
+
+  Bevis i boken #emoji.face.sad
+
+  #hr
+
+  = Låtsasvektorer
+
+  Om $X=mat(x_1;dots.v;x_n) in CC^n$ så är
+
+  $ |X|^2=|x_1|^2+|x_2|^2+dots.c+|x_n|^2=overline(x_1)x_1+overline(x_2)x_2+dots.c+overline(x_n)x_n=overline(X)^t X=X^H X. $
+
+  #emoji.face.halo
+
+  == Exempel
+
+  Rotation i planet $A=mat(0, -1;1, 0).$ $ det(A- lambda E)=mat(delim: "|", -lambda, -1;1, -lambda)=lambda^2+1=(lambda-i)(lambda+i). $
+
+  Egenvektorer till $i$:
+
+  $ mat(-i, -1;1, -i)mat(x_1;x_2)=mat(0;0)<=>mat(-i, -1;0, 0)mat(x_1;x_2)=mat(0;0)<=>cases(i x_1=-t, x_2=t)<=>cases(x_1=underbrace(t i, "tihi --Albert"), x_2=t) $
+
+  Icke-reella egenvärden har med rotationer att göra.
+
+  $ R_theta&=mat(cos theta, -sin theta;sin theta, cos theta)\ det(R_theta-lambda E)&=mat(
+    delim: "|",
+    cos theta, lambda, -sin theta;sin theta, cos theta - lambda,
+
+  )\ &=(cos theta-lambda)^2+sin^2 theta\ &= (cos theta-lambda+i sin theta)(cos theta -lambda - i sin theta) $
+
+  Egenvärden $cos theta plus.minus i sin theta=e^(plus.minus i sin theta)$.
+
+  #hr
+
+  $A$ är hermitesk#footnote[Uttalas herr-m#strong[i]tsk.] om $A^H=A$.
+
+  Om $A$ är hermitesk så är alla egenvärden reella. Speciellt: En symmetrisk reell
+  matris har endast reella egenvärden.
+
+  = DAGENS HÖJDPUNKT (WAOW #emoji.face.woozy) -- SPEKTRALSATSEN
+
+  Om $A$ är en reell symmetrisk matris så finns en ortonormerad bas av
+  egenvektorer. Det finns alltså en ortogonal matris $T$ så att $ A=T D T^-1 $ där $D$ är
+  diagonal.
 ]
 
 #pagebreak(weak: true)
