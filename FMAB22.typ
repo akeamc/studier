@@ -917,7 +917,7 @@ Strukturen för $2 times 2$-matriser är att de är så jäkla små.
 
   $ R_theta&=mat(cos theta, -sin theta;sin theta, cos theta)\ det(R_theta-lambda E)&=mat(
     delim: "|",
-    cos theta, lambda, -sin theta;sin theta, cos theta - lambda,
+    cos theta, lambda, -sin theta;sin theta, cos theta - lambda, , , ,
 
   )\ &=(cos theta-lambda)^2+sin^2 theta\ &= (cos theta-lambda+i sin theta)(cos theta -lambda - i sin theta) $
 
@@ -935,6 +935,72 @@ Strukturen för $2 times 2$-matriser är att de är så jäkla små.
   Om $A$ är en reell symmetrisk matris så finns en ortonormerad bas av
   egenvektorer. Det finns alltså en ortogonal matris $T$ så att $ A=T D T^-1 $ där $D$ är
   diagonal.
+]
+
+#lecture(
+  2024,
+  10,
+  15,
+  [Rekursionsekvationer, numerisk beräkning av egenvärden och geometri],
+)[
+  = Rekursionsekvationer
+
+  Den rekursiva formeln
+
+  $ f_n=2f_(n-1)-3f_(n-2)+pi f_(n-3) $
+
+  kan skrivas som
+
+  $ mat(f_n;f_(n-1);f_(n-2))=mat(2, -3, pi;1, 0, 0;0, 1, 0) mat(f_(n-1);f_(n-2);f_(n-3)). $
+
+  (Det är bara Markovprocesser.)
+
+  Om $A$ är diagonaliserbar så går det fort att räkna ut $A^n$.
+
+  == Fibbonacci
+
+  Följden beskrivs av
+
+  $ mat(f_n;f_(n-1))=mat(1, 1;1, 0)mat(f_(n-1);f_(n-2)). $
+
+  $mat(1, 1;1, 0)$ har egenvärdena $(1 plus.minus sqrt(5))/2$. Låt
+
+  $ T=mat(1, -(sqrt(5)-1)/2;(sqrt(5)-1)/2, 1) => A^n=T mat(((sqrt(5)+1)/2)^(n-1), 0;0, ((1-sqrt(5))/2)^(n-1)) T^(-1). $
+
+  = Egenvärdesberäkningar
+
+  $A$ är en $n times n$-matris. Antag att dess egenvärden är $lambda_1, dots.c, lambda_n$ så
+  att $lambda_1 >= dots >= lambda_n$. Låt $e1, dots.c, en$ vara motsvarande
+  egenvektorer.
+
+  Tag $vu_0!=zv$. Låt $vu_1=A vu_0, vu_2=A vu_1, dots.c, vu_n=A vu_(n-1)$. Vi har
+  att $vu_0=a_1 e1+dots.c+a_n en$. Om vi har otur är $a_1=0$, annars är $a_1!=0$.
+
+  $ vu_0&=a_1 e1+dots.c+a_n en\
+  vu_1&=lambda_1 a_1 e1+dots.c+lambda_n a_n en\
+  vu_2&=lambda_1^2 a_1 e1+dots.c+lambda_n^2 a_n en\
+      & #h(0.3em) dots.v\
+  vu_n&=lambda_1^n a_1 e1+dots.c+lambda_n^n a_n en. $
+
+  Om $k$ är stort och $a_1!=0$ så är $ vu_k approx a_1 lambda_1^k e1. $
+
+  Resterande egenvärden kan hittas med "QR-faktorisering och annat jox".
+
+  = Kägelsnitt
+
+  $ q(x,y)=a x^2+b x y+c y^2 $ kan skrivas $ q(mat(x;y))=mat(x, y)mat(a, b/2;b/2, c)mat(x;y), $
+
+  Nu ska vi diagonalisera $mat(a, b/2;b/2, c)$.
+
+  Nu har vi gjort det.
+
+  = Seminarieuppgift för att tiden inte tog slut i tid
+
+  $A$ är en $n times n$-matris med kolonnsumman 1. Visa att $1$ är ett egenvärde.
+
+  $ det(A^t-lambda E)=det((A-lambda E)^t)=det(A-lambda E) $
+
+  $ A^t mat(1;dots.v;1)=mat(1;dots.v;1) quad qed $
 ]
 
 #pagebreak(weak: true)
