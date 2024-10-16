@@ -917,7 +917,7 @@ Strukturen för $2 times 2$-matriser är att de är så jäkla små.
 
   $ R_theta&=mat(cos theta, -sin theta;sin theta, cos theta)\ det(R_theta-lambda E)&=mat(
     delim: "|",
-    cos theta, lambda, -sin theta;sin theta, cos theta - lambda, , , ,
+    cos theta, lambda, -sin theta;sin theta, cos theta - lambda, , , , , , ,
 
   )\ &=(cos theta-lambda)^2+sin^2 theta\ &= (cos theta-lambda+i sin theta)(cos theta -lambda - i sin theta) $
 
@@ -1001,6 +1001,135 @@ Strukturen för $2 times 2$-matriser är att de är så jäkla små.
   $ det(A^t-lambda E)=det((A-lambda E)^t)=det(A-lambda E) $
 
   $ A^t mat(1;dots.v;1)=mat(1;dots.v;1) quad qed $
+]
+
+#lecture(
+  2024,
+  10,
+  16,
+  [Tomas sista föreläsning för höstterminen],
+)[
+  = Uppgift 10.10
+
+  $A$ är diagonaliserbar med ickenegativa egenvärden. Visa att det finns en matris $B$ så
+  att $B^2=A$.
+
+  Vi har att $ A=T mat(
+    lambda_1, 0, dots.c, 0;0, lambda_2, dots.c, 0;dots.v, dots.v, dots.down, dots.v;0, 0, dots.c, lambda_n
+  ) T^(-1) $.
+
+  Sätt $ B=T mat(
+    plus.minus sqrt(lambda_1), 0, dots.c, 0;0, plus.minus sqrt(lambda_2), dots.c, 0;dots.v, dots.v, dots.down, dots.v;0, 0, dots.c, plus.minus sqrt(lambda_n)
+  ) T^(-1). $
+
+  "Alla matriser är nästan diagonaliserbara."
+
+  Se _Jordanfaktorisering_.
+
+  = Uppgift 10.12
+
+  #set enum(numbering: "a)")
+
+  $A$ är inverterbar $n times n$-matris. Visa att
+  + #[
+      $A^t A$ har endast positiva egenvärden. Tips: $x^t A^t A x=|A x|^2$.
+
+      Låt $lambda$ vara ett egenvärde till $A^t A$ med egenvektorn $x != zv$.
+
+      $ 0 < |A x|^2=(A x)^t (A x)=x^t A^t A x=x^t lambda x=lambda x^t x=lambda|x|^2 $.
+    ]
+  + #[
+      Det finns precis en symmetrisk matris $B$ med positiva egenvärden så att $B^2=A^t A$.
+
+      $A^t A$ är symmetrisk så $ A^t A=T D T^t $ där $T$ är ortogonal och $D=mat(lambda_1, dots.c, 0;dots.v, dots.down, dots.v;0, dots.c, lambda_n)$.
+      Sätt
+
+      $ B=T mat(
+        sqrt(lambda_1), dots.c, 0;dots.v, dots.down, dots.v;0, dots.c, sqrt(lambda_n)
+      ) T^t. $
+
+      $B$ är uppenbarligen symmetrisk.
+
+      Om $C$ är symmetrisk med positiva egenvärden och $B^2=B^2=A^t A$ så är $ C^2=B^2=T D T^t => C^2 "har egenvärdena" lambda_1, dots.c, lambda_n. $
+
+      $ C "symmetrisk" => C "kan diagonaliseras, har ON-bas av egenvektorer" $
+
+      Om $C x=mu x$ så är $C^2x=mu^2x$. Ger att $C$ har egenvärden $sqrt(lambda_1),dots.c,sqrt(lambda_n)$ och
+      egenvektorer ges av kolonnerna i $T$.
+
+      Så $C=B$.
+    ]
+  + #[
+      Visa att $A=Q B$ där $B$ enligt tidigare, $Q$ ortogonal. Kallas för polär
+      dekompisition.
+
+      Jämför med $ a+i b=r e^(i theta). $ $r$ är en symmetrisk $1 times 1$-matris och $e^(i theta)$ är
+      en ortogonal $1 times 1$-matris (rotation).
+
+      $ A=Q B <=> Q=A B^(-1). $
+
+      $B^(-1)$ existerar ty dess egenvärden är positiva.
+
+      Är $Q$ ortogonal?
+
+      $ Q^t Q=(A B^-1)^t (A B^-1)=(B^t)^(-1) A^t A B^(-1)=B^(-1) B^2 B^(-1)=E $
+
+      så ja.
+    ]
+
+  = 11.4
+
+  Minsta värde av $ 2x_1 x_2-4x_1 x_3+4x_2 x_3-3x_3^2 $ när $x_1^2+x_2^2+x_3^2<=4 $?
+
+  Skriv om den kvadratiska formen på den nya formen
+
+  $ X^t underbrace(mat(0, 1, -2;1, 0, 2;-2, 2, -3), A) X, quad X=mat(x_1;x_2;x_3). $
+
+  $ det(A-lambda E)&=mat(delim: "|", -lambda, 1, -2;1, -lambda, 2;-2, 2, -3-lambda)\
+                 &=mat(delim: "|", -lambda, 1, -2;1-lambda, 1-lambda, 0;-2, 2, -lambda-3)\
+                 &=(1-lambda) mat(delim: "|", -lambda, 1, -2;1, 1, 0;-2, 2, -lambda-3)\
+                 &=(1-lambda)mat(delim: "|", -lambda, 1+lambda, -2;1, 0, 0;-2, 4, -lambda-3)\
+                 &=-(1-lambda)mat(delim: "|", 1+lambda, -2;4, -lambda-3)\
+                 &=(-1-lambda)mat(delim: "|", 1+lambda, lambda-1;4, -(lambda-1))\
+                 &=-(1-lambda)^2 mat(delim: "|", 1+lambda, -1;4, 1)\
+                 &=-(1-lambda)^2 mat(delim: "|", lambda+5, 0;4, 1)\
+                 &=-(1-lambda)^2(lambda+5). $
+
+  "Det är töntigt att börja multiplicera ihop saker."
+
+  Då finns ett ortogonalt $T$ så att $ A=T mat(1, 0, 0;0, 1, 0;0, 0, -5)T^t. $
+
+  Låt $hat(X)=T^t X$ så att
+
+  $ q=X^t A X=X^t T D T^t X=hat(X)^t D hat(X)=1 hat(x)_1^2+1 hat(x)_2^2-5hat(x)_3^2. $
+
+  Vi söker $min q$ då $hat(x)_1^2+hat(x)_2^2+hat(x)_3^2<=4$.
+
+  Minsta värde fås då $hat(x)_2^2=4$. Så svaret är: $-20$.
+
+  = 11.7
+
+  + #[
+      Bestäm hel- och halvaxeln för ellipsen som ges av ekvationen $ 17x^2-12 x y+8y^2=20. $
+
+      $ q(x,y)=mat(x, y)underbrace(mat(17, -6;-6, 8), A)mat(x;y)\
+      det(A-lambda E)=mat(delim: "|", 17-lambda, -6;-6, 8-lambda)=lambda^2-25 lambda+100=(lambda-5)(lambda-20). $
+
+      "Vi har en multiplikationstabell på mitt kontor."
+
+      #ellipse(
+        width: 3cm,
+        height: 6cm,
+        align(center + horizon)[Ta-da #emoji.sparkles],
+      )
+    ]
+
+  = 11.16
+
+  $e1, dots.c, en$ är en bas i $V$. Visa att det finns en skalärprodukt så att $e1, dots.c, en$ är
+  ortonormerad.
+
+  Tag $vu=(x_1, dots.c, x_n)$ och $vv=(y_1,dots.c,y_n)$. Definiera $scalar(vu, vv)=x_1 y_1+dots+x_n y_n$.
 ]
 
 #pagebreak(weak: true)
