@@ -1,4 +1,5 @@
 #import "template.typ": conf, lecture, hr
+#import "@preview/physica:0.9.3": dd
 
 #show: doc => conf("FMAB66", [Introduktion till reell analys], doc)
 
@@ -250,3 +251,13 @@ $ lim_(x->a) (f(x))/(g(x))=lim_(x->a) (f'(x))/(g'(x)). $
 ==== Bevis
 
 Låt $eta$ vara.
+
+= Integraler
+
+== Variabelbyte
+
+Antag att $g in cal(C)'([a,b])$. (Det vill säga $g' in cal(C)([a,b])$.)
+
+Då gäller det att $ integral_g(a)^g(b)f(t) dd(t)=integral_a^b f(g(x))g'(x) dd(x). $
+
+och $ integral_c^d f(t)dd(t)=integral_(g^(-1)(c))^(g^(-1)(d)) f(g(x))g'(x) dd(x) $

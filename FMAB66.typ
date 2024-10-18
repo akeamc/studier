@@ -485,6 +485,43 @@
   $ lim_(x->0)(f''(x))/(g''(x))=lim_(x->0)(sin x)/(-2 tan x (1+tan^2x))=lim_(x->0)1/(-2/(cos x)(1 + tan^2 x))=-1/2=lim_(x->0)f(x)/g(x). $
 ]
 
+#lecture(2024, 10, 17, [Asymptotanalys])[
+  $f$ har en sned asymptot $y=k x+m$ precis då dessa ändliga gränsvärden existerar:
+
+  $ k=lim_(x->+infinity) f(x)/x, quad m=lim_(x->infinity)(f(x)-k x). $
+
+  $x=a$ är en lodrät asymptot till $f$ om $f(x)->+infinity$ eller $f(f(x)->-infinity)$ då $x->a^+$ och/eller $x->a^-$.
+
+  Alltså: $x=0$ är en lodrät asymptot till $f(x)=ln x$.
+
+  = Exempel
+
+  Hyperbelgrenen $ (x/2)^2-y^2=-1, quad y>=0 $ har asymptot $y=x/2$ när $x->+infinity$.
+
+  "Tomas kom till mitt kontor och frågade: 'Kan du rita hyperbler?'"
+
+  Vi har $ (x/2)^2-y^2=-1 <=> y=sqrt(1+(x/2)^2). $
+
+  $ k=lim_(x->+infinity) sqrt(1+(x/2)^2)/x=lim_(x->+infinity)|x/2|/x underbracket(sqrt(1/(x/2)^2+1), --> 1)=1/2\
+  m=lim_(x->+infinity)(sqrt(1+(x/2)^2)-x/2)=lim_(x->+infinity) 1/(sqrt(1+(x/2)^2)+x/2)=0\
+  $
+  
+  så $y=x/2$ är en asymptot.
+
+  = Grafritning
+
+  *I någon mening är det kanske passé att rita grafer för hand.*
+
+  - $D_f$? Är $f$ kontinuerlig? Är $f$ deriverbar?
+  - Kritiska punkter?#footnote[$f'=0$ eller $f'$ ej definierad.]
+  - Teckentabell för derivatan där lokala maximum-, minimum- och terrasspunkter
+    kan finnas samt punkter där $f$ eller $f'$ inte är definierad.
+  - Gränsvärden och asymptoter.
+  - Fler punkter?
+  - Konvexitet?#footnote[$f$ är konvex om $f''>=0$. Konkav och strängt konvex/konkav på motsvarande vis.] (Brukar i allmänhet ej krävas.)
+  - Skissa grafen. Ha med de intressanta punkterna!
+]
+
 #pagebreak(weak: true)
 
 = Övningar
