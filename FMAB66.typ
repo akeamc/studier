@@ -435,14 +435,14 @@
 
   #hr
 
-  För alla $a,b in RR$ är $ |arctan a - arctan b| <= |a-b|. $
+  För alla $a,b in RR$ är $ abs(arctan a - arctan b) <= abs(a-b). $
 
   $ f(x)=arctan x => f'(x)=1/(1+x^2). $
 
   Tag $a,b in RR$. Då finns ett $xi$ mellan $a$ och $b$ så att $f(b)-f(a)=f'(xi)(b-a)$ dvs.
 
   $ arctan b - arctan a &= 1/(1+xi^2)(b-a)\
-  |arctan b-arctan a|&=underbracket(|1/(1+xi^2)|, <= 1)|b-a|<=|b-a| $
+  abs(arctan b-arctan a)&=underbracket(abs(1/(1+xi^2)), <= 1)abs(b-a)<=abs(b-a) $
 
   #hr
 
@@ -514,12 +514,70 @@
 
   - $D_f$? Är $f$ kontinuerlig? Är $f$ deriverbar?
   - Kritiska punkter?#footnote[$f'=0$ eller $f'$ ej definierad.]
-  - Teckentabell för derivatan där lokala maximum-, minimum- och terrasspunkter
+  - Teckentabell för derivatan där lokala maximi-, minimi- och terrasspunkter
     kan finnas samt punkter där $f$ eller $f'$ inte är definierad.
   - Gränsvärden och asymptoter.
   - Fler punkter?
   - Konvexitet?#footnote[$f$ är konvex om $f''>=0$. Konkav och strängt konvex/konkav på motsvarande vis.] (Brukar i allmänhet ej krävas.)
   - Skissa grafen. Ha med de intressanta punkterna!
+]
+
+#lecture(2024, 10, 18, [Extentor])[
+  = 240828
+
+  1. Bestäm $f'$ och $f''$ då $ f(x)=ln(1+cos x). $
+  2. Bestäm $x in RR$ så att $ abs(x-1/x)<2. $
+  3. Gäller $ tan x/2=(sin x)/(1+cos x) $ för de $x$ där VL har mening?
+  4. $f: RR->RR$. Visa att $f$ är växande om $f'>0$. Gäller omvändningen, det vill säga är $f'>0$ om $f$ är växande?
+  5. #[
+    $ cases(a_1&=3, a_(n+1)&=2a_n+5) $
+    Visa att $a_n>2^n$ för alla $n in NN$.
+  ]
+  6. Ett 1 meter långt snöre klipps i två stumpar; den ena stumpen formas till en cirkel och den andra till en kvadrat. Vilka värden kan formernas totala area anta?
+  7. #[
+    $ lim_(x->+infinity) x^(1 slash x) $
+    Anmärkning: $infinity e^(i x)$.
+  ]
+  8. #[
+    Ge exempel på en deriverbar funktion vars derivata ej är kontinuerlig.
+
+    Visa också att $f$ är kontinuerlig om den är deriverbar.
+
+    #hr
+
+    $ f(x)=cases(x^2 sin 1/x quad& x!=0, 0 quad& x=0) $
+
+    Tag $a in D_f$. Antag att $f$ är deriverbar i $a$.
+
+    $ f(x)&=f(a)+f(x)-f(a)\ &=f(a)+underbracket((f(x)-f(a))/(x-a), -> f'(a))(x-a)\ &->f(a) "då" x->a. $
+  ]
+  9. #[
+    Visa att $(s_n)$ är växande och uppåt begränsad om
+
+    $ s_n=sum_(k=0)^n 1/(k!). $
+
+    #hr
+
+    *Växande*: $ s_(n+1)-s_n=sum_(k=0)^(n+1)1/(k!)-sum_(k=0)^n 1/(k!)=1/(n+1)!>0 $ så $(s_n)$ är (strängt) växande.
+
+    *Uppåt begränsad:* Visa att det finns $C$ så att $s_n<C$ för alla $n$.
+
+    $ 1/k! =1/(k(k-1)(k-2) space dots.c space 2 dot 1)<=1/(2 dot 2 dot 2 space dots.c space dot 2 dot 1)=1/(2^(k-1)) $
+
+    $ s_n&=1+1+1/2!+1/3!+dots.c+1/k!+dots.c+1/n!\
+    &>=1+1+1/2+1/2^2+dots.c+1/(2^(k-1))+dots.c+1/(2^(n-1))=1+1 dot (1-(1 slash 2)^n)/(1-1 slash 2)\
+    &= 1+2(1-(1 slash 2)^n)<=1+2=3 $
+
+    så $C=3$ duger. $qed$
+  ]
+
+  #hr
+
+  = Fin
+
+  - Ta-da
+  - #emoji.sparkles
+  - Åke out
 ]
 
 #pagebreak(weak: true)
