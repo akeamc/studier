@@ -22,3 +22,12 @@
 ]
 
 #let hr = line(length: 100%, stroke: 0.5pt)
+
+#let ex = (title, content) => rect(fill: white.darken(5%))[
+  #set math.equation(numbering: none)
+  #set enum(numbering: "a)")
+
+  *Exempel:* #title
+
+  #content
+]

@@ -1,9 +1,9 @@
-#import "template.typ": conf, lecture, hr
+#import "template.typ": conf, lecture, hr, ex
 #import "@preview/physica:0.9.3": *
 #import "@preview/unify:0.6.0": qty
 #import "@preview/cetz:0.2.2": canvas, draw, plot
 
-#show: doc => conf("FMAB66", [Endimensionell analys], doc)
+#show: doc => conf("FMAB70", [Endimensionell analys], doc)
 
 = Föreläsningar
 
@@ -93,8 +93,15 @@
 
   = Geometriska exempel
 
-  - ${z in CC | Re z + Im z = 1}$ beskriver en rät linje i det komplexa talplanet.
-  - ${z in CC | |z-1-i|=2}$ beskriver en cirkel med mittpunkt i $(1+i)$ och radie $2$.
+  #ex([
+    Vad beskriver
+    + ${z in CC | Re z + Im z = 1}$
+    + ${z in CC | |z-1-i|=2}$
+  ])[
+    #enum[En rät linje.][
+      En cirkel med mittpunkt i $(1+i)$ och radie 2.
+    ]
+  ]
 
   Givet $z=x+i y$ och $w=xi+i eta$ är $abs(z-w)=sqrt((x-xi)^2+(y-eta)^2)$.
 
