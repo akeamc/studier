@@ -23,11 +23,29 @@
 
 #let hr = line(length: 100%, stroke: 0.5pt)
 
-#let ex = (title, content) => rect(fill: white.darken(5%))[
+#let ex = (title, content) => rect(fill: white.darken(5%), width: 100%)[
   #set math.equation(numbering: none)
   #set enum(numbering: "a)")
 
   *Exempel:* #title
-
+  
+  #v(4pt)
+  
   #content
+]
+
+#let obs = (content) => rect(fill: white.darken(5%), width: 100%)[
+  *Obs:* #content
+]
+
+#let sats = (name, content) => rect(fill: white.darken(5%), width: 100%)[
+  *Sats:* #name
+  
+  #v(4pt)
+  
+  #content
+]
+
+#let anm = (content) => rect(fill: white.darken(5%), width: 100%)[
+  *Anmärkning:* #content
 ]
