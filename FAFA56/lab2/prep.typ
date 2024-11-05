@@ -24,3 +24,7 @@ $ [qty("380", "nm"), space qty("750", "nm")] arrow.squiggly [a/qty("380", "nm"),
 = R4
 
 $ (r_1-r_2)=lambda (n + 1 slash 2), quad n in ZZ $
+
+= R5
+
+Koherens. Fas.
