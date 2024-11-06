@@ -1,8 +1,3 @@
-#let conf(year, month, day, number, doc) = {
-  
-  doc
-}
-
 #let assignment(book: none, no: "FXX", answer: []) = [
   #set text(lang: "sv")
   #set par(justify: true)
@@ -13,7 +8,7 @@
     book
   }
 
-  *#book #no*
+  #set page(header: text(size: 10pt)[*#book #no*])
 
   #answer
 ]
