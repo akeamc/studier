@@ -1,4 +1,4 @@
-#import "./template.typ": e
+#import "../template.typ": e
 #import "@preview/unify:0.6.0": qty, num
 
 #show: doc => e(ch: 41, n: "39", doc)

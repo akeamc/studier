@@ -1,4 +1,4 @@
-#import "./template.typ": e, nm_to_ev, planck, light
+#import "../template.typ": e, nm_to_ev, planck, light
 #import "@preview/unify:0.6.0": qty, num
 #import "@preview/physica:0.9.3": *
 
