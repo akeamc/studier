@@ -1,4 +1,5 @@
 #import "@preview/unify:0.6.0": qty
+#import "@preview/physica:0.9.3": *
 
 #let assignment(book: "Bok", no: "FXX", answer: []) = [
   #set text(lang: "sv")
@@ -18,3 +19,5 @@
 #let planck = qty("6,626e-34", "J s")
 #let light = qty("3,00e8", "m/s")
 #let nm_to_ev = qty("1240", "eV nm")
+
+#let infint(content) = $integral_(-infinity)^infinity #content dd(x)$
