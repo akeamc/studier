@@ -10,3 +10,5 @@ Enligt Heisenbergs osäkerhetsprincip är
 $ Delta x Delta p>=h/(4 pi) $
 
 vilket ger osäkerheten i position $ Delta x>= h/(4 pi Delta p)=h/(4 pi m Delta v)=qty("0,60", "J s")/(4 pi dot qty("0,50", "kg") dot qty("1,2", "m/s"))=qty("8,0", "cm"). $
+
+Det vore svårt att fånga en sådan boll dels på grund av den stora osäkerheten i position (bollen skulle vara en sorts suddig fläck), dels på grund av att andra kvantfenomen, som tunnling, blir mer påtagliga för stora värden på $h$.

@@ -21,3 +21,5 @@
 #let nm_to_ev = qty("1240", "eV nm")
 
 #let infint(content) = $integral_(-infinity)^infinity #content dd(x)$
+
+#let conj(z) = $ #z^* $

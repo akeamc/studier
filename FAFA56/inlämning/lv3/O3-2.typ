@@ -8,12 +8,12 @@
 
 + $R+T=1$ eftersom reflektans och transmittans är varandras komplementhändelser.
 + #[
-    När $E$ går mot oändligheten torde språnget bli försumbart litet i förhållande till $E$, så $T -> 1$.
+    När $E$ går mot oändligheten torde språnget bli försumbart litet i förhållande till $E$, dvs $T -> 1$.
 
     #rect(stroke: none, fill: gray.lighten(80%))[
       Vid ett negativt potentialsprång (med höjden $V_0$) är sannolikheten för reflektans $ R=((k-K)/(k+K))^2=((sqrt(E)-sqrt(E+V_0))/(sqrt(E)+sqrt(E+V_0)))^2 $
 
-      för en partikel med vågtalen $k$ respektive $K$ innan och efter språnget samt den ursprungliga energin $E$. Enligt (a) är $T=1-R$.
+      för en partikel med vågtalen $k$ och $K$ innan respektive efter språnget, vilket kan skrivas om med den ursprungliga energin $E$ och potentialsprångets höjd $V_0$. Enligt (a) är $T=1-R$.
     ]
 
     Vi betraktar gränsvärdet $lim_(E->infinity)R$:
@@ -27,7 +27,7 @@
     *Färdigbetraktat.* När $E$ går mot oändligheten går reflektansen mot 0 och transmittansen mot 1 (enligt villkoret i (a)).
   ]
 + #[
-    Gränslöst stora $V_0$ borde rimligtvis ge en reflektans som går mot 1, #text(fill: red, size: 2em)[eftersom ...]
+    Gränslöst stora $V_0$ borde rimligen få reflektansen att gå mot 1.
 
     Vi studerar $lim_(V_0->infinity) R$:
 
@@ -42,7 +42,6 @@
 + #[
     Nedan skissas $T$ som funktion av $E$.
 
-    #let a = 1.5
     #let V_0 = 1
     #let k = (E, V) => calc.sqrt(E + V)
     #let f = E => 1 - calc.pow((k(E, 0) - k(E, V_0)) / (k(E, 0) + k(E, V_0)), 2)
@@ -50,7 +49,6 @@
     #canvas({
       import draw: *
 
-      // Set-up a thin axis style
       set-style(
         axes: (stroke: .5pt, tick: (stroke: .5pt)),
         grid: (stroke: 1pt),
@@ -70,9 +68,7 @@
         x-grid: "both",
         y-grid: "both",
         {
-          let domain = (0, 2)
-
-          plot.add(f, domain: domain, samples: 300)
+          plot.add(f, domain: (0, V_0 * 1.5), samples: 300)
         },
       )
     })

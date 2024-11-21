@@ -1,6 +1,8 @@
 #import "../template.typ": assignment, planck, light, infint
-#import "@preview/unify:0.6.0": qty
+#import "@preview/unify:0.6.0": qty, num
 #import "@preview/physica:0.9.3": *
+#import "@preview/cetz:0.3.1": canvas, draw
+#import "@preview/cetz-plot:0.1.0": plot
 
 #show: doc => assignment(answer: doc, book: none, no: "1.1")
 
@@ -28,7 +30,7 @@
     Låt $ f(x)&=abs(psi(x))^2 "och"\
     g(x)&=abs((N x slash 2)/x^3)^2. $
 
-    På intervallet $[0, 1]$ är $f>=g>=0$, så om $integral_0^1 g(x) dd(x)$ är divergent så är $integral_0^1 f(x) dd(x)$ också divergent enligt jämförelsesatsen. Vi har
+    På intervallet $[0, 1]$ är $f>=g>=0$, #footnote[Den enda skillnaden mellan $f$ och $g$ är att $sin x$-termen i $f$ har ersatts med $x/2$ i $g$. Eftersom $sin x>=x/2$ på $[0,1]$ är $f>=g$.] så om $integral_0^1 g(x) dd(x)$ är divergent så är $integral_0^1 f(x) dd(x)$ också divergent enligt jämförelsesatsen. Vi har
 
     $
       integral_0^1 abs((N x slash 2)/x^3)^2 dd(x)=N^2 / 4 integral_0^1 1 / x^4 dd(x)=N^2 / 4 [
