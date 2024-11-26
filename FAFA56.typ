@@ -1,7 +1,8 @@
 #import "template.typ": conf, lecture, hr, ex, obs, sats, anm
 #import "@preview/physica:0.9.3": *
 #import "@preview/unify:0.6.0": qty, unit
-#import "@preview/cetz:0.2.2": canvas, draw, plot
+#import "@preview/cetz:0.3.1": canvas, draw
+#import "@preview/cetz-plot:0.1.0": plot
 
 #show: doc => conf("FAFA56", [Kvantfysikaliska koncept], doc)
 
@@ -152,4 +153,71 @@
   $
 
   #text(fill: green.darken(20%))[_Kan levande objekt interferera med sig själva?_]
+]
+
+#lecture(2024, 11, 25, [Bundna tillstånd])[
+  $ K=1 / 2 m v^2=p^2 / (2 m)=h^2 / (2 m lambda^2)=(h^2 k^2) / ((2pi)^2 2 m)=(hbar^2 k^2) / (2 m) $
+
+  Konstruktiv interferens i oändlig kvantbrunn? Ja, om $ 2 a = n lambda $ för ett kvanttal $n in NN$.
+
+  Lös vågfunktionen!
+
+  $
+    V(x)=cases(infinity\, quad &x<0,
+  0\, quad &0<x<a,
+  infinity\, quad &x > a
+  )
+  $
+
+  $
+    &"I och III": quad &psi(x)&=0\
+    &"II": &-hbar^2 / (2 m) psi''(x)&=E psi(x)
+  $
+
+  Passningsvillkoren $psi(0)=psi(a)=0 <=> A+B=0$ ger
+
+  $
+    A(e^(i k a)-e^(-i k a))=2 i sin (k a)=0\
+    <=> k a=n pi quad quad n in ZZ^+\
+    <=> k=k_n=(n pi) / a
+  $
+
+  så
+
+  $
+    E=E_n=(hbar^2 k_n^2) / (2 m)=(hbar^2 n^2 pi^2) / (2 m a^2)=(h^2 n^2 cancel(pi^2)) / ((
+      2 cancel(pi)
+    )^2 2 m a^2)=(h^2 n^2) / (8 m a^2).
+  $
+
+  #canvas({
+    let a = 1
+    let E = n => (n * n)
+    let wave = (n, x) => calc.sin(n * calc.pi * x / a) + E(n)
+
+    let ns = range(1, 4)
+
+    plot.plot(
+      size: (12, 8),
+      y-min: 0,
+      y-tick-step: none,
+      x-tick-step: none,
+      x-ticks: ((a, $a$),),
+      y-label: none,
+      axis-style: "school-book",
+      y-ticks: ns.map(n => (E(n), text(fill: blue)[$E(#n)$])),
+      {
+        for n in ns {
+          plot.add-hline(E(n), style: (stroke: (dash: "dashed", paint: blue)))
+          plot.add(domain: (0, a), samples: 100, x => wave(n, x), style: (stroke: blue))
+        }
+
+        plot.add-vline(a, style: (stroke: 1pt))
+      },
+    )
+  })
+
+  I område II är $ psi_n(x)=A(e^(i k x)-e^(- i k x))=underbrace(2 i A, C) sin(k x) $
+
+  och normering av $psi$ ger $ integral_0^a abs(psi(x)) dd(x)=1 <=> abs(C)=sqrt(2 / a). $
 ]

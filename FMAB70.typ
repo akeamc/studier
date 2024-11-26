@@ -1,7 +1,8 @@
 #import "template.typ": conf, lecture, hr, ex, obs, sats, anm
 #import "@preview/physica:0.9.3": *
 #import "@preview/unify:0.6.0": qty
-#import "@preview/cetz:0.2.2": canvas, draw, plot
+#import "@preview/cetz:0.3.1": canvas, draw, angle
+#import "@preview/cetz-plot:0.1.0": plot
 
 #show: doc => conf("FMAB70", [Endimensionell analys], doc)
 
@@ -488,7 +489,180 @@
   ]
 
   #ex([])[
-    $ (10z+40)/((z-1)^2 (z^2+2z+2))=&A/(z-1)^2+s(z)/((z-1)(z^2+2z+2))\
-    =&A/(z-1)^2+B/(z-1)+(tilde(s)(z))/(z^2+2z+2) $
+    $
+      (10z+40) / ((z-1)^2 (z^2+2z+2))=&A / (z-1)^2+s(z) / ((z-1)(z^2+2z+2))\
+      =&A / (z-1)^2+B / (z-1)+(tilde(s)(z)) / (z^2+2z+2)
+    $
+  ]
+]
+
+#lecture(2024, 11, 25, [Längd av funktionskurva])[
+  #canvas({
+    let a = 1
+    let b = 5
+
+    let parts = 5
+    let px = k => a + k * (b - a) / parts
+
+    plot.plot(
+      size: (12, 8),
+      x-tick-step: none,
+      x-min: a - 1,
+      x-max: b + 1,
+      y-tick-step: none,
+      axis-style: "school-book",
+      x-grid: true,
+      x-ticks: ((a, $a=x_0$), ..range(1, parts).map(k => (px(k), $x_#k$)), (b, $b=x_#parts$)),
+      {
+        plot.add(x => 0.1 * (x - 3) * (x - 5) * (x - 1) + 3, domain: (a - 1, b + 1))
+        plot.add-vline(a, style: (stroke: (dash: "dashed")))
+        plot.add-vline(b, style: (stroke: (dash: "dashed")))
+      },
+    )
+  })
+
+  $ y=f(x) $
+
+  $ a=x_0<x_1<x_2<dots.c<x_n=b $
+
+  Polygontåg som har längd $ sum_(k=1)^n sqrt((x_k-x_(k-1))^2+(f(x_k)-f(x_(k-1)))^2) $
+
+  $y=f(x)$ är rektifierbar om
+
+  $ sup sum_(k=1)^n sqrt((x_k-x_(k-1))^2+(f(x_k)-f(x_(k-1)))^2) $
+
+  existerar. Kurvans längd är då supremumet.
+
+  #sats([])[
+    Om $f'$ är kontinuerlig på $[a,b]$ så har kurvan $y=f(x)$, $a<=x<=b$ längden $ integral_a^b sqrt(1+f'(x)^2) dd(x). $
+
+    *Bevisskiss:*
+
+    Vill skriva om längden av polygontåg som riemannsumma för den påstådda integralen.
+
+    $
+      S&=sum_(k=1)^n sqrt((x_k-x_(k-1))^2+(f(x_k)-f(x_(k-1)))^2)\
+      &= sum_(k=1)^n sqrt(1+((f(x_k)-f(x_(k-1)))/(x_k-x_(k-1)))^2)(x_k-x_(k-1))
+    $
+
+    Medelvärdessatsen för derivator ger oss $xi_k$ i $(x_(k-1), x_k)$ så att $ (f(x_k)-f(x_(k-1)))/(x_k-x_(k-1)))=f'(xi_k) $
+
+    så $ S_n=sum_(k=1)^n sqrt(1+f'(xi_k)^2)(x_k - x_(k-1)) --> integral_a^b sqrt(1+f'(x)^2) dd(x). $
+
+    $S_n$ är strängt växande så $S=sup S_n$.
+  ]
+
+  #ex([Bestäm omkretsen av en cirkel med radie $R_0$.])[
+    $ x^2+y^2=R_0^2 $
+
+    #figure(
+      canvas({
+        import draw: *
+
+        let R0 = 2
+
+        grid((-2 * R0, 2 * R0), (-2 * R0, 2 * R0), step: 0.5, stroke: black)
+
+        circle((0, 0), radius: R0)
+
+        let R0s2 = R0 / calc.sqrt(2)
+        arc-through((-R0s2, R0s2), (0, R0), (R0s2, R0s2), close: true, stroke: 2pt + red)
+        angle.angle((0, 0), (-1, 1), (1, 1), label: $pi slash 2$, label-radius: 0.75)
+        line((-R0s2, R0s2), (0, 0), (R0s2, R0s2))
+      }),
+    )
+
+    $
+      O&=4integral_(-R_0 slash sqrt(2))^(R_0 slash sqrt(2)) sqrt(1+[D sqrt(R_0^2-x^2)]^2) dd(x)\
+      &=4 integral_(-R_0 slash sqrt(2))^(R_0 slash sqrt(2)) sqrt(1+(x/(sqrt(R_0^2-x^2)))^2) dd(x)\
+      &=4 integral_(-R_0 slash sqrt(2))^(R_0 slash sqrt(2)) sqrt(R_0^2/(R_0^2-x^2)) dd(x)\
+      &=4 integral_(-R_0 slash sqrt(2))^(R_0 slash sqrt(2)) R_0 / sqrt(R_0^2-x^2) dd(x)\
+      &=[4 R_0 arcsin(x/R_0)]_(-R_0 slash sqrt(2))^(R_0 slash sqrt(q))\
+      &=4 R_0 underbracket(arcsin 1/sqrt(2), =pi/4)-4 R_0 underbracket(arcsin(- 1/sqrt(2)), =-pi/4)=360 degree R_0
+    $
+  ]
+
+  Nu gör vi samma sak igen fast vi är mindre rigorösa.
+
+  $
+    (Delta s)^2&=(Delta x)^2+(Delta y)^2\
+    Delta s&=sqrt(1 + ((Delta y)/(Delta x))^2) Delta x.
+  $
+
+  Bågelement
+
+  $ dd(s)=sqrt(1+(dd(y)/dd(x))^2) dd(x). $
+
+  Längden $s$ blir:
+
+  $ S=integral dd(s)=integral_a^b sqrt(1+f'(x)^2) dd(x). $
+
+  = Längd av parametriserade kurvor
+
+  $ S=integral_alpha^beta sqrt(X'(t)^2+Y'(t)^2) dd(t). $
+
+  #ex([Omkrets av cirkel med radie $R_0$])[
+    $
+      cases(
+      x=X(t)=R_0 cos t,
+      y=Y(t)=R_0 sin t
+    ) #h(4em) 0<=t<=2pi\
+    X'(t)=-R_0 sin t quad Y'(t)=R_0 cos t\
+    sqrt(X'(t)^2+Y'(t)^2)=R_0
+    $
+
+    Omkretsen
+
+    $ O=integral_0^(2pi) R_0 dd(t)=2pi R_0. $
+  ]
+
+  #ex([Icke rektifierbar kurva])[
+    $ cases(x=X(t)=t, y=Y(t)=t sin pi/t) $
+
+    #canvas({
+      let f = t => if t == 0 {
+        0
+      } else {
+        t * calc.sin(calc.pi / t)
+      }
+
+      plot.plot(
+        size: (6, 8),
+        x-tick-step: none,
+        y-tick-step: none,
+        axis-style: "school-book",
+        {
+          plot.add(f, samples: 2000, domain: (0, 0.2))
+        },
+      )
+    })
+  ]
+
+  = Längd av kurvor på polär form
+
+  $ X'(theta)^2+Y'(theta)^2=dots.c=R(theta)^2+R'(theta)^2 $
+
+  obs. $"abs"(e^(i theta))=1$
+
+  #ex([Cirkel med radie $R_0$])[
+    $
+      R(theta)=R_0 quad R'(theta)=0\
+      O=integral_0^(2pi)sqrt(R_0^2+0^2)dd(theta)=2pi R_0.
+    $
+
+    Nu har vi beräknat omkretsen av en cirkel på tre olika sätt och alltid fått samma svar och det ska vi vara tacksamma för.
+  ]
+
+  #ex([Pascals snäcka])[
+    $
+      R(theta)&=1+cos theta\
+      R'(theta)&=-sin theta
+    $
+
+    $
+      "Längden"&=integral_0^(2pi) sqrt((1+cos theta)^2+(-sin theta)^2) dd(theta)\
+      &=integral_0^(2pi) sqrt(2+2cos theta) dd(theta)=integral_0^(2pi) sqrt(4 cos^2 theta/2) dd(theta)\
+      &==integral_0^(2pi) 2 abs(cos theta/2) dd(theta)=4 integral_0^pi cos theta/2 dd(theta)=underbracket(dots.c, \""Nu vill jag också ha lunch"\")=8
+    $
   ]
 ]
