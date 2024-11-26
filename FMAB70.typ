@@ -1,6 +1,6 @@
-#import "template.typ": conf, lecture, hr, ex, obs, sats, anm
+#import "template.typ": conf, lecture, hr, ex, obs, sats, anm, fplot
 #import "@preview/physica:0.9.3": *
-#import "@preview/unify:0.6.0": qty
+#import "@preview/unify:0.6.0": qty, unit
 #import "@preview/cetz:0.3.1": canvas, draw, angle
 #import "@preview/cetz-plot:0.1.0": plot
 
@@ -662,7 +662,104 @@
     $
       "Längden"&=integral_0^(2pi) sqrt((1+cos theta)^2+(-sin theta)^2) dd(theta)\
       &=integral_0^(2pi) sqrt(2+2cos theta) dd(theta)=integral_0^(2pi) sqrt(4 cos^2 theta/2) dd(theta)\
-      &==integral_0^(2pi) 2 abs(cos theta/2) dd(theta)=4 integral_0^pi cos theta/2 dd(theta)=underbracket(dots.c, \""Nu vill jag också ha lunch"\")=8
+      &=integral_0^(2pi) 2 abs(cos theta/2) dd(theta)=4 integral_0^pi cos theta / 2 dd(theta)=underbracket(dots.c, \""Nu vill jag också ha lunch"\")=8
     $
+  ]
+]
+
+#lecture(2024, 11, 26, [Rotationsareor och -volymer])[
+  Då $y=f(x)$, $a<=x<=b$ ($f>0$) roterar 1 _varf_ [sic!] kring x-axeln uppstår en rotationsarea.
+
+  $
+    Delta A&=2pi f(x) Delta s\
+    dd(A)&=2pi f(x) dd(s)=2pi f(x) sqrt(1+f'(x)^2) dd(x)\
+    => A&= integral_a^b 2pi f(x) sqrt(1+f'(x)^2) dd(x)
+  $
+
+  #ex([Bestäm arean som uppstår då $f(x)=sqrt(x), 1<=x<=4$ roterar ett varv kring x-axeln.])[
+    #fplot(x => calc.sqrt(x), domain: (1, 4))
+
+    $ f'(x)&=1 / (2 sqrt(x)) $
+
+    så
+
+    $
+      A&=integral_1^4 2pi sqrt(x) sqrt(1+1/(4 x)) dd(x)=integral_1^4 2pi sqrt(x + 1/4) dd(x)\
+      &=[2pi 2 / 3 (x+1 / 4)^(3 slash 2)]_1^4= dots.c=pi / 6 (17sqrt(17)-5sqrt(5)).
+    $
+  ]
+
+  = Rotation kring y-axeln?
+
+  $ A=integral_a^b 2pi x sqrt(1+f'(x)^2) dd(x) $
+
+  #ex([Låt $y=f(x)=x^2$, $1<=x<=2$ rotera kring y-axeln.])[
+    $ A=integral_1^2 2pi x sqrt(1+(2x)^2) dd(x)=[(2pi) / 8 2 / 3 (1+4x^2)^(3 slash 2)]_1^2="samma som förut" $
+  ]
+
+  #ex([Bestäm arean av en sfär med radie $R_0$.])[
+    Vi roterar $y=sqrt(R_0-x^2)$ kring x-axeln:
+
+    $ y'=(-x) / sqrt(R_0-x^2) <=> 1+(y')^2=R_0^2 / (R_0^2-x^2) $
+
+    $
+      A&=integral_(-R_0)^R_0 2pi sqrt(R_0^2-x^2)sqrt(R_0^2/(R_0^2-x^2)) dd(x)\
+      &= integral_(-R_0)^R_0 2pi R_0 dd(x)=4 pi R_0^2
+    $
+
+    ... och kring y-axeln:
+
+    $
+      A&=2 integral_0^R_0 2pi x sqrt(R_0^2/(R_0^2-x^2)) dd(x)\
+      &=4pi R_0 integral_0^R_0 x / sqrt(R_0^2-x^2) dd(x)\
+      &= 4pi R_0[-sqrt(R_0^2-x^2)]_0^R_0=4pi R_0^2.
+    $
+  ]
+
+  = Volym
+
+  Skivformeln: $ V=integral_a^b V(x) dd(x). $
+
+  #ex([Bestäm volymen av en ellipsoid med halvaxlar $a$, $b$ och $c$.])[
+    $ x^2 / a^2+y^2 / b^2+z^2 / c^2=1 $
+
+    Fixera $x_0$. Vad blir arean då vi skär med planet $x=x_0$?
+
+    $ y^2 / b^2+z^2 / c^2=1-x^2 / a^2 $ beskriver en ellips. Våra halvaxlar blir
+
+    $
+      &b sqrt(1-x_0^2/a^2) "och"\
+      &c sqrt(1-x_0^2/a^2).
+    $
+
+    En ellips med halvaxlarna $alpha$ och $beta$ har arean $pi alpha beta$ så tvärsnittet får arean
+
+    $ A(x)=pi b c (1-x^2 / a^2). $
+
+    Totala volymen blir $ V=integral_(-a)^a A(x) dd(x)=integral_(-a)^a pi b c (1-x^2/a^2) dd(x)=[pi b c (x-x^3/(3 a^2))]_(-a)^a= 4/3 pi a b c. $
+
+    Speciellt ger $a=b=c=R_0$ volymen av ett klot; $4/3 pi R_0^3$.
+  ]
+
+  = Alternativa ellipsoidvolymsberäkningar
+
+  Skal: $ V=integral_0^(R_0) 4 pi r^2 dd(r)=4/3 pi R_0^3 $
+
+  Skalning av klot:
+
+  Vi vet att klotets volym är $4/3 pi R_0^2$. Om vi skalar klotet med $a$, $b$ och $c$ i x-, y- respektive z-led så skalas volymen med determinanten av skalningsmatrisen, dvs.
+
+  $ det mat(a, 0, 0; 0, a, 0; 0, 0, c)=a b c. $
+
+  = Rörmetoden
+
+  #ex([$y=x^2$, $0<=x<=2$ roterar kring y-axeln. Det uppstår en skål#footnote[Egentligen _paraboloid._]. Bestäm volymen.])[
+    $ V=integral_0^2 2pi x (2^2 - x^2) dd(x)=8 pi $
+
+    Alternativt låter vi $y=sqrt(x)$, $0 <= x <= 4$ rotera kring x-axeln.
+  ]
+
+  #ex([Vi har en tre meter hög skulptur. Ett tvärsnitt på höjden $x$ bildar en rektangel med sidorna $(1+x) unit("m")$, $(4-x) unit("m")$.])[
+    $ "Volymen"=integral_0^3 A(x) dd(x)=integral_0^3 (1+x)(4-x) dd(x)=dots.c=33 / 2 unit("m^3"). $
   ]
 ]
