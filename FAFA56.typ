@@ -221,3 +221,119 @@
 
   och normering av $psi$ ger $ integral_0^a abs(psi(x)) dd(x)=1 <=> abs(C)=sqrt(2 / a). $
 ]
+
+#lecture(2024, 11, 27, [])[
+  #figure(
+    canvas({
+      import draw: *
+
+      let b = 1
+      let V0 = 1
+
+      plot.plot(
+        size: (12, 6),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-ticks: ((-b, $-b$), (b, $b$)),
+        y-ticks: ((-V0, $-V_0$),),
+        y-min: -V0 * 1.5,
+        y-label: $V(x)$,
+        {
+          plot.add-vline(-b, style: (stroke: (dash: "dashed")))
+          plot.add-vline(b, style: (stroke: (dash: "dashed")))
+          plot.annotate({
+            content((-b * 1.2, -V0 * 1.4), [I])
+            content((-b / 2, -V0 * 1.4), [II])
+            content((b / 2, -V0 * 1.4), [II])
+            content((b * 1.2, -V0 * 1.4), [III])
+          })
+          plot.add(((-b * 1.2, 0), (-b, 0), (-b, -V0), (b, -V0), (b, 0), (b * 1.2, 0)), style: (stroke: red))
+        },
+      )
+    }),
+  )
+
+  $ V(x)=cases(-V_0\, quad x in (-b,b), 0 quad"annars") $
+
+  = Utanför brunnen
+
+  $ -hbar^2 / (2m) psi''(x)+underbracket(V(x), = space 0)psi(x)=underbracket(E, < space 0) psi(x) $
+
+  Ansatsen $psi(x)=e^(kappa x)$ ger $ -hbar^2/(2 m) kappa^2 cancel(psi(x))=E cancel(psi(x))\
+  => kappa^2=(2m (-E))/hbar^2>0\
+  => kappa= plus.minus sqrt((2m(-E))/hbar^2) $
+
+  #let I = $upright("I")$
+  #let II = $upright("II")$
+  #let III = $upright("III")$
+
+  $ #I:& quad psi_#I (x)=A e^(kappa x)\
+  #III:& quad psi_#III (x)=B e^(-kappa x) $
+
+  = Inuti brunnen
+
+  $
+    -hbar^2 / (2m) psi''(x)=underbracket((E+V_0), > space 0) psi(x)\
+    => psi(x)=C sin(k x)+D cos(k x), quad k=sqrt((2m(E+V_0))/hbar^2)
+  $
+
+  = Passning av $psi$
+
+  $
+    cases(psi_#I (-b)&=psi_#II (-b),
+  psi_#I '(-b)&=psi_#II '(-b),
+  psi_#II (b)&=psi_#III (b),
+  psi_#II '(b)&=psi_#III '(b))\
+    => A=B\
+    => tan(k b)=kappa / k\
+    => tan(sqrt(((2m)(E+V_0))/hbar^2) dot b)=sqrt(-E) / sqrt(E+V_0)
+  $
+
+  #figure(
+    canvas({
+      import draw: *
+
+      let V0 = 1
+
+      let f1(E) = calc.tan(calc.pi * V0 * 3 * E)
+      let f2(E) = if E == -V0 {
+        100000
+      } else {
+        calc.sqrt(-E) / calc.sqrt(E + V0)
+      }
+      let f3(E) = if E == 0 {
+        -100000
+      } else {
+        -calc.sqrt(E + V0) / calc.sqrt(-E)
+      }
+
+      plot.plot(
+        size: (12, 8),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-label: $E$,
+        x-ticks: ((-V0, $-V_0$),),
+        x-grid: true,
+        y-grid: true,
+        y-max: 4,
+        y-min: -4,
+        {
+          let n = 6
+
+          for i in range(0, n) {
+            let len = V0 / n
+            let domain = (-len * (i + 1), -len * i)
+            plot.add(f1, domain: domain, samples: 200, style: (stroke: 0.5pt))
+          }
+
+          plot.add(f2, domain: (-V0, 0), samples: 200)
+          plot.add(f3, domain: (-V0, 0), samples: 200)
+        },
+      )
+    }),
+  )
+
+  Vi kan använda $ E_n=(h^2 n^2)/(8 m a^2) $ om $k<<kappa$.
+]

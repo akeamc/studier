@@ -749,7 +749,7 @@
 
   Vi vet att klotets volym är $4/3 pi R_0^2$. Om vi skalar klotet med $a$, $b$ och $c$ i x-, y- respektive z-led så skalas volymen med determinanten av skalningsmatrisen, dvs.
 
-  $ det mat(a, 0, 0; 0, a, 0; 0, 0, c)=a b c. $
+  $ det dmat(a, b, c)=a b c. $
 
   = Rörmetoden
 
