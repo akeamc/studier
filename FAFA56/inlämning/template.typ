@@ -6,6 +6,7 @@
   #set par(justify: true)
   #set page(header: text(size: 10pt)[*#book #no*])
   #set enum(numbering: "(a)")
+  #set math.mat(delim: "[")
 
   #answer
 ]
@@ -23,3 +24,7 @@
 #let infint(content) = $integral_(-infinity)^infinity #content dd(x)$
 
 #let conj(z) = $ #z^* $
+
+#let I = $upright("I")$
+#let II = $upright("II")$
+#let III = $upright("III")$
