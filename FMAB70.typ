@@ -763,3 +763,7 @@
     $ "Volymen"=integral_0^3 A(x) dd(x)=integral_0^3 (1+x)(4-x) dd(x)=dots.c=33 / 2 unit("m^3"). $
   ]
 ]
+
+#lecture(2024, 11, 29, [Gammal tenta])[
+  #figure(image("myrlejonslända.jpeg", width: 20%), caption: [Myrlejonsländans larv, _"doodlebug"_.])
+]

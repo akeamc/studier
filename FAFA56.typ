@@ -190,32 +190,34 @@
     )^2 2 m a^2)=(h^2 n^2) / (8 m a^2).
   $
 
-  #canvas({
-    let a = 1
-    let E = n => (n * n)
-    let wave = (n, x) => calc.sin(n * calc.pi * x / a) + E(n)
+  #figure(
+    canvas({
+      let a = 1
+      let E = n => (n * n)
+      let wave = (n, x) => calc.sin(n * calc.pi * x / a) + E(n)
 
-    let ns = range(1, 4)
+      let ns = range(1, 5)
 
-    plot.plot(
-      size: (12, 8),
-      y-min: 0,
-      y-tick-step: none,
-      x-tick-step: none,
-      x-ticks: ((a, $a$),),
-      y-label: none,
-      axis-style: "school-book",
-      y-ticks: ns.map(n => (E(n), text(fill: blue)[$E(#n)$])),
-      {
-        for n in ns {
-          plot.add-hline(E(n), style: (stroke: (dash: "dashed", paint: blue)))
-          plot.add(domain: (0, a), samples: 100, x => wave(n, x), style: (stroke: blue))
-        }
+      plot.plot(
+        size: (12, 8),
+        y-min: 0,
+        y-tick-step: none,
+        x-tick-step: none,
+        x-ticks: ((a, $a$),),
+        y-label: none,
+        axis-style: "school-book",
+        y-ticks: ns.map(n => (E(n), text(fill: blue)[$E_#n$])),
+        {
+          for n in ns {
+            plot.add-hline(E(n), style: (stroke: (dash: "dashed", paint: blue)))
+            plot.add(domain: (0, a), samples: 100, x => wave(n, x), style: (stroke: blue))
+          }
 
-        plot.add-vline(a, style: (stroke: 1pt))
-      },
-    )
-  })
+          plot.add-vline(a, style: (stroke: 1pt))
+        },
+      )
+    }),
+  )
 
   I område II är $ psi_n(x)=A(e^(i k x)-e^(- i k x))=underbrace(2 i A, C) sin(k x) $
 
@@ -336,4 +338,147 @@
   )
 
   Vi kan använda $ E_n=(h^2 n^2)/(8 m a^2) $ om $k<<kappa$.
+]
+
+#lecture(2024, 11, 29, [Diverse tillstånd])[
+  #align(center)[
+    #emoji.sparkles _Qdot#sym.trademark #sym.trademark.registered Nanocrystal_ #emoji.sparkles
+  ]
+
+  = Atomer som bundna tillstånd
+
+  $ "kemi" subset "kvantfysik" subset "matematik". $
+
+  #figure(
+    canvas({
+      import draw: *
+
+      circle((-1, 1), radius: 1pt, fill: black)
+      content((-1, 1), anchor: "south-east", padding: 5pt, [$q=e$])
+
+      circle((0, 0), radius: 5pt, fill: black)
+      content((0, 0), anchor: "north-west", padding: 7pt, [$Q=Z e$])
+    }),
+  )
+
+  $ V(r)=-(q Q) / (4 pi epsilon_0) $
+
+  #figure(
+    canvas({
+      let ns = range(1, 4)
+      let E(n) = -10 / calc.pow(n, 2)
+      let wave = (n, x) => calc.sin(n * calc.pi * x / 1) + E(n)
+
+      plot.plot(
+        size: (12, 6),
+        y-max: 0,
+        y-min: -15,
+        y-tick-step: none,
+        x-tick-step: none,
+        axis-style: "school-book",
+        x-label: $r$,
+        y-label: $V(r)$,
+        y-ticks: ns.map(n => (E(n), text(fill: blue)[$E_#n$])),
+        {
+          plot.add(
+            domain: (-1, 1),
+            samples: 100,
+            r => if r == 0 {
+              none
+            } else {
+              -1 / (calc.abs(r))
+            },
+          )
+
+          // FIXME
+          for n in range(1, 4) {
+            plot.add-hline(E(n), style: (stroke: (dash: "dashed", paint: blue)))
+            plot.add(domain: (-1, 1), samples: 100, x => wave(n, x), style: (stroke: blue))
+          }
+        },
+      )
+    }),
+  )
+
+  $ E_n=-(E_"Ry" Z^2) / n^2 $
+
+  Spinn $sigma$: #sym.arrow.t eller #sym.arrow.b.
+
+  Kemins natur beror på Systembolaget.
+
+  $ "Fler tillstånd" => "fler mångfald". $
+
+  Snurrigt.
+
+  = Optiska övergångar
+
+  #figure(
+    canvas({
+      import draw: *
+
+      content((0, 0), anchor: "east", padding: 3pt, [$E_n$])
+      line((0, 0), (2, 0))
+      content((0, 2), anchor: "east", padding: 3pt, [$E_m$])
+      line((0, 2), (2, 2))
+
+      line((1, 0), (1, 2), stroke: blue)
+
+      content((3, 1), anchor: "west", [_foton._])
+    }),
+  )
+
+  Om en elektron går från $E_m$ till $E_n$ emitteras en foton. En elektron i $E_n$ som absorberar en foton kommer att exciteras och hoppa till $E_2$. En foton som stimulerar en elektron i $E_m$ gör att fotonen deexciteras samtidigt som samma foton emitteras.
+
+  #text(size: 0.75em)[
+    "Du lever i en stimulation," sa den ena lasern till den andra.
+  ]
+
+  $
+    &U=complement nothing \
+  &#rotate(-90deg, $in$)\
+   &psi_m (x).
+  $
+
+  $
+    #text[en massa _*ytterst triviala*_ räkningar]\
+  => hbar (omega_m-omega_n) = E_m-E_n
+  $
+
+  == Urvalsregeln
+
+  #figure(
+    table(
+      columns: 2,
+      stroke: (
+        x: none,
+        y: 0.5pt,
+      ),
+      ..(
+        ($n=2 -> n=1$, true),
+        ($n=3 -> n=1$, false),
+        (
+          $Gamma_"opt">0$,
+          true,
+        ),
+        (
+          $Gamma_"opt"=0$,
+          false,
+        ),
+      ).map(((event, allowed)) => (
+        event,
+        if allowed {
+          emoji.face.happy
+        } else {
+          emoji.face.sad
+        },
+      )).flatten()
+    ),
+    caption: [
+      Inte alla övergångar är tillåtna.
+    ],
+  )
+
+  $ Gamma_"opt"=1 / tau_"opt" prop integral_(-infinity)^infinity psi_m(x) psi_n(x) x dd(x) $
+
+  Integralen är nollskild om dess integrand är jämn, så #underline[$psi_m$ får inte ha samma paritet som $psi_n$].
 ]
