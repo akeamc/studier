@@ -53,44 +53,46 @@ $
 )
 $
 
-och vi söker $F/A="transmitterad sannolikhetsström"/"infallande sannolikhetsström"$.
+och vi söker transmittansen $T=F/A=abs("transmitterad sannolikhetsström")/abs("infallande sannolikhetsström")$.
 
 Låt $alpha=i k$, $beta=i kappa$, $gamma=e^(i kappa a)$ och $delta=e^(i k a)$.
 
-$ alpha(A+B+A-B)&=alpha(C+D)+beta(C-D)\
-=> 2 alpha underbracket(A, = 1)&=C(alpha+beta)+D(alpha-beta)\
-=> (2 alpha-C(alpha+beta))/(alpha-beta)&=D $
+Ekvationssystemets underbestämdhet tillåter oss att sätta $A=1$, så $T=F$.
 
-$ C gamma+(2 alpha -C(alpha+beta))/gamma(alpha-beta)=F delta\
-=> (C gamma+(2 alpha - C(alpha+beta))/(gamma(alpha-beta)))/delta=F $
+// $ alpha(A+B+A-B)&=alpha(C+D)+beta(C-D)\
+// => 2 alpha underbracket(A, = 1)&=C(alpha+beta)+D(alpha-beta)\
+// => (2 alpha-C(alpha+beta))/(alpha-beta)&=D $
 
- Ekvationssystemet kan skrivas om som matrisekvationen
+// $ C gamma+(2 alpha -C(alpha+beta))/gamma(alpha-beta)=F delta\
+// => (C gamma+(2 alpha - C(alpha+beta))/(gamma(alpha-beta)))/delta=F $
 
-$
-  mat(
-    1,1,-1,-1, 0;
-    i k, -i k, i kappa, -i kappa, 0;
-    0, 0, e^(i kappa a), e^(-i kappa a), e^(i k a);
-    0, 0, i kappa e^(i kappa a), -i kappa e^(-i kappa a), i k e^(i k a)
-) mat(A;B;C;D;F)
-=underbrace(mat(
-    1,1,-1,-1,0;
-    alpha,-alpha,beta,-beta,0;
-    0,0,gamma,1 slash gamma, delta;
-    0, 0, beta gamma, -beta slash gamma, alpha delta
-), A) mat(A;B;C;D;F)=mat(0;0;0;0;0).
-$
+//  Ekvationssystemet kan skrivas om som matrisekvationen
 
-Gausseliminering av $A$ ger
+// $
+//   mat(
+//     1,1,-1,-1, 0;
+//     i k, -i k, i kappa, -i kappa, 0;
+//     0, 0, e^(i kappa a), e^(-i kappa a), e^(i k a);
+//     0, 0, i kappa e^(i kappa a), -i kappa e^(-i kappa a), i k e^(i k a)
+// ) mat(A;B;C;D;F)
+// =underbrace(mat(
+//     1,1,-1,-1,0;
+//     alpha,-alpha,beta,-beta,0;
+//     0,0,gamma,1 slash gamma, delta;
+//     0, 0, beta gamma, -beta slash gamma, alpha delta
+// ), A) mat(A;B;C;D;F)=mat(0;0;0;0;0).
+// $
 
-$
-  A ~ mat(
-    1,1,-1,-1,0;
-    0, -2alpha, alpha+beta, alpha-beta, 0;
-    0, 0, gamma, 1 slash gamma, delta;
-    0, 0, 0, -2beta slash gamma, alpha delta-beta delta
-  )\
-  => (-2 beta slash gamma) D+(alpha delta-beta delta)F=0
-$
+// Gausseliminering av $A$ ger
 
-Transmittansen ges av .
+// $
+//   A ~ mat(
+//     1,1,-1,-1,0;
+//     0, -2alpha, alpha+beta, alpha-beta, 0;
+//     0, 0, gamma, 1 slash gamma, delta;
+//     0, 0, 0, -2beta slash gamma, alpha delta-beta delta
+//   )\
+//   => (-2 beta slash gamma) D+(alpha delta-beta delta)F=0
+// $
+
+// Transmittansen ges av .

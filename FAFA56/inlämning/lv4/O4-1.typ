@@ -4,7 +4,7 @@
 #import "@preview/cetz:0.3.1": canvas, draw
 #import "@preview/cetz-plot:0.1.0": plot
 
-#show: doc => o(ch: 3, n: "7", doc)
+#show: doc => o(ch: 4, n: "1", doc)
 
 #let I = $upright("I")$
 #let II = $upright("II")$
