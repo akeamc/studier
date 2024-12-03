@@ -1,4 +1,4 @@
-#import "template.typ": conf, lecture, hr, ex, obs, sats, anm, fplot
+#import "template.typ": conf, lecture, hr, ex, obs, sats, anm, fplot, slopefield
 #import "@preview/physica:0.9.3": *
 #import "@preview/unify:0.6.0": qty, unit
 #import "@preview/cetz:0.3.1": canvas, draw, angle
@@ -787,52 +787,6 @@
 
   $x'=k x$ där $k>0$ är differensen mellan födslar och dödslar. Lösning $ x=C e^(k t). $
 
-  #let slopefield(
-    df,
-    x-min: 0,
-    x-max: 10,
-    y-min: 0,
-    y-max: 10,
-    x-step: 1,
-    y-step: 1,
-    x-lines: (),
-    y-lines: (),
-  ) = canvas({
-    import draw: *
-
-    set-style(
-      axes: (stroke: .5pt, tick: (stroke: .5pt)),
-      // legend: (stroke: none, orientation: ttb, item: (spacing: .3), scale: 80%),
-    )
-
-    plot.plot(
-      size: (10, 8),
-      x-label: $t$,
-      y-label: $x$,
-      x-tick-step: none,
-      y-tick-step: none,
-      y-min: y-min,
-      y-max: y-max,
-      axis-style: "school-book",
-      y-ticks: y-lines,
-      y-grid: true,
-      x-grid: true,
-      {
-        for x in range(x-min, x-max, step: x-step) {
-          for y in range(y-min, y-max, step: y-step) {
-            let x0 = x - 0.1 / x-step
-            let x1 = x + 0.1 / x-step
-
-            let y0 = y - df(y) * 0.03 / y-step
-            let y1 = y + df(y) * 0.03 / y-step
-
-            plot.add(((x0, y0), (x1, y1)), style: (stroke: blue))
-          }
-        }
-      },
-    )
-  })
-
   #figure(slopefield(y => y))
 
   = Verhulst (1845)
@@ -920,5 +874,175 @@
     Men det finns fler lösningar:
 
     Tänk tanken att tanken blir tömd till tommare än tömd.
+  ]
+]
+
+#lecture(2024, 12, 3, [Linjära differentialekvationer av ordning 1])[
+  Alltså ekvationer på formen $ y' + g y=h $ där $g$ och $h$ är givna.
+
+  De kallas linjära för om man tar vänsterledet och inför $ cal(L)(y)=y'+g y $ så är $cal(L)$ en linjär operator#footnote[Det vill säga $cal(L)(alpha y_1+beta y_2)=alpha cal(L)(y_1)+beta cal(L)(y_2)$.].
+
+  Vi vill multiplicera $y'+g y =h$ med någon funktion $a>0$ som gör att vänsterledet blir derivatan av en produkt:
+
+  $ underbracket(a y' + a g y, (a y)') = a h $
+
+  Vi behöver alltså att
+
+  $
+    a g&=a'\
+    a' / a&=g\
+    (ln a)'&=g\
+    ln a &= G
+  $
+
+  så $ a=e^G. $
+
+  Vi vill alltså multiplicera med den integrerande faktorn $ e^G=e^(integral g(x) dd(x)). $
+
+  Vi får
+
+  $
+    (e^G y)'&=e^G h\
+    e^G(x) y(x)&=integral e^G(x) h(x) dd(x)\
+    y(x)&=e^(-G(x)) integral e^G(x) h(x) dd(x).
+  $
+
+  #ex([Lös $y'-x y=0$.])[
+    $ y=C e^(x^2 slash 2) $
+  ]
+
+  #ex([Bestäm alla kurvor vars tangent i $(x,y)$ har riktningskoefficient $-1-y/x$ då $x>0$.])[
+    Om vi ser $y$ som funktion av $x$ så är riktningskoefficienten $y'$. Vi vill ha
+
+    $
+      y'&=-1-y / x\
+      y'+underbracket(1/x, g(x)) y&=underbracket(-1, h(x)).
+    $
+
+    $G(x)=ln x$ duger. Integrerande faktor: $e^G(x)=e^(ln x)=x$.
+
+    $
+      x y'+y&=-x\
+      (x y)'&=-x\
+      x y(x)&=integral -x dd(x)=-x^2 / 2+C\
+      y(x)&=-x / 2+C / x.
+    $
+  ]
+
+  #ex([
+    #canvas({
+      import draw: *
+
+      let sun_center = (0.5, 0.3)
+
+      line((0.3, -1), (1.3, -1), name: "mirror")
+      line(sun_center, "mirror.mid", (1, 0.3), stroke: (dash: "dashed"))
+      circle(sun_center, radius: 0.2, stroke: yellow, fill: yellow)
+      line((0, 0), (2, 0), stroke: blue)
+
+    })
+
+    Ljusintensiteten $y$ uppfyller $y'=-k y$ och det visade sig att intensiteten halverades då ljuset kom till ytan igen. Bestäm $k$.])[
+    $ y=C e^(k x). $
+
+    Vi har villkoren
+
+    $
+      x=0 "ger" y=C\
+      x=10 "ger" y=C e^(-k dot 10)
+    $
+
+    som ger $ C e^(-k dot 10)=1/2 C\
+    e^(-10 k)=1/2\
+    e^(10 k)=2\
+    k=1/10 ln 2. $
+  ]
+
+  #ex([
+    Betrakta partabelfamiljen $x+C=y^2 slash 2$. En kurva som skär alla parabler vinkelrätt kallas för ortogonal trajektorie. Vilka kurvor blir sådana?
+  ])[
+    Derivatan med avseende på $x$ är
+
+    $ 1+0=y(x) y'(x) $
+
+    och de ortogonala trajektorierna måste ha derivatan
+
+    $
+      1&=y_perp (-1 / (y'_perp))\
+      y'_perp&=-y_perp
+    $
+
+    så $ y_perp (x)=C e^(-x). $
+  ]
+
+  = Integralekvationer
+
+  En integralekvation kräver mindre regularitet. I allmänhet får man något som beter sig bättre än vad man började med.
+
+  #ex([Bestäm samtliga kontinuerliga funktioner $f$ sådana att $ f(x)=3 ln abs(1+x)+integral_0^x f(t)/(1+t) dd(t) $ då $x>=0$.])[
+    Om $f$ löser ekvationen och är kontinuerlig så kan ekvationen deriveras, varför $f in cal(D)$.
+
+    Derivering ger $ f'(x)=3/(1+x)+f(x)/(1+x). $
+
+    Integralekvationen ger dessutom att $ f(0)=3ln(1+0)+integral_0^0 dots.c space dd(x)=0. $
+
+    Låt $y'=f(x)$. Vi har
+
+    $ y'-1 / (1+x)y=3 / (1+x) $
+
+    och vår integrerande faktor blir
+
+    $
+      g(x)&=-1 / (1+x)\
+      G(x)&=-ln(1+x)\
+      e^G(x)&=e^(-ln(1+x))=1 / (1+x).
+    $
+
+    Vi får $ 1/(1+x)y'-1/(1+x)^2 y&=3/(1+x)^2\
+    (1/(1+x)y)'&=3/(1+x)^2. $
+
+    Integrera: $ 1/(1+x)y&=integral 3/(1+x)^2 dd(x)=-3/(1+x)+C\
+    y&=-3 + C(1+x). $
+
+    Insättning av $x=y=0$ ger
+
+    $ 0=-3+C(1+0) $ så $C=3$ och $ y=f(x)=3 x. $
+  ]
+
+  Vår reflex när vi får en integralekvation ska vara att derivera den för att istället få en differential-?ekvation.
+
+  #ex([Ett fysikaliskt, kanske ganska läskigt exempel med rotationssymetriska stålstolpar.
+
+    Vi har en julklapp ovanpå en stolpe.
+
+    #table(
+      stroke: (x: none, y: 0.5pt),
+      columns: 2,
+      [$rho$], unit("kg/m^3"),
+      [Maximal last], qty("350", "MN/m^2"),
+    )
+
+    "Jag är inte fysiker, så det är förmodligen o-troligt."
+  ])[
+    Vid ett tvärsnitt på höjden $h$ är belastningen summan av paketets och stolpens tyngd från tvärsnittet och uppåt.
+
+    Paketets tyngd: $350 pi f(0)^2$.
+
+    Övre delens tyngd: $10^(-6) g rho integral_0^x pi f(t)^2 dd(t) $.
+
+    För maximal last:
+
+    $
+      overbracket(350 pi f(0)^2+10^(-6) g rho integral_0^x pi f(t)^2 dd(t), "kraft") / underbracket(pi f(x)^2, "area")&=350\
+      350 pi f(0)^2 + 10^(-6) g rho integral_0^x pi f(t)^2 dd(t)&=350 pi f(x)^2.
+    $
+
+    Derivering ger
+
+    $
+      10^(-6) g rho pi f(x)^2=2 dot 350 dot pi f(x)f'(x)\
+      dots.v\
+      f'(x)=k f(x) <=> f(x)=r_0 e^(k x).
+    $
   ]
 ]

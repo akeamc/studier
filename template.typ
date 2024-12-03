@@ -62,3 +62,49 @@
     },
   )
 })
+
+#let slopefield(
+    df,
+    x-min: 0,
+    x-max: 10,
+    y-min: 0,
+    y-max: 10,
+    x-step: 1,
+    y-step: 1,
+    x-lines: (),
+    y-lines: (),
+  ) = canvas({
+    import draw: *
+
+    set-style(
+      axes: (stroke: .5pt, tick: (stroke: .5pt)),
+      // legend: (stroke: none, orientation: ttb, item: (spacing: .3), scale: 80%),
+    )
+
+    plot.plot(
+      size: (10, 8),
+      x-label: $t$,
+      y-label: $x$,
+      x-tick-step: none,
+      y-tick-step: none,
+      y-min: y-min,
+      y-max: y-max,
+      axis-style: "school-book",
+      y-ticks: y-lines,
+      y-grid: true,
+      x-grid: true,
+      {
+        for x in range(x-min, x-max, step: x-step) {
+          for y in range(y-min, y-max, step: y-step) {
+            let x0 = x - 0.1 / x-step
+            let x1 = x + 0.1 / x-step
+
+            let y0 = y - df(y) * 0.03 / y-step
+            let y1 = y + df(y) * 0.03 / y-step
+
+            plot.add(((x0, y0), (x1, y1)), style: (stroke: blue))
+          }
+        }
+      },
+    )
+  })
