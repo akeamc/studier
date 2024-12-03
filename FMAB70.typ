@@ -3,6 +3,7 @@
 #import "@preview/unify:0.6.0": qty, unit
 #import "@preview/cetz:0.3.1": canvas, draw, angle
 #import "@preview/cetz-plot:0.1.0": plot
+#import "@preview/suiji:0.3.0": *
 
 #show: doc => conf("FMAB70", [Endimensionell analys], doc)
 
@@ -766,4 +767,158 @@
 
 #lecture(2024, 11, 29, [Gammal tenta])[
   #figure(image("myrlejonslända.jpeg", width: 20%), caption: [Myrlejonsländans larv, _"doodlebug"_.])
+]
+
+#lecture(2024, 12, 2, [Differentialekvationer (jippi!)])[
+  _Maya min Maya, min bitska lilla piraja_
+
+  Tre frågor:
+  - existens
+  - entydighet
+  - regularitet.
+
+  (Skånetrafiken är inget av ovanstående.)
+
+  = Populationsmodeller
+
+  $x=x(t)$ antalet fiskar i en sjö.
+
+  = Malthus (1798)
+
+  $x'=k x$ där $k>0$ är differensen mellan födslar och dödslar. Lösning $ x=C e^(k t). $
+
+  #let slopefield(
+    df,
+    x-min: 0,
+    x-max: 10,
+    y-min: 0,
+    y-max: 10,
+    x-step: 1,
+    y-step: 1,
+    x-lines: (),
+    y-lines: (),
+  ) = canvas({
+    import draw: *
+
+    set-style(
+      axes: (stroke: .5pt, tick: (stroke: .5pt)),
+      // legend: (stroke: none, orientation: ttb, item: (spacing: .3), scale: 80%),
+    )
+
+    plot.plot(
+      size: (10, 8),
+      x-label: $t$,
+      y-label: $x$,
+      x-tick-step: none,
+      y-tick-step: none,
+      y-min: y-min,
+      y-max: y-max,
+      axis-style: "school-book",
+      y-ticks: y-lines,
+      y-grid: true,
+      x-grid: true,
+      {
+        for x in range(x-min, x-max, step: x-step) {
+          for y in range(y-min, y-max, step: y-step) {
+            let x0 = x - 0.1 / x-step
+            let x1 = x + 0.1 / x-step
+
+            let y0 = y - df(y) * 0.03 / y-step
+            let y1 = y + df(y) * 0.03 / y-step
+
+            plot.add(((x0, y0), (x1, y1)), style: (stroke: blue))
+          }
+        }
+      },
+    )
+  })
+
+  #figure(slopefield(y => y))
+
+  = Verhulst (1845)
+
+  Den logistiska modellen: $ x'=(a-b x) x $
+
+  Funktionen har ett stabilt och ett instabilt jämviktsläge.
+
+  #figure(slopefield(y => (6 - y) * y))
+
+  = Logistiska modellen med fiske
+
+  Verhults modell fungerar fint om fisken får vara i fred.
+
+  $ x'=(1-x) x-c $
+
+  #figure(slopefield(y => (6 - y) * y - 5, y-lines: ((1, "Instabilt jämviktsläge"),)), caption: [Hållbart fiske.])
+
+  #figure(slopefield(y => (7 - y) * y - 15), caption: [Överfiske.])
+
+  = Fiskekvoter
+
+  $ x'=(1-x)x-p x=(1-p-x)x $
+
+  #let p = 5 * 0.5
+
+  #figure(slopefield(y => (5 - p - y) * y))
+
+  = Lite om det existentiella
+
+  #ex([Visa att $x'=k x$ endast har lösningar på formen $x=C e^(k t)$ där $C in RR$.])[
+    Inför $u=u(t)$ genom $ x=u e^(k t). $
+
+    Om $x'=k x$ så:
+
+    $ (x'=u' e^(k t)+u k e^(k t)) $
+
+    $ 0=x'-k x=u' e^(k t) + k u e^(k t)-k u e^(k t)=u' e^(k t) $
+
+    så $ u' e^(k t)=0 <=> u'=0 $
+
+    men då måste ju $u$ vara en konstant funktion; $ u=C. $
+  ]
+
+  #ex([Visa att om $k$, $t_0$, $x_0$ är konstanter och $ cases(x'&=k x, x(t_0)&=x_0) $ så måste det gälla att $ x=x_0 e^(k(t-t_0)). $])[
+    Entydig!
+  ]
+
+  #let rng = gen-rng(42)
+
+  // #slopefield(y => integers-f(rng, low: -1, high: 1))
+
+  #ex([Visa att $x(t)=1/(1+C e^(-t))$ uppfyller $x'=(1-x)x.$])[
+    $
+      x'(t)&=-1/(1+C e^(-t))^2 (-C e^(-t))\
+    &=1/(1+C e^(-t))((C e^(-t))/(1+C e^(-t)))\
+    &=1/(1+C e^(-t))((1+C e^(-t)-1)/(1+C e^(-t)))=x(1-x). quad #emoji.sparkles
+    $
+  ]
+
+  == Existens av lösning
+
+  Vi har $x'=f(t,x)$
+
+  Peano #emoji.piano sa att om $f$ är kontinuerlig så finns lösning, men den behöver inte vara entydig.
+
+  Picard-Lindelöf sa att om $f$ uppfyller ett Lipschitzvillkor $ abs(f(t,x_1)-f(f,x_2))<= K abs(x_1-x_2) $ så är lösningen entydig.
+
+  Ett tillräckligt villkor för detta är att $f$ är deriverbar med kontinuerliga derivator.
+
+  #ex([Vid tömning av tank används Tornicellis lag, $ x'=-sqrt(abs(x)). $ Låt $x(0)=1.$ Mikael påstår att $ x(t)=cases((t-2)^2/4 quad &0<=t<=2, 0 quad &t>2) $ löser differentialekvationen.#footnote[När tanken väl är tömd så fortsätter den att vara tömd.]])[
+    *$0<t<2$:*
+
+    $
+      x'(t)&=1 / 2 (t-2)\
+      -sqrt(abs(x(t)))&=- abs(t-2) / 2=(t-2) / 2 quad "så ok."
+    $
+
+    *$t>2$:*
+
+    $ x'=0, -sqrt(abs(x))=0 quad "så ok." $
+
+    *$t=2$:* ok.
+
+    Men det finns fler lösningar:
+
+    Tänk tanken att tanken blir tömd till tommare än tömd.
+  ]
 ]
