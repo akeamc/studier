@@ -185,9 +185,7 @@
   så
 
   $
-    E=E_n=(hbar^2 k_n^2) / (2 m)=(hbar^2 n^2 pi^2) / (2 m a^2)=(h^2 n^2 cancel(pi^2)) / ((
-      2 cancel(pi)
-    )^2 2 m a^2)=(h^2 n^2) / (8 m a^2).
+    E=E_n=(hbar^2 k_n^2) / (2 m)=(hbar^2 n^2 pi^2) / (2 m a^2)=(h^2 n^2 cancel(pi^2)) / (( 2 cancel(pi) )^2 2 m a^2)=(h^2 n^2) / (8 m a^2).
   $
 
   #figure(
@@ -481,4 +479,116 @@
   $ Gamma_"opt"=1 / tau_"opt" prop integral_(-infinity)^infinity psi_m(x) psi_n(x) x dd(x) $
 
   Integralen är nollskild om dess integrand är jämn, så #underline[$psi_m$ får inte ha samma paritet som $psi_n$].
+]
+
+#lecture(2024, 12, 4, [])[
+  = Tillståndstäthet
+
+  $ n(E)=1 / V derivative(N(E), E) $
+
+  Metall.
+
+  Fermienergin $E_F in [qty("1", "eV"), qty("10", "eV")]$ för metaller (oftast).
+
+  $ n(E)=m / (pi^2 hbar^3) sqrt(2 m E) $
+
+  Vid $T=0$ är alla tillstånd ovanför $E_F$ oockuperade.
+
+  #let EF = 1
+
+  #let F(E, T) = {
+    1 / (1 + calc.exp((E - EF) / T))
+  }
+
+  #canvas({
+    let n(E, T) = {
+      if T == 0 {
+        if E > EF {
+          0
+        } else {
+          calc.sqrt(E)
+        }
+      } else {
+        calc.sqrt(E) * F(E, T)
+      }
+    }
+
+    plot.plot(
+      size: (12, 8),
+      x-label: $E$,
+      y-label: $n(E)$,
+      x-tick-step: none,
+      y-tick-step: none,
+      axis-style: "school-book",
+      x-ticks: ((1, $E_F$),),
+      {
+        plot.add(E => n(E, 0), domain: (0, 1.5), samples: 200, fill: true)
+        plot.add(E => n(E, 0.05), domain: (0, 1.5), samples: 200, fill: true)
+      },
+    )
+  })
+
+  Rumstemperatur: $E_"T"approx k dot qty("300", "K")=qty("25", "meV")$.
+
+  Sannolikhet att ockupera ett tillstånd med $E$ ges av Fermifunktionen
+
+  $ f(E)=1 / (1 + exp((E-E_F) slash k T)). $
+
+  (Använd bara en stegfunktion om $T=0$.)
+
+  $
+    N=cases(
+    T=0: quad &V integral_0^E_F n(E) dd(E),
+    T>0: quad &V integral_0^infinity n(E) f(E) dd(E)
+  )
+  $
+
+  = Bandstruktur i kristaller
+
+  // TODO: rita kvantbrunnar formade som tänder
+
+  #figure(
+    canvas({
+      let wave(x, x0) = calc.exp(-10 * calc.pow(x - x0, 2)) / 2
+
+      plot.plot(
+        size: (12, 8),
+        axis-style: none,
+        x-tick-step: none,
+        y-tick-step: none,
+        x-label: $x$,
+        y-label: $V(x)$,
+        {
+          plot.add(
+            ((-1, 1), (-0.6, 1), (-0.6, 0), (-0.1, 0), (-0.1, 1), (0.1, 1), (0.1, 0), (0.6, 0), (0.6, 1), (1, 1)),
+            style: (stroke: black),
+          )
+          for x0 in (-0.35, 0.35) {
+            plot.add(x => wave(x, x0), domain: (-1, 1), style: (stroke: (dash: "dashed")), samples: 200)
+          }
+
+          plot.add(x => wave(x, -0.35) + wave(x, 0.35), domain: (-1, 1), style: (stroke: blue), samples: 200)
+          plot.add(x => wave(x, -0.35) - wave(x, 0.35), domain: (-1, 1), style: (stroke: red), samples: 200)
+        },
+      )
+    }),
+  )
+
+  $N$ brunnar (atomer) ger $N$ tillstånd per ursprungligt antal tillstånd i varje enskild atom, det vill säga väldigt många ty det finns väldigt många atomer. Mellan energibanden finns så kallade bandgap som saknar (serverings)tillstånd.
+
+  \#atomer \#kvantfysik \#wow
+
+  Hos metaller ligger $E_F$ typ i mitten av valensbandet, eller åtminstone så långt ner att det innehåller oockuperade tillstånd.
+
+  Isolatorer har fulla valensband.
+
+  Diamanter är snygga isolatorer.
+
+  #canvas({
+    import draw: *
+
+    rect((0,0), (5,-2), stroke: none, fill: blue.lighten(90%))
+    line((0,0), (5,0), stroke: blue)
+    line((0,2), (5,2), stroke: blue)
+  })
 ]

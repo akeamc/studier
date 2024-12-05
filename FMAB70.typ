@@ -106,8 +106,6 @@
 
   Givet $z=x+i y$ och $w=xi+i eta$ är $abs(z-w)=sqrt((x-xi)^2+(y-eta)^2)$.
 
-  #text(font: "Monsieur La Doulaise")[TP är en special treatment.]
-
   Triangelolikheten gäller även för komplexa tal:
 
   $
@@ -1044,5 +1042,145 @@
       dots.v\
       f'(x)=k f(x) <=> f(x)=r_0 e^(k x).
     $
+  ]
+]
+
+#lecture(2024, 12, 5, [Separabla differentialekvationer])[
+  Givet $f(y) y'=h(x)$:
+
+  Om $F$ är en primitiv till $f$ och $H$ en till $h$ så bestäms lösningarna av $ F(y)=H(x)+C. $
+
+  Alternativt skrivsätt: $ f(y) derivative(y, x)&=h(x)\
+    integral f(y) dd(y)/(cancel(dd(x))) cancel(dd(x))&=integral h(x) dd(x) $
+
+  #ex([
+    $ y'=(1-y)y $
+
+    #set enum(numbering: "a)")
+
+    + $y=1/2$, $x=0$
+    + $y=1$, $x=0$
+  ])[
+    $ derivative(y, x)&=(1-y)y\
+      1/((1-y)y) derivative(y, x)&=1\
+      integral 1/((1-y)y) dd(y)&=x+C\
+      integral (1/(1-y)+1/y) dd(y)&=x+C\
+      -ln abs(1-y)+ln abs(y)=ln abs(y/(1-y))&=x+C
+    $
+
+    #set enum(numbering: "a)")
+
+    1. #[
+      $y(0)=1/2$ så $ abs(y/(1-y))=y/(1-y). $
+
+      $y(0)=1/2$ ger $ ln((1 slash 2)/(1-1 slash 2))=0+C $
+
+      så $C=0$.
+
+      Algebra ger $ y=e^x/(1+e^x)=1/(1+e^(-x)). $
+    ]
+    2. #[
+      Vi startar i en jämviktspunkt så $y=1$ blir lösningen.
+    ]
+  ]
+
+  = Dagens lilla trick
+
+  $ integral 1/((1-y)y) dd(y)=integral 1/((1/y-1)y^2) dd(y)=-ln(1/y-1)+C. $
+
+  #ex([$y'=x(1+y^2)$])[
+    $ 1/(1+y^2)y'&=x\
+      integral 1/(1+y^2) dd(y) &= integral x dd(x)\
+      arctan y&=x^2/2+C\
+      y&=tan(x^2/2+C). $
+
+    Lösningarna slutar att existera då $ x^2/2+C -> pi/2. $
+  ]
+
+  #ex([
+    Toricellis lag ...
+
+    $ derivative(x, t)&=-sqrt(x) quad quad (x(0)=1)\
+      integral 1/sqrt(x) dd(x)&=integral -1 dd(t)\
+      2 sqrt(x)&=-t+C $
+
+    Begynnelsevillkoret ger $ 2sqrt(1)=-0+C <=> C=2 $
+
+    så $ x=((2-t)/2)^2. $
+  ])[]
+
+  #ex([
+    Bestäm de kurvor som är ortogonala överallt mot alla räta linjer genom origo.
+  ])[
+    Cirklar?
+
+    Räta linjer: $y=k x <=> y/x=k$. Derivera:
+
+    $ (y' x-y)/x^2=0 dots.c y'=y/x. $
+
+    Ortogonala kurvor: Byt ut $y'$ mot $-1/y'$ så
+
+    $ -1/y'&=y/x\
+      y y'&=-x quad "Separabel!"\
+      integral y dd(y)&=integral -x dd(x)\
+      y^2/2&=-x^2/2+C\
+      x^2+y^2&=tilde(C). $
+
+    Cirklar!
+  ]
+
+  #ex([
+    Ett exempel från fysik med någon slags härledning av kedjekurvan.
+  ])[
+    #let F = $overline(F)$
+    #let H = $overline(H)$
+    #let V = $overline(V)$
+    #let g = $overline(g)$
+
+    Densitet $rho$.
+
+    Ett kedjesegment mellan $x$ och $x+Delta x$ påverkas av tyngdkraften $rho Delta s #g$ och två spännkrafter; $overline(F)(x)$ och $overline(F)(x+Delta x)$.
+
+    Kraftjämvikt råder: $ #F (x)+#F (x+Delta x)+ rho Delta s #g=overline(0). $
+
+    $#F$ delas upp i sin horisontella komposant $#H$ och sin vertikala $#V$. I horisontellt led gäller
+
+    $ #H (x)+#H (x+Delta x)=overline(0) $
+
+    och i vertikalt
+
+    $ #V (x)+#V (x+Delta x)+rho Delta s #g = overline(0). $
+
+    $ f'(x)&=- V(x)/H\
+      f'(x+Delta x)&=V(x+Delta x)/H\
+      Delta s &= sqrt(1+f'(x)^2) Delta x $
+
+    $ V(x+Delta x)-V(x)&=rho g sqrt(1+f'(x)^2) Delta x\
+      (V(x+Delta x)-V(x))/(Delta x)&=rho g sqrt(1+f'(x)^2)\
+      (f'(x+Delta x)-f'(x))/Delta x&=(rho g)/H sqrt(1+f'(x)^2)\
+      f''(x)&=(rho g)/H sqrt(1+f'(x)^2). $
+
+    Sätt $u(x)=f'(x)$:
+
+    $ u'(x)&= C sqrt(1+u(x)^2), quad C=(rho g)/H\
+      integral 1/sqrt(1+u^2) dd(u)&= integral C dd(x)\
+      ln(u+sqrt(1+u^2))=op("arsinh")(h)&=C x+D\
+      f'(x)=u&=sinh(C x+D)\
+      f(x)&=1/C cosh(C x+D)+E quad #emoji.sparkles  $
+
+    $cosh$ kallas för kedjekurvan. Se S:t Paul i London och Gateway Arch i Saint Louis.
+  ]
+  
+  #ex([
+    *En makaber uppgift.* Vi har en hund i $(0, 1)$ och husse i $(0, 0)$. Hunden vill inte vara ute och gå men husse går längs x-axeln i positiv riktning och drar med sig hunden. Vilken kurva beskriver hunden?
+  ])[
+    Kopplet kommer att vara spänt längs tangenten av kurvan.
+    
+    Hunden befinner sig i $(a, f(a))$. Tangent $ y=f(a)+f'(a)(x-a)$.
+    
+    Skär x-axeln där $y=0$ -- ger
+    
+    $ 0&=f(a)+f'(a)(x-a)\
+      x&=a-f(a)/f'(a) $
   ]
 ]
