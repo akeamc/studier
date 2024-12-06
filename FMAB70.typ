@@ -237,12 +237,8 @@
     $
       cos 4 theta&=Re(cos 4theta + i sin 4theta)\
       &=Re((cos theta+i sin theta)^4)\
-      &=Re[
-        mat(4;0)cos^4 theta + underbracket(mat(4;1)cos^3 theta i sin theta, "försvinner") + mat(4;2)cos^2 theta (
-          i sin theta
-        )^2 +
-        underbracket(mat(4;3) cos theta+(i sin theta)^3, "försvinner") + mat(4;4) (i sin theta)^4
-      ]\
+      &=Re[ mat(4;0)cos^4 theta + underbracket(mat(4;1)cos^3 theta i sin theta, "försvinner") + mat(4;2)cos^2 theta ( i sin theta )^2 +
+        underbracket(mat(4;3) cos theta+(i sin theta)^3, "försvinner") + mat(4;4) (i sin theta)^4 ]\
       &=cos^4 theta-6cos^2 theta sin^2 theta+sin^4 theta\
       &=cos^4theta-6cos^2(1-cos^2theta)+(1-cos^2 theta)^2\
       &=dots.c=8cos^4theta-8cos^2theta+1.
@@ -345,9 +341,7 @@
     *Bevis:* Om $p(alpha)=0$ så är $p(overline(alpha))=0$ och därmed är $(z-alpha)$ och $(z-overline(alpha))$ faktorer i $p$.
 
     $
-      (z-alpha)(z-overline(alpha))=z^2-(
-        alpha+overline(alpha)
-      )z+alpha overline(alpha)=z^2-2 Re(alpha) z+abs(alpha)^2 in RR
+      (z-alpha)(z-overline(alpha))=z^2-( alpha+overline(alpha) )z+alpha overline(alpha)=z^2-2 Re(alpha) z+abs(alpha)^2 in RR
     $
   ]
 
@@ -937,7 +931,6 @@
       line(sun_center, "mirror.mid", (1, 0.3), stroke: (dash: "dashed"))
       circle(sun_center, radius: 0.2, stroke: yellow, fill: yellow)
       line((0, 0), (2, 0), stroke: blue)
-
     })
 
     Ljusintensiteten $y$ uppfyller $y'=-k y$ och det visade sig att intensiteten halverades då ljuset kom till ytan igen. Bestäm $k$.])[
@@ -1061,38 +1054,41 @@
     + $y=1/2$, $x=0$
     + $y=1$, $x=0$
   ])[
-    $ derivative(y, x)&=(1-y)y\
-      1/((1-y)y) derivative(y, x)&=1\
-      integral 1/((1-y)y) dd(y)&=x+C\
-      integral (1/(1-y)+1/y) dd(y)&=x+C\
+    $
+      derivative(y, x)&=(1-y)y\
+      1 / ((1-y)y) derivative(y, x)&=1\
+      integral 1 / ((1-y)y) dd(y)&=x+C\
+      integral (1 / (1-y)+1 / y) dd(y)&=x+C\
       -ln abs(1-y)+ln abs(y)=ln abs(y/(1-y))&=x+C
     $
 
     #set enum(numbering: "a)")
 
     1. #[
-      $y(0)=1/2$ så $ abs(y/(1-y))=y/(1-y). $
+        $y(0)=1/2$ så $ abs(y/(1-y))=y/(1-y). $
 
-      $y(0)=1/2$ ger $ ln((1 slash 2)/(1-1 slash 2))=0+C $
+        $y(0)=1/2$ ger $ ln((1 slash 2)/(1-1 slash 2))=0+C $
 
-      så $C=0$.
+        så $C=0$.
 
-      Algebra ger $ y=e^x/(1+e^x)=1/(1+e^(-x)). $
-    ]
+        Algebra ger $ y=e^x/(1+e^x)=1/(1+e^(-x)). $
+      ]
     2. #[
-      Vi startar i en jämviktspunkt så $y=1$ blir lösningen.
-    ]
+        Vi startar i en jämviktspunkt så $y=1$ blir lösningen.
+      ]
   ]
 
   = Dagens lilla trick
 
-  $ integral 1/((1-y)y) dd(y)=integral 1/((1/y-1)y^2) dd(y)=-ln(1/y-1)+C. $
+  $ integral 1 / ((1-y)y) dd(y)=integral 1 / ((1 / y-1)y^2) dd(y)=-ln(1/y-1)+C. $
 
   #ex([$y'=x(1+y^2)$])[
-    $ 1/(1+y^2)y'&=x\
-      integral 1/(1+y^2) dd(y) &= integral x dd(x)\
-      arctan y&=x^2/2+C\
-      y&=tan(x^2/2+C). $
+    $
+      1 / (1+y^2)y'&=x\
+      integral 1 / (1+y^2) dd(y) &= integral x dd(x)\
+      arctan y&=x^2 / 2+C\
+      y&=tan(x^2/2+C).
+    $
 
     Lösningarna slutar att existera då $ x^2/2+C -> pi/2. $
   ]
@@ -1100,9 +1096,11 @@
   #ex([
     Toricellis lag ...
 
-    $ derivative(x, t)&=-sqrt(x) quad quad (x(0)=1)\
-      integral 1/sqrt(x) dd(x)&=integral -1 dd(t)\
-      2 sqrt(x)&=-t+C $
+    $
+      derivative(x, t)&=-sqrt(x) quad quad (x(0)=1)\
+      integral 1 / sqrt(x) dd(x)&=integral -1 dd(t)\
+      2 sqrt(x)&=-t+C
+    $
 
     Begynnelsevillkoret ger $ 2sqrt(1)=-0+C <=> C=2 $
 
@@ -1116,15 +1114,17 @@
 
     Räta linjer: $y=k x <=> y/x=k$. Derivera:
 
-    $ (y' x-y)/x^2=0 dots.c y'=y/x. $
+    $ (y' x-y) / x^2=0 dots.c y'=y / x. $
 
     Ortogonala kurvor: Byt ut $y'$ mot $-1/y'$ så
 
-    $ -1/y'&=y/x\
+    $
+      -1 / y'&=y / x\
       y y'&=-x quad "Separabel!"\
       integral y dd(y)&=integral -x dd(x)\
-      y^2/2&=-x^2/2+C\
-      x^2+y^2&=tilde(C). $
+      y^2 / 2&=-x^2 / 2+C\
+      x^2+y^2&=tilde(C).
+    $
 
     Cirklar!
   ]
@@ -1151,36 +1151,257 @@
 
     $ #V (x)+#V (x+Delta x)+rho Delta s #g = overline(0). $
 
-    $ f'(x)&=- V(x)/H\
-      f'(x+Delta x)&=V(x+Delta x)/H\
-      Delta s &= sqrt(1+f'(x)^2) Delta x $
+    $
+      f'(x)&=- V(x) / H\
+      f'(x+Delta x)&=V(x+Delta x) / H\
+      Delta s &= sqrt(1+f'(x)^2) Delta x
+    $
 
-    $ V(x+Delta x)-V(x)&=rho g sqrt(1+f'(x)^2) Delta x\
-      (V(x+Delta x)-V(x))/(Delta x)&=rho g sqrt(1+f'(x)^2)\
-      (f'(x+Delta x)-f'(x))/Delta x&=(rho g)/H sqrt(1+f'(x)^2)\
-      f''(x)&=(rho g)/H sqrt(1+f'(x)^2). $
+    $
+      V(x+Delta x)-V(x)&=rho g sqrt(1+f'(x)^2) Delta x\
+      (V(x+Delta x)-V(x)) / (Delta x)&=rho g sqrt(1+f'(x)^2)\
+      (f'(x+Delta x)-f'(x)) / Delta x&=(rho g) / H sqrt(1+f'(x)^2)\
+      f''(x)&=(rho g) / H sqrt(1+f'(x)^2).
+    $
 
     Sätt $u(x)=f'(x)$:
 
-    $ u'(x)&= C sqrt(1+u(x)^2), quad C=(rho g)/H\
+    $
+      u'(x)&= C sqrt(1+u(x)^2), quad C=(rho g)/H\
       integral 1/sqrt(1+u^2) dd(u)&= integral C dd(x)\
       ln(u+sqrt(1+u^2))=op("arsinh")(h)&=C x+D\
       f'(x)=u&=sinh(C x+D)\
-      f(x)&=1/C cosh(C x+D)+E quad #emoji.sparkles  $
+      f(x)&=1/C cosh(C x+D)+E quad #emoji.sparkles
+    $
 
     $cosh$ kallas för kedjekurvan. Se S:t Paul i London och Gateway Arch i Saint Louis.
   ]
-  
+
   #ex([
     *En makaber uppgift.* Vi har en hund i $(0, 1)$ och husse i $(0, 0)$. Hunden vill inte vara ute och gå men husse går längs x-axeln i positiv riktning och drar med sig hunden. Vilken kurva beskriver hunden?
   ])[
     Kopplet kommer att vara spänt längs tangenten av kurvan.
-    
+
     Hunden befinner sig i $(a, f(a))$. Tangent $ y=f(a)+f'(a)(x-a)$.
-    
+
     Skär x-axeln där $y=0$ -- ger
-    
-    $ 0&=f(a)+f'(a)(x-a)\
-      x&=a-f(a)/f'(a) $
+
+    $
+      0&=f(a)+f'(a)(x-a)\
+      x&=a-f(a) / f'(a)
+    $
   ]
+
+  #figure(
+    canvas({
+      import draw: *
+
+      let arcosh(x) = calc.ln(1 + calc.sqrt(1 - x * x))
+      let C = -0.9
+      let D = 0
+      let E = 1
+      let A = 1
+      // let catenary(x) = 1 / C * arcosh(C * x + D) + E
+      let catenary(x) = A * calc.cosh(x / A)
+      let catenary-inv(y) = A * arcosh(y * A)
+
+      let artanh(x) = 0.5 * calc.ln((1 + x) / (1 - x))
+
+
+      // let P = (d, catenary(d))
+
+      let x(t) = t - calc.tanh(t)
+      let y(t) = 1 / calc.cosh(t)
+
+      let dydx(t) = {
+        let d = 1e-3
+
+        // derivative of parametric curve
+        let dx = x(t + d) - x(t)
+        let dy = y(t + d) - y(t)
+
+        dy / dx
+      }
+
+      let W = 10
+      let H = 19
+
+      let d = 3
+      let N = 100
+      let n = 10
+      let ts = range(-N * d, N * d + 1).map(i => i / N)
+      let x-min = x(ts.first()) * 1.5
+      let x-max = x(ts.last()) * 1.5
+
+      let grad = gradient.linear(..color.map.rainbow)
+
+      plot.plot(
+        size: (W, H),
+        axis-style: "school-book",
+        x-tick-step: none,
+        y-tick-step: none,
+        y-min: 0,
+        y-max: (x-max - x-min) * (H / W),
+        {
+          for i in range(-n * d, n * d + 1) {
+            let t = i / n
+            let dy = dydx(t)
+            if dy == 0 {
+              continue
+            }
+            let slope = -1 / dydx(t)
+            let x0 = x(t)
+            let y0 = y(t)
+
+            if calc.abs(x0) < 0.001 {
+              continue
+            }
+
+            let f(x) = slope * (x - x0) + y0
+
+            let color = grad.sample((t - ts.first()) / (ts.last() - ts.first()) * 100%)
+            let domain = if x0 < 0 {
+              (x-min, x0)
+            } else {
+              (x0, x-max)
+            }
+
+            // let p = ts.map(x).map(x => (x, catenary(x))).find(((x, y)) => calc.abs(y - f(x)) < 10)
+
+            // if p != none {
+            //   plot.annotate({
+            //     line((x0, y0), p, stroke: (color + 0.5pt))
+            //   })
+            // }
+
+            plot.add(f, domain: domain, style: (stroke: 0.5pt + color))
+          }
+
+          plot.add(ts.map(t => (x(t), y(t))), style: (stroke: grad + 2pt))
+          plot.add(catenary, domain: (x-min, x-max), style: (stroke: 2pt))
+        },
+      )
+    }),
+    caption: [Kedjekurvan.],
+  )
+]
+
+#lecture(2024, 12, 6, [Linjära differentialekvationer])[
+  $ y^((n))+a_(n-1)y^((n-1))+dots.c+a_1 y' + a_0 y=g $ <lindiff>
+
+  #ex([Newton $m a=F$])[
+    $x=x(t)$ position
+
+    $m x''(t)=F$
+  ]
+
+  Även de allra enklaste funktionerna $a_(n-1), dots.c, a_0$ resulterar i ickeelementära funktioner i lösningen $y$.
+
+  #sats([])[Antag att $y_p$ är en lösning till @lindiff. Då kommer $y$ att lösa @lindiff om och endast om $y-y_p$ löser motsvarande homogena ekvation.]
+
+  Idag: homogena differentialekvationer av ordning 2.
+
+  #rect(inset: 12pt, [$ y''+a y'+b y=0 $ <ode2>])
+
+  Vi vet att $y=e^(lambda x)$ löser $y'-lambda y=0$. Kan det vara så att $y=e^(lambda x)$ löser @ode2?
+
+  $ y''+a y'+b y=lambda^2 e^(lambda x)+a lambda e^(lambda x)+b e^(lambda x)=(lambda^2 + a lambda + b) e^(lambda x). $
+
+  Om $lambda^2 + a lambda + b=0$ så har vi hittat en lösning!
+
+  #hr
+
+  Antag att $y$ löser $y''-6y'+5y=0$. Inför $u(x)$ via $y(x)=u(x) e^x$.
+
+  $
+    y'&=u'(x)e^x+u(x)e^x\
+    y''&=u''(x)e^x+2u'(x)e^x+u(x)e^x.
+  $
+
+  $
+    0=y''-6y'+5y&=e^x (u''+2u'+u-6u'-6u+5u)\
+    &=e^x (u''-4u')
+  $
+  $
+    =>u''-4u'&=0\
+    v'-4v&=0 quad quad v=u'\
+    => v(x)&=A e^(4x)\
+    u'(x)&=A e^(4 x)\
+    u(x)&=A / 4 e^(4x)+B\
+    y&=u e^x\
+    &=(A / 4 e^(4x)+B)e^x\
+    &=tilde(A) e^(5x)+B e^x.
+  $
+
+  #sats([])[
+    Antag att $lambda_1$ och $lambda_2$ är lösningarna till $lambda^2+a lambda+b=0$. Då har $y''+a y'+b y=0$ lösningar:
+
+    #set enum(numbering: "a)")
+
+    + #[
+        $y_h=A e^(lambda_1 x)+B e^(lambda_2 x)$ om $lambda_1 != lambda_2$
+      ]
+    + #[
+        $y_h=(A+B x)e^(lambda_1 x)$ om $lambda_1=lambda_2$
+      ]
+  ]
+
+  #ex([Visa att lösningen till $ y''-6y'+9y=0 $ har formen $ y=(A+B x)e^(3x). $])[
+    Inför $u$ via $y(x)=u(x) e^(3x)$.
+
+    $
+      y&=u e^(3x)\
+      y'&=u' e^(3x)+3u e^(3x)\
+      y''&=u'' e^(3x)+6u' e^(3x)+9u e^(3x)
+    $
+
+    $
+      0=y''-6y'+9y=e^(3x) (u''+6u'+9u-6u'-18u+9u)=e^(3x) u''\
+      => u''(x)=0 "och" u(x)=A + B x.
+    $
+  ]
+
+  #ex([Omskrivning av $y=A e^((3-i)x) + B e^((3+i)x)$.])[
+    $
+      y&=A e^(3x)(cos x-i sin x)+B e^(3x)(cos x+i sin x)\
+      &=e^(3x) (underbrace((A+B), C_1) cos x + underbrace((-i A + i B), C_2) sin x)\
+      &=e^(3x) (C_1 cos x + C_2 sin x).
+    $
+  ]
+
+  #sats([])[
+    Om $ a, b in RR, quad lambda_1=alpha+i beta, quad lambda_2=alpha-i beta quad (beta != 0) $ löser $lambda^2+a lambda + b=0$ så kommer $y''+a y'+b y=0$ att ha lösningarna $ y=e^(alpha x) (A cos beta x + B sin beta x). $
+  ]
+
+  = Högre ordning?
+
+  Vi har en karakteristisk ekvation $ 0=(lambda-3)^3 (lambda-1)=lambda^4-10lambda^3+36lambda^2-54lambda+27. $ <kekv1>
+
+  #ex([Lös $ y''''-10y'''+36y''-54y'+27y=0. $])[
+    Differentialekvationens karakteristiska ekvation finns att skåda i @kekv1. Dess lösningar är $ lambda_1=lambda_2=lambda_3=3, quad lambda_4=1. $
+
+    Vi får $ y=(A_1+A_2 x+A_3 x^2)e^(3x)+B e^x. $
+  ]
+
+  #sats([])[
+    Betrakta $y^((n))+a_(n-1) y^((n-1))+dots.c+a_1 y'+a_0 y=0$. Antag att karakteristiska ekvationen $lambda^n+a_(n-1) lambda^(n-1)+dots.c+a_1 n+a_0=0 $ har lösningar $lambda_1$ med multiplicitet $m_1$, $lambda_2$ med multiplicitet $m_2$, dots.c, $lambda_r$ med multiplicitet $m_r$. Då ges den allmänna lösningen till differentialekvationen av
+
+    $
+      y=p_1(x)e^(lambda_1 x)+p_2(x)e^(lambda_2 x)+dots.c+p_r (x)e^(lambda_r x)
+    $ där graden av varje polynom $p_k$ är $m_k-1$.
+  ]
+
+  #let dop = $op(upright(D))$
+
+  Man kan faktorisera operatorn #dop:
+
+  $
+    y''-6y'+5y&=0\
+    (dop^2-6dop+5)y&=0\
+    (dop-1)underbracket((dop-5)y, v)&=0\
+    cases(
+      (dop-1)v = 0,
+      (dop-5)y = v
+    )
+  $
 ]

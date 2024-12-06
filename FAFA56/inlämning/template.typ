@@ -20,6 +20,8 @@
 #let planck = qty("6,626e-34", "J s")
 #let light = qty("3,00e8", "m/s")
 #let nm_to_ev = qty("1240", "eV nm")
+#let rinf = qty("1,097e7", "m^-1")
+#let me = qty("9,109e-31", "kg")
 
 #let infint(content) = $integral_(-infinity)^infinity #content dd(x)$
 
