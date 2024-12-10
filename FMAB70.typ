@@ -1405,3 +1405,20 @@
     )
   $
 ]
+
+#lecture(2024, 12, 10, [])[
+  Man kan skala bort tråkiga konstanter:
+
+  $ -hbar^2/(2m) derivative(,x,2) psi + 1/2 m omega^2 x^2 psi &= E omega\
+  - derivative(,x,2) Psi+x^2 Psi&=lambda Psi. $
+
+  #hr
+
+  En fallskärmshoppare med massa $m$.
+
+  $ m derivative(v,t)=m g - k v^2 $
+
+  Inför $t^*=t slash T$ och $v^*=v slash V$.
+
+  $ dots.v $
+]
