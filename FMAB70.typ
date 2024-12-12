@@ -1406,7 +1406,7 @@
   $
 ]
 
-#lecture(2024, 12, 10, [])[
+#lecture(2024, 12, 10, [Differentialekvationer, avslutning])[
   Man kan skala bort tråkiga konstanter:
 
   $ -hbar^2/(2m) derivative(,x,2) psi + 1/2 m omega^2 x^2 psi &= E omega\
@@ -1421,4 +1421,100 @@
   Inför $t^*=t slash T$ och $v^*=v slash V$.
 
   $ dots.v $
+]
+
+#lecture(2024, 12, 12, [Maclaurinutveckling])[
+  #canvas({
+    plot.plot(size: (12, 8), x-min: 0, x-max: 5, y-min: 0, y-max: 8, x-tick-step: none, y-tick-step: none, axis-style: "left", {
+      let f(x) = 0.5 * x * x * x - 2 * x * x + 2 + 4
+
+      plot.add(f, domain: (1, 4))
+      plot.add(f, domain: (1, 4), samples: 6, style: (stroke: none), mark: "x")
+    })
+  })
+
+  #let macterm(n) = {
+    if type(n) == int {
+      if n == 0 {
+        return $f(0)$
+      }
+
+      if n == 1 {
+        return $f'(0)x$
+      }
+
+      if n == 2 {
+        return $(f''(0))/2! x^2$
+      }
+
+      if n == 3 {
+        return $f('''(0))/3! x^3$
+      }
+    }
+
+    $(f^((#n))(0))/(#n !) x^#n$
+  }
+
+  $ P_(f,n)=#range(3).map(macterm).join($+$)+dots.c+macterm(n) $
+
+  = Feluppskattning
+
+  Vill visa att $abs(f(x)-P_(f,n)(x))<=M abs(x)^(n+1)$ åtminstone på ett begränsat intervall.
+
+  För $n=2$: Antag att $m<=f^((3))(0)<=M$ på något intervall som inehåller $0$.
+
+  Integrera mellan $0$ och $x>0$:
+
+  $ integral_0^x m dd(t) &<= integral_0^x f'''(t) dd(t) &<= integral_0^x M dd(t)\
+  m x &<= f''(x) - f''(0) &<= M(x) $
+
+  Integrera igen!
+
+  $ integral_0^x m t dd(t) &<= integral_0^x (f''(t) - f''(0)) dd(t) &<= integral_0^x M t dd(t)\
+  m x^2/2 &<= f'(x)-f'(0)-f''(0) x &<= M x^2/2 $
+
+  Igen!
+
+  $ integral_0^x m t^2/2 dd(t) &>= integral_0^x (f'(t)-f'(0)-f''(0)t) dd(t) &<= integral_0^x M t^2/2 dd(t)\
+  m x^3/3! &<= underbrace(f(x)-f(0)-f'(0)x-(f''(0))/2! x^2, f(x)-P_(f,2)(x)) &<= M x^3/3! $
+
+  #sats([])[
+    Antag att $abs(f^((n+1)))<=M, quad M>0$ på ett intervall som innehåller $0$. Då gäller där att $ abs(f(x)-P_(f,n)(x))<=M/(n+1)! abs(x)^(n+1).. $
+  ]
+
+  #ex([Låt $f(x)=e^x$. På intervallet $[-1, 1]$ är $f^((5))(x)=e^x$ begränsad av $e$, dvs. $abs(f^((5))(x))=abs(e^x)<=e$. Satsen ovan ger därför att $ e^x-(1+x+x^2/2!+x^3/3!+x^4/4!)<=e/5! abs(x)^5. $])[]
+
+  #obs[
+    Approximationen är bäst nära $0$.x
+  ]
+
+  #obs[
+    $ "Maclaurinutveckling" = "Maclaurinpolynom" + "Restterm" $
+  ]
+
+  = Lagranges form
+
+  Fixera $x>0$.
+
+  $ m&=min_(t in [0, x]) f^((n+1))(t)\
+  M&=max_(t in [0, x]) f^((n+1))(t). $
+
+  $ m <= (f(x)-P_(f,n)(x))/(x^(n+1) slash (n+1)!) <= M $
+
+  Antag nu att $f^((n+1)) in cal(C)$. Satsen om mellanliggande värden ger $xi$ mellan $0$ och $x$ så att kvoten är lika med
+  
+  $ f^((n+1))(xi), $
+
+  dvs. $ (f(x)-P_(f,n))/(x^(n+1) slash (n+1)!)=f^((n+1))(xi), $
+
+  dvs. $ f(x)=P_(f,n)(x)+(f^((n+1))(xi))/(n+1)! x^(n+1). $
+
+  = Svag form
+
+  $ B(x) x^(n++1) $
+
+  = Standardutvecklingar
+
+  $ ln(1+x)&=x-x^2/2+x^3/3-x^4/4+dots.c+(-1)^(n+1) x^n/n +x^(n+1) B(x)\
+  arctan(x)&=x-x^3/3+x^5/5-x^7/7+dots.c+(-1)^(n-1) (x^(2n-1))/(2n-1)+x^(2n+1)B(x) $
 ]

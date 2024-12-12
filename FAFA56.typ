@@ -587,8 +587,48 @@
   #canvas({
     import draw: *
 
-    rect((0,0), (5,-2), stroke: none, fill: blue.lighten(90%))
-    line((0,0), (5,0), stroke: blue)
-    line((0,2), (5,2), stroke: blue)
+    rect((0, 0), (5, -2), stroke: none, fill: blue.lighten(90%))
+    line((0, 0), (5, 0), stroke: blue)
+    line((0, 2), (5, 2), stroke: blue)
   })
+]
+
+#lecture(2024, 12, 11, [])[
+  = Heterostrukturer
+
+  #figure(
+    canvas({
+      import draw: *
+
+      draw.set-style(
+        axes: (stroke: .5pt, tick: (stroke: .5pt)),
+        legend: (stroke: none, orientation: ttb, item: (spacing: .3), scale: 80%, fill: white),
+      )
+
+      plot.plot(
+        size: (12, 8),
+        axis-style: "left",
+        x-tick-step: none,
+        y-tick-step: none,
+        x-label: none,
+        y-label: none,
+        y-ticks: ((-2, $E_C$), (-3, $E_V$)),
+        legend: "south",
+        {
+          plot.annotate({
+            content((1, 6pt), [InAs])
+            content((3, 6pt), [InP])
+            content((5, 6pt), [InAs])
+          })
+
+          plot.add(((0, 0), (6, 0)), style: (stroke: (dash: "dashed")))
+          plot.add(((0, -2), (2, -2), (2, -1), (4, -1), (4, -2), (6, -2)), style: (stroke: black))
+          plot.add(((0, -3), (2, -3), (2, -4), (4, -4), (4, -3), (6, -3)), style: (stroke: black))
+
+          plot.add-hline(-1.5, label: [Stark dopning ($1 slash 10^4$)], style: (stroke: red))
+          plot.add-hline(-2.5, label: [Svag dopning ($1 slash 10^7$)], style: (stroke: blue))
+        },
+      )
+    }),
+  )
 ]
