@@ -1,9 +1,11 @@
 #import "@preview/unify:0.7.0": qty, num, unit
 #import "@preview/cetz:0.3.1": canvas, draw
 #import "@preview/cetz-plot:0.1.0": plot
+#import "@preview/physica:0.9.3": *
 
 #set text(lang: "en")
 #set heading(numbering: "1.1")
+#set math.equation(numbering: "(1)")
 
 #[
   #align(
@@ -13,7 +15,7 @@
     ],
   )
 
-  #align(end + bottom, text(size: 12pt)[Åke\ Amadeus])
+  #align(end + bottom, text(size: 12pt)[Åke Amcoff\ Amadeus Bernmark])
 
   #pagebreak(weak: true)
 ]
@@ -28,6 +30,11 @@
 #pagebreak(weak: true)
 
 // glöm inte att multiplicera med 0,3 på något ställe
+
+
+#set par(justify: true)
+#set page(numbering: "1")
+#counter(page).update(1)
 
 = Overview
 
@@ -47,79 +54,194 @@
 }
 
 #figure(
-  canvas({
-    let a = 1
-    let V0 = 1
-
-    default-plot-style
-
-    plot.plot(
-      size: (6, 4),
-      axis-style: "left",
-      x-tick-step: none,
-      x-ticks: ((-a / 2, $-a slash 2$), (a / 2, $a slash 2$)),
-      y-tick-step: none,
-      y-ticks: ((V0, $V_0$),),
-      y-grid: true,
-      x-grid: true,
-      {
-        plot.add((
-          (-a, 0),
-          (-a / 2, 0),
-          (-a / 2, V0),
-          (a / 2, V0),
-          (a / 2, 0),
-          (a, 0),
-        ))
-      },
-    )
-  }),
-)
-
-#figure(
+  caption: [The potential barrier formed by gallium arsenide (GaAs) and indium gallium arsenide (InGaAs) with and without a voltage bias $U$.],
   canvas({
     import draw: *
 
     let a = 1
-    let b = 1
     let V0 = 1
 
     default-plot-style
 
+    set-style(legend: (orientation: ltr))
+
     plot.plot(
-      size: (6, 4),
+      size: (10, 4),
       axis-style: "left",
       x-tick-step: none,
       y-tick-step: none,
-      y-ticks: ((V0, $V_0$),),
       y-grid: true,
       x-grid: true,
+      y-label: $V$,
+      y-min: 0,
+      y-max: 2,
+      x-min: -1.5,
+      legend: "south",
       {
-        plot.add((
-          (-a - b, 0),
-          (-a - b / 2, 0),
-          (-a - b / 2, V0),
-          (-b / 2, V0),
-          (-b / 2, 0),
-          (b / 2, 0),
-          (b / 2, V0),
-          (a + b / 2, V0),
-          (a + b / 2, 0),
-          (a + b, 0),
-        ))
+
+        plot.add(
+          (
+            (-a, 1),
+            (-a / 2, 1),
+            (-a / 2, V0 + 1),
+            (a / 2, V0 + 1),
+            (a / 2, 1),
+            (a, 1),
+          ),
+          label: [Zero voltage],
+        )
+        plot.add(
+          (
+            (-a, 1),
+            (-a / 2, 1),
+            (-a / 2, V0 + 1),
+            (a / 2, V0 + 0.5),
+            (a / 2, 0 + 0.5),
+            (a, 0 + 0.5),
+          ),
+          label: [With voltage bias $U$],
+          style: (stroke: (paint: red, dash: "dashed")),
+        )
 
         plot.annotate({
-          // set-style(mark: (symbol: ">"))
+          set-style(mark: (start: "straight", end: "straight", scale: 0.25), stroke: .5pt)
+          line((-1, 1), (-1, V0 + 1))
+          content((-1.1, (1 + V0 + 1) / 2), anchor: "west", $V_0$)
 
-          line((-a - b / 2, V0 / 2), (-b / 2, V0 / 2), name: "l1")
-          content("l1.mid", $ a $, anchor: "south", padding: -1.5pt)
-          line((a + b / 2, V0 / 2), (b / 2, V0 / 2), name: "l2")
-          content("l2.mid", $ a $, anchor: "south", padding: -1.5pt)
+          line((1, 1), (1, V0 + 1))
+          content((0.9, (1 + V0 + 1) / 2), anchor: "west", $V_0$)
+
+          line((0.4, 0.5), (0.4, V0 + 0.5))
+          content((0.5, (1 + V0) / 2), anchor: "east", $V_0$)
+
+          line((1, 1), (1, 0.5))
+          content((0.87, (1.5) / 2), anchor: "west", $q U$)
+
+          line((-0.5, 2.1), (0.5, 2.1))
+          content((0, 2.1), anchor: "north", $a$)
+
+          let y = 2.7
+          let h = 0.4
+
+          rect((-1, y), (-0.5, y + h), name: "I", fill: yellow.lighten(50%), stroke: none)
+          content("I.center")[GaAs]
+          rect((-0.5, y), (0.5, y + h), name: "II", fill: green.lighten(50%), stroke: none)
+          content("II.center")[InGaAs]
+          rect((0.5, y), (1, y + h), name: "III", fill: yellow.lighten(50%), stroke: none)
+          content("III.center")[GaAs]
         })
       },
     )
   }),
 )
+
+A double potential barrier can be constructed by alternating layers of two different semiconductor materials. Applying a voltage bias $U$ across the structure creates a potential difference $q U$ across the barriers, as shown in @double-barrier.
+
+#figure(
+  caption: [A typical double barrier heterostructure with a voltage bias $U$.],
+  canvas({
+    import draw: *
+
+    let a = 1
+    let V0 = 1
+
+    default-plot-style
+
+    set-style(legend: (orientation: ltr))
+
+    plot.plot(
+      size: (15, 4),
+      axis-style: "left",
+      x-tick-step: none,
+      y-tick-step: none,
+      y-grid: true,
+      x-grid: true,
+      y-label: $V$,
+      y-min: 0,
+      y-max: 2,
+      x-min: -1.5,
+      legend: "south",
+      {
+
+        plot.add(
+          (
+            (-a, 1),
+            (-a / 2, 1),
+            (-a / 2, V0 + 1),
+            (a / 2, V0 + 1),
+            (a / 2, 1),
+            (a, 1),
+            (1, 1),
+            (a, V0 + 1),
+            (a+1, V0 + 1),
+            (a+1, 1),
+            (a+1.5, 1),
+          ),
+          label: [Zero voltage],
+        )
+        plot.add(
+          (
+            (-a, 1),
+            (-a / 2, 1),
+            (-a / 2, V0 + 1),
+            (a / 2, V0 + 0.75),
+            (a / 2, 0 + 0.75),
+            (a, 0 + 0.75),
+            (1, 0 + 0.75),
+            (a, V0 + 0.75),
+            (a+1, V0 + 0.5),
+            (a+1, 0 + 0.5),
+            (a+1.5, 0 + 0.5),
+          ),
+          label: [With voltage bias $U$],
+          style: (stroke: (paint: red, dash: "dashed")),
+        )
+
+        plot.annotate({
+          set-style(mark: (start: "straight", end: "straight", scale: 0.25), stroke: .5pt)
+          line((-1, 1), (-1, V0 + 1))
+          content((-1.1, (1 + V0 + 1) / 2), anchor: "west", $V_0$)
+
+          line((2.5, 1), (2.5, 0.5))
+          content((2.43, (1.5) / 2), anchor: "west", $q U$)
+
+          line((-0.5, 2.1), (0.5, 2.1))
+          content((0, 2.1), anchor: "north", $a$)
+          line((0.5, 2.1), (1, 2.1))
+          content((0.75, 2.1), anchor: "north", $L$)
+
+          let y = 2.7
+          let h = 0.4
+
+          rect((-1, y), (-0.5, y + h), name: "I", fill: yellow.lighten(50%), stroke: none)
+          content("I.center")[GaAs]
+          rect((-0.5, y), (0.5, y + h), name: "II", fill: green.lighten(50%), stroke: none)
+          content("II.center")[InGaAs]
+          rect((0.5, y), (1, y + h), name: "III", fill: yellow.lighten(50%), stroke: none)
+          content("III.center")[GaAs]
+          rect((1, y), (2, y + h), name: "IV", fill: green.lighten(50%), stroke: none)
+          content("IV.center")[InGaAs]
+          rect((2, y), (2.5, y + h), name: "V", fill: yellow.lighten(50%), stroke: none)
+          content("V.center")[GaAs]
+        })
+      },
+    )
+  }),
+) <double-barrier>
+
+Inside the potential well, the particles (in our case, electrons) are confined and their energy levels are quantized. RESONANCE The energy levels of the even wave functions satisfy the relationship
+
+$ tan(sqrt((m L^2E)/(2hbar^2)))=sqrt((V_0-E)/(E)), $ <even-vibes>
+
+adapted from #cite(<ohlen>, form: "prose"), where $L$ is the width of the well, $m$ is the particle's mass, $E$ is its energy, $V_0$ is the depth of the well and $h$ is the Planck constant. Since the voltage drop across one barrier is half the total voltage drop $U$, the electrons inside the well will have a kinetic energy $E=gamma q U slash 2$.
+
+Rearranging @even-vibes and solving for $L$, we obtain
+
+$ L=(sqrt(2 hbar^2) arctan(sqrt((V_0-E) slash E)))/(sqrt(m E)) $ <L-formula>
+
+= Method
+
+In the experiment, the current--voltage relationship of four liquid nitrogen-cooled samples (A, B, C, D) of GaAs/InGaAs heterostructures#footnote[Two single-barrier structures (GaAs--InGaAs--GaAs) and two double-barrier structures (GaAs--InGaAs--GaAs--InGaAs--GaAs).] are measured using a computer-controlled variable voltage source, an ammeter and a voltmeter connected according to the circuit diagram in @circuit. The voltage is swept from 0 to $tilde qty("1", "V")$ (depending on the sample) in steps of around $qty("20", "mV")$ and the current is recorded.
 
 #let stranger = [Я]
 
@@ -143,13 +265,39 @@
 
     line((-2.25, -1.9), (-1.75, -1.9))
     line((-2.5, -2.1), (-1.5, -2.1))
-set-style(mark: (end: "straight"))
+    set-style(mark: (end: "straight"))
     line((-2.5, -2.5), (-1.5, -1.5))
   }),
   caption: [Circuit diagram illustrating the setup. #stranger denotes some sample (A, B, C or D).],
-)
-  
+) <circuit>
+
+The constants listed in @constants, conveyed by an oracle#footnote[The lab instructor.], are used in the later analysis.
+
+#figure(
+  table(
+    stroke: (
+      x: none,
+      y: .5pt,
+    ),
+    columns: 3,
+    align: (
+      left,
+      right,
+      left,
+    ),
+    [*Description*], [*Symbol*], [*Value*],
+    [Electron mass], $m_e$, qty("9.109e-31", "kg"),
+    [Effective electron mass in GaAs], $m^*$, $num("0.067") m_e$,
+    [Barrier height], $V_0$, $qty("200", "meV")$,
+    [Relative voltage drop in samples], $gamma$, $num("0.30")$,
+
+  ),
+  caption: [Lab-specific constants used in the calculations.],
+) <constants>
+
 = Results
+
+The results obtained are plotted in the following figures.
 
 #let read(sample: str) = csv(sample + ".tsv", delimiter: "\t").slice(1).map(((U, I)) => (float(U), float(I))).sorted()
 
@@ -211,39 +359,33 @@ set-style(mark: (end: "straight"))
   )
 }
 
-Hej hej @ohlen
-
 = Analysis
 
-The energy levels of the electrons in the potential well are quantized and given by
-
-$ E_n=(n^2 h^2) / (8 m^* L^2) $
-
-where $n in ZZ^+$ is the quantum number, $h$ is Planck's constant, $m$ is the electron mass, and $L$ is the width of the well. 
-
-och $ E=q U. $
-
-At the first peak, the resonance inside the potential well gives rise to constructive interference, so $ L=h/sqrt(8 m_e q U) $
+The plots of samples A and B show a peak in the current at a certain voltage $U_A$ and $U_B$, respectively. This is characteristic of double barrier structures, where certain voltages correspond to resonances in the potential well formed by the barriers. Hence, we can use @L-formula derived earlier to calculate the width of the well for samples A and B. With $m=m^*$ and $E=gamma q U slash 2$ and the constants listed in @constants, we get
 
 #let UA = interesting.at("A").at(0)
 #let UB = interesting.at("B").at(0)
 #let planck = 6.626e-34
+#let pred = planck / (2 * calc.pi)
 #let me = 9.109e-31
 #let meff = 0.067 * me
 #let q = 1.602e-19
+#let V0 = 200e-3 * q
+#let gamma = 0.3
 
-#let LA = planck / calc.sqrt(8 * meff * q * UA)
-#let LB = planck / calc.sqrt(8 * meff * q * UB)
+#let E(U) = gamma * q * U / 2
+#let L(U) = pred * calc.sqrt(2) * calc.atan(calc.sqrt((V0 - E(U)) / E(U))).rad() / calc.sqrt(meff * E(U))
 
-yielding
-
-#cite(<ohlen>, form: "prose") anser
+#let LA = L(UA)
+#let LB = L(UB)
 
 $
-  L_A&=qty(#str(calc.round(LA * 1e12) / 1e3), "nm")\
-  L_B&=qty(#str(calc.round(LB * 1e12) / 1e3), "nm").
+  L_A&=qty(#str(calc.round(LA * 1e11) / 1e2), "nm")\
+  L_B&=qty(#str(calc.round(LB * 1e11) / 1e2), "nm").
 $
+
+Samples C and D do not exhibit the same current peaks as A and B, which suggests that they are single barrier structures. Since the current for the same voltage is much lower in D than in C, we can conclude that the barrier in D is higher than in C.
 
 = Discussion
 
-#bibliography("bibliography.bib")
+#bibliography("bibliography.bib", style: "american-physics-society")

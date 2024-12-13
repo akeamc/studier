@@ -15,6 +15,8 @@
 
 #let e(ch: 0, n: "0", answer) = assignment(book: "Concepts", no: "E" + str(ch) + "-" + n, answer: answer)
 
+#let p(ch: 0, n: "0", answer) = assignment(book: "Concepts", no: "P" + str(ch) + "-" + n, answer: answer)
+
 #let o(ch: 0, n: "0", answer) = assignment(book: "Ohlén", no: str(ch) + "-" + n, answer: answer)
 
 #let planck = qty("6,626e-34", "J s")

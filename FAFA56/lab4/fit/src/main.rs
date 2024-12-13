@@ -20,7 +20,7 @@ fn exp(xs: &DVector<f64>, k: f64) -> DVector<f64> {
 }
 
 fn exp_dk(xs: &DVector<f64>, k: f64) -> DVector<f64> {
-    xs.map(|x| -x * (-k * x.sqrt()).exp())
+    xs.map(|x| -x.sqrt() * (-k * x.sqrt()).exp())
 }
 
 fn main() -> anyhow::Result<()> {
