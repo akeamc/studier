@@ -7,15 +7,25 @@
 #set heading(numbering: "1.1")
 #set math.equation(numbering: "(1)")
 
-#[
-  #align(
-    center + horizon,
-    text(size: 48pt, font: "New Computer Modern")[
-      Quantum Tunneling Lab
-    ],
-  )
+#align(center)[
+  #v(1fr)
 
-  #align(end + bottom, text(size: 12pt)[Åke Amcoff\ Amadeus Bernmark])
+  #text(size: 24pt, font: "New Computer Modern")[
+      *Quantum Tunneling Lab Report*
+      #v(2em)
+      Concepts in Quantum Physics
+    ],
+
+  #v(.5fr)
+
+  *F1.02 Åke Amcoff, (Amadeus Bernmark)*
+
+  #v(.5fr)
+
+  *Lab supervisor: unknown*\
+  *Intro session teacher: Fernando Omlov*
+
+  December 2024
 
   #pagebreak(weak: true)
 ]
@@ -38,7 +48,16 @@
 
 = Overview
 
+The purpose of this lab is to study heterostructures of gallium arsenide
+(GaAs) and indium gallium arsenide (InGaAs), and deriving properties of
+their potential landscapes from how they behave as conductors when a
+voltage bias is applied.
+
 = Background
+
+A single potential barrier can be formed by sandwiching a material B between
+to layers of material A. The potential landscape of such a strucutre is shown
+in @single-barrier.
 
 #let default-plot-style = {
   draw.set-style(
@@ -78,7 +97,6 @@
       x-min: -1.5,
       legend: "south",
       {
-
         plot.add(
           (
             (-a, 1),
@@ -115,7 +133,7 @@
           content((0.5, (1 + V0) / 2), anchor: "east", $V_0$)
 
           line((1, 1), (1, 0.5))
-          content((0.87, (1.5) / 2), anchor: "west", $q U$)
+          content((0.87, 1.5 / 2), anchor: "west", $q U$)
 
           line((-0.5, 2.1), (0.5, 2.1))
           content((0, 2.1), anchor: "north", $a$)
@@ -133,12 +151,12 @@
       },
     )
   }),
-)
+) <single-barrier>
 
 A double potential barrier can be constructed by alternating layers of two different semiconductor materials. Applying a voltage bias $U$ across the structure creates a potential difference $q U$ across the barriers, as shown in @double-barrier.
 
 #figure(
-  caption: [A typical double barrier heterostructure with a voltage bias $U$.],
+  caption: [Potential landscape of a typical double barrier heterostructure with and without a voltage bias $U$.],
   canvas({
     import draw: *
 
@@ -162,7 +180,6 @@ A double potential barrier can be constructed by alternating layers of two diffe
       x-min: -1.5,
       legend: "south",
       {
-
         plot.add(
           (
             (-a, 1),
@@ -173,9 +190,9 @@ A double potential barrier can be constructed by alternating layers of two diffe
             (a, 1),
             (1, 1),
             (a, V0 + 1),
-            (a+1, V0 + 1),
-            (a+1, 1),
-            (a+1.5, 1),
+            (a + 1, V0 + 1),
+            (a + 1, 1),
+            (a + 1.5, 1),
           ),
           label: [Zero voltage],
         )
@@ -189,9 +206,9 @@ A double potential barrier can be constructed by alternating layers of two diffe
             (a, 0 + 0.75),
             (1, 0 + 0.75),
             (a, V0 + 0.75),
-            (a+1, V0 + 0.5),
-            (a+1, 0 + 0.5),
-            (a+1.5, 0 + 0.5),
+            (a + 1, V0 + 0.5),
+            (a + 1, 0 + 0.5),
+            (a + 1.5, 0 + 0.5),
           ),
           label: [With voltage bias $U$],
           style: (stroke: (paint: red, dash: "dashed")),
@@ -203,7 +220,7 @@ A double potential barrier can be constructed by alternating layers of two diffe
           content((-1.1, (1 + V0 + 1) / 2), anchor: "west", $V_0$)
 
           line((2.5, 1), (2.5, 0.5))
-          content((2.43, (1.5) / 2), anchor: "west", $q U$)
+          content((2.43, 1.5 / 2), anchor: "west", $q U$)
 
           line((-0.5, 2.1), (0.5, 2.1))
           content((0, 2.1), anchor: "north", $a$)
@@ -229,7 +246,11 @@ A double potential barrier can be constructed by alternating layers of two diffe
   }),
 ) <double-barrier>
 
-Inside the potential well, the particles (in our case, electrons) are confined and their energy levels are quantized. RESONANCE The energy levels of the even wave functions satisfy the relationship
+Inside the potential well, the particles (in our case, electrons) are confined and
+their energy levels are quantized. This causes particles whose energy does not match
+some discrete energy level to have a higher chance of being reflected at the potential
+step between the first potential barrier and the well. The energy levels of the even#footnote[In this lab, resonance at the ground frequency of the well is studied. The ground frequency has quantum number $1$ and is an even function.] wave
+functions satisfy the relationship
 
 $ tan(sqrt((m L^2E)/(2hbar^2)))=sqrt((V_0-E)/(E)), $ <even-vibes>
 
@@ -237,7 +258,12 @@ adapted from #cite(<ohlen>, form: "prose"), where $L$ is the width of the well, 
 
 Rearranging @even-vibes and solving for $L$, we obtain
 
-$ L=(sqrt(2 hbar^2) arctan(sqrt((V_0-E) slash E)))/(sqrt(m E)) $ <L-formula>
+$ L=(sqrt(2 hbar^2) arctan(sqrt((V_0-E) slash E))) / (sqrt(m E)). $ <L-formula>
+
+Electric current is the flow of electrons. In our samples, the current will be
+proportional to the number of electrons that can tunnel through the potential
+barrier and thus to the transmission probability. Therefore, we study the
+current--voltage relationship of the samples.
 
 = Method
 
@@ -247,7 +273,6 @@ In the experiment, the current--voltage relationship of four liquid nitrogen-coo
 
 #figure(
   canvas({
-
     import draw: *
 
     line((-2, -1.9), (-2, 0), (4, 0), (4, -4), (-2, -4), (-2, -2.1))
@@ -290,7 +315,6 @@ The constants listed in @constants, conveyed by an oracle#footnote[The lab instr
     [Effective electron mass in GaAs], $m^*$, $num("0.067") m_e$,
     [Barrier height], $V_0$, $qty("200", "meV")$,
     [Relative voltage drop in samples], $gamma$, $num("0.30")$,
-
   ),
   caption: [Lab-specific constants used in the calculations.],
 ) <constants>
@@ -387,5 +411,11 @@ $
 Samples C and D do not exhibit the same current peaks as A and B, which suggests that they are single barrier structures. Since the current for the same voltage is much lower in D than in C, we can conclude that the barrier in D is higher than in C.
 
 = Discussion
+
+(TODO)
+
+The amperage of sample D is extremely low. Also, it is nonzero with a
+voltage bias of 0 which suggests that there is a significant relative error
+in the measurement.
 
 #bibliography("bibliography.bib", style: "american-physics-society")
