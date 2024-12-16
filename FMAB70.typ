@@ -1409,8 +1409,10 @@
 #lecture(2024, 12, 10, [Differentialekvationer, avslutning])[
   Man kan skala bort tråkiga konstanter:
 
-  $ -hbar^2/(2m) derivative(,x,2) psi + 1/2 m omega^2 x^2 psi &= E omega\
-  - derivative(,x,2) Psi+x^2 Psi&=lambda Psi. $
+  $
+    -hbar^2 / (2m) derivative(,x,2) psi + 1 / 2 m omega^2 x^2 psi &= E omega\
+    - derivative(,x,2) Psi+x^2 Psi&=lambda Psi.
+  $
 
   #hr
 
@@ -1425,12 +1427,22 @@
 
 #lecture(2024, 12, 12, [Maclaurinutveckling])[
   #canvas({
-    plot.plot(size: (12, 8), x-min: 0, x-max: 5, y-min: 0, y-max: 8, x-tick-step: none, y-tick-step: none, axis-style: "left", {
-      let f(x) = 0.5 * x * x * x - 2 * x * x + 2 + 4
+    plot.plot(
+      size: (12, 8),
+      x-min: 0,
+      x-max: 5,
+      y-min: 0,
+      y-max: 8,
+      x-tick-step: none,
+      y-tick-step: none,
+      axis-style: "left",
+      {
+        let f(x) = 0.5 * x * x * x - 2 * x * x + 2 + 4
 
-      plot.add(f, domain: (1, 4))
-      plot.add(f, domain: (1, 4), samples: 6, style: (stroke: none), mark: "x")
-    })
+        plot.add(f, domain: (1, 4))
+        plot.add(f, domain: (1, 4), samples: 6, style: (stroke: none), mark: "x")
+      },
+    )
   })
 
   #let macterm(n) = {
@@ -1444,15 +1456,15 @@
       }
 
       if n == 2 {
-        return $(f''(0))/2! x^2$
+        return $(f''(0)) / 2! x^2$
       }
 
       if n == 3 {
-        return $f('''(0))/3! x^3$
+        return $f('''(0)) / 3! x^3$
       }
     }
 
-    $(f^((#n))(0))/(#n !) x^#n$
+    $(f^((#n))(0)) / (#n !) x^#n$
   }
 
   $ P_(f,n)=#range(3).map(macterm).join($+$)+dots.c+macterm(n) $
@@ -1465,18 +1477,24 @@
 
   Integrera mellan $0$ och $x>0$:
 
-  $ integral_0^x m dd(t) &<= integral_0^x f'''(t) dd(t) &<= integral_0^x M dd(t)\
-  m x &<= f''(x) - f''(0) &<= M(x) $
+  $
+    integral_0^x m dd(t) &<= integral_0^x f'''(t) dd(t) &<= integral_0^x M dd(t)\
+    m x &<= f''(x) - f''(0) &<= M(x)
+  $
 
   Integrera igen!
 
-  $ integral_0^x m t dd(t) &<= integral_0^x (f''(t) - f''(0)) dd(t) &<= integral_0^x M t dd(t)\
-  m x^2/2 &<= f'(x)-f'(0)-f''(0) x &<= M x^2/2 $
+  $
+    integral_0^x m t dd(t) &<= integral_0^x (f''(t) - f''(0)) dd(t) &<= integral_0^x M t dd(t)\
+    m x^2 / 2 &<= f'(x)-f'(0)-f''(0) x &<= M x^2 / 2
+  $
 
   Igen!
 
-  $ integral_0^x m t^2/2 dd(t) &>= integral_0^x (f'(t)-f'(0)-f''(0)t) dd(t) &<= integral_0^x M t^2/2 dd(t)\
-  m x^3/3! &<= underbrace(f(x)-f(0)-f'(0)x-(f''(0))/2! x^2, f(x)-P_(f,2)(x)) &<= M x^3/3! $
+  $
+    integral_0^x m t^2 / 2 dd(t) &>= integral_0^x (f'(t)-f'(0)-f''(0)t) dd(t) &<= integral_0^x M t^2 / 2 dd(t)\
+    m x^3 / 3! &<= underbrace(f(x)-f(0)-f'(0)x-(f''(0))/2! x^2, f(x)-P_(f,2)(x)) &<= M x^3 / 3!
+  $
 
   #sats([])[
     Antag att $abs(f^((n+1)))<=M, quad M>0$ på ett intervall som innehåller $0$. Då gäller där att $ abs(f(x)-P_(f,n)(x))<=M/(n+1)! abs(x)^(n+1).. $
@@ -1496,13 +1514,15 @@
 
   Fixera $x>0$.
 
-  $ m&=min_(t in [0, x]) f^((n+1))(t)\
-  M&=max_(t in [0, x]) f^((n+1))(t). $
+  $
+    m&=min_(t in [0, x]) f^((n+1))(t)\
+    M&=max_(t in [0, x]) f^((n+1))(t).
+  $
 
-  $ m <= (f(x)-P_(f,n)(x))/(x^(n+1) slash (n+1)!) <= M $
+  $ m <= (f(x)-P_(f,n)(x)) / (x^(n+1) slash (n+1)!) <= M $
 
   Antag nu att $f^((n+1)) in cal(C)$. Satsen om mellanliggande värden ger $xi$ mellan $0$ och $x$ så att kvoten är lika med
-  
+
   $ f^((n+1))(xi), $
 
   dvs. $ (f(x)-P_(f,n))/(x^(n+1) slash (n+1)!)=f^((n+1))(xi), $
@@ -1515,6 +1535,131 @@
 
   = Standardutvecklingar
 
-  $ ln(1+x)&=x-x^2/2+x^3/3-x^4/4+dots.c+(-1)^(n+1) x^n/n +x^(n+1) B(x)\
-  arctan(x)&=x-x^3/3+x^5/5-x^7/7+dots.c+(-1)^(n-1) (x^(2n-1))/(2n-1)+x^(2n+1)B(x) $
+  $
+    ln(1+x)&=x-x^2 / 2+x^3 / 3-x^4 / 4+dots.c+(-1)^(n+1) x^n / n +x^(n+1) B(x)\
+    arctan(x)&=x-x^3 / 3+x^5 / 5-x^7 / 7+dots.c+(-1)^(n-1) (x^(2n-1)) / (2n-1)+x^(2n+1)B(x)
+  $
+]
+
+#lecture(2024, 12, 16, [Taylor])[
+  = Taylorutvecklingar
+
+  #sats([])[
+    Antag att $f^((n+1))$ är kontinuerlig i en omgivning av $a$. Då gäller där att
+
+    $ f(x)=f(a)+(f'(a)) / 1! (x-a)+(f''(a)) / 2! (x-a)^2+dots.c+(f^((n))(a)) / (n!)(x-a)^n+R_(n+1)(x) $
+
+    där $R_(n+1)=(f^((n+1))(xi))/(n+1)! (x-a)^(n+1)$, $xi=xi(x)$ är mellan $a$ och $x$ eller alternativt $R_(n+1)=(x-a)^(n+1)B(x)$ där $B$ är begränsad i omvigning av $a$. Denna form betecknas
+
+    $ T_(f,a,n). $
+
+    *Bevis*:
+
+    Låt $t=x-a$ och $g(t)=f(x)=f(t+a)$. $g$ blir tillräckligt deriverbar kring $0$ och Maclaurin ger:
+
+    $ g(t)=g(0)+(g'(0)) / 1!+(g''(0)) / 2! t^2+dots.c+(g^((n))(0)) / n! t^n+(g^((n+1))(tau)) / (n+1)! t^(n+1) $
+
+    där $tau=tau(t)$ är mellan $0$ och $t$.
+
+    Vi får
+
+    $
+      f(x)=f(a)+f'(a) / 1! (x-a)+(f''(a)) / 2! (x-a)^2+dots.c\
+      +(f^((n))(a)) / n! (x-a)^n+(f^((n+1))(xi)) / (n+1)! (x-a)^(n+1)
+    $
+
+    där $xi=tau+a$ är mellan $a$ och $t+a=x$.
+  ]
+
+  #ex([Vilken uppskattning på $tan((2pi)/9)$ fås om vi approximerar $tan$ med dess Taylorpolynom av ordning $2$ kring $pi slash 4$?])[
+    $
+      f(x)&=tan x quad &f(pi slash 4)&=1\
+      f'(x)&=1+tan^2 x quad &f'(pi slash 4)&=2\
+      f''(x)&=2 tan x(1+tan^2 x) quad &f''(pi slash 4)&=4\
+      f'''(x)&=(2+6tan^2 x)(1+tan^2 x) quad &
+    $
+
+    $
+      f((2pi) / 9)=f(pi / 4)+f'(pi / 4)((2pi) / 9-pi / 4)+(f''(pi / 4)) / 2!((2pi) / 9-pi / 4)^2+(f'''(xi)) / 3!((2pi) / 9-pi / 4)^3\
+      abs(tan (2pi)/9-(1+2((2pi)/9-pi/4)+4/2((2pi)/9-pi/4)^2))=abs((f'''(xi))/6((2pi)/9-pi/4)^3)<=16 / 6 abs((2pi)/9-pi/4)^3
+    $
+  ]
+
+  = Maclaurinserier
+
+  Kan det vara så att $lim_(n->+infinity) P_(f,n)(x)=f(x)$, förutsatt att $f in cal(C)^infinity$?
+
+  #ex([$f(x)=1/(1-x)$.])[
+    $ P_(f,n)=1+x+x^2+dots.c+x^n. $
+
+    Vi vet att $ lim_(n -> +infinity) P_(f,n)(x)=1/(1-x) <=> abs(x)< 1. $
+
+    För andra $x$ existerar $lim_(n -> +infinity) P_(f,n)(x)$ inte alls.
+  ]
+
+  #ex([Om $f(x)=e^x$, för vilka $x$ är $lim_(n->+infinity) P_(f,n)(x)=f(x)$?])[
+    Alla.
+
+    Fixera $x>0$. För varje $n$ gäller
+
+    $ e^x=1+x+x^2 / 2!+dots.c+x^n / n!+e^(xi_n) / (n+1)!x^(n+1) $
+
+    där $xi_n$ är mellan $0$ och $x$.
+
+    Vi får $ 1+x+x^2/2+dots.c+x^n/n!-> e^x "precis då" e^(xi_n)/(n+1)! x^(n+1) -> 0. $
+
+    Välj $N in NN$ så att $abs(x)<=N$. För $n>N$ gäller
+
+    $
+      abs(e^(xi_n)/(n+1)! x^(n+1))&<=e^N overbrace(abs(x) dot abs(x) dot abs(x) dot dots.c dot abs(x), N "gånger") / (1 dot 2 dot 3 dot dots.c dot N)(abs(x) / (N+1) dot abs(x) / (N+2) dot dots.c dot abs(x) / (n+1))\
+      &<=e^N N^N / N! dot 1 dot 1 dot 1 dot dots.c dot N / (n+1) -> 0 "då" n->+infinity.
+    $
+  ]
+
+  = $e^x$
+
+  - $sum_(k=0)^(+infinity) x^k / k!$
+  - $lim_(n->infinity) (1+1 / n)^n$
+  - Entydig lösning till $y'=y, quad y(0)=1$
+  - Inversen till $ln x =integral_1^x 1/t dd(t) $
+
+  #sats([])[
+    $ ln(1+x)=x-x^2 / 2+x^3 / 3-x^4-x+dots.c $ konvergerar då $-1<x<=1$.
+
+    $T_(f,a,n)$ konvergerar alltid på symmetriska intervall.
+
+    $
+      cos x&=1-x^2 / 2!+x^4 / 4!-x^6 / 6!+dots.c, quad &x in RR\
+      sin x&=x-x^3 / 3!+x^5 / 5!-x^7 / 7!+dots.c, quad &x in RR\
+      arctan x&=x-x^3 / 3+x^5 / 5-x^7 / 7+dots.c, quad &-1<x<=1\
+    $
+
+    Man måste ut i komplexa talplanet för att se varför det går illa för $P_(arctan x, n)$ vid stora $x$.
+
+    Newtons binomialutveckling:
+
+    $
+      (1+x)^alpha=1+alpha / 1! x+alpha(alpha-1) / 2! x^2+ dots.c+(alpha(alpha-2)(alpha-2)dot.c(alpha-n+1)) / n! x^n+dots.c
+    $
+  ]
+
+  #ex([$e^(i theta)$])[
+    $
+      e^(i theta)&=1+(i theta)+(i theta)^2 / 2!+(i theta)^3 / 3!+(i theta)^4 / 4! + dots.c\
+      &=1-theta^2 / 2!+theta^4 / 4!+dots.c\
+      &+i(theta-theta^3 / 3!+theta^5 / 5!-dots.c)=cos theta+i sin theta
+    $
+  ]
+
+  #ex([Utveckla $f(x)=1/(2+sin x)$ till ordning $3$ med restterm på svag form.])[
+    $ sin x =x-x^3 / 6+x^5 B_1(x) $
+
+    $
+      f(x)=1 / (2+x-x^3 / 6+x^5 B_1(x))=1 / 2 1 / (1+x / 2-x^3 / 12+x^5 / 2 B_1(x))\
+      =1 / 2(1-(x / 2-x^3 / 12+x^5 / 2 B_1(x))+(x / 2-x^3 / 12+x^5 / 2 B_1(x))^2\
+        -(x / 2-x^3 / 12+x^5 / 2 B_1(x))^3+(x / 2-x^3 / 12+x^5 / 2 B_1(x))^4 B_2(x))\
+      =1 / 2 [1-x / 2+x^2 / 4 + (1 / 12-1 / 8)x^3]+x^4 B_3(x)\
+      =underbracket(1/2-x/4+x^2/8-x^3/48, P_(f,3))+x^4 B_3(x).
+    $
+  ]
 ]

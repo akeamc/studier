@@ -254,7 +254,7 @@ functions satisfy the relationship
 
 $ tan(sqrt((m L^2E)/(2hbar^2)))=sqrt((V_0-E)/(E)), $ <even-vibes>
 
-adapted from #cite(<ohlen>, form: "prose"), where $L$ is the width of the well, $m$ is the particle's mass, $E$ is its energy, $V_0$ is the depth of the well and $h$ is the Planck constant. Since the voltage drop across one barrier is half the total voltage drop $U$, the electrons inside the well will have a kinetic energy $E=gamma q U slash 2$.
+adapted from #cite(<ohlen>, form: "prose"), where $L$ is the width of the well, $m$ is the particle's mass, $E$ is its energy, $V_0$ is the depth of the well and $hbar$ is the reduced Planck constant. Since the voltage drop across one barrier is half the total voltage drop $U$, the electrons inside the well will have a kinetic energy $E=gamma q U slash 2$.
 
 Rearranging @even-vibes and solving for $L$, we obtain
 
