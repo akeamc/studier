@@ -7,40 +7,62 @@
 #set heading(numbering: "1.1")
 #set math.equation(numbering: "(1)")
 
-#align(center)[
-  #v(1fr)
+#[
+  // #let bg = navy
+  // #let fg = yellow
+  #let bg = white
+  #let fg = black
 
-  #text(size: 24pt, font: "New Computer Modern")[
-      *Quantum Tunneling Lab Report*
-      #v(2em)
-      Concepts in Quantum Physics
+  #set page(margin: 2cm, fill: bg)
+  #set text(font: "Plus Jakarta Sans", weight: "medium", size: 12pt, fill: fg)
+
+  #grid(
+    columns: (1fr, auto),
+    rows: (auto, auto, 1fr, auto),
+    column-gutter: 24pt,
+    row-gutter: 32pt,
+    par(leading: 0.5em, text(size: 64pt, weight: "bold", tracking: -0.02em)[Quantum Tunneling Lab Report]),
+    grid.cell(rowspan: 2)[
+      #v(6pt)
+      Åke Amcoff\
+      F1.02 \
+      \
+      December 2024\
     ],
+    stack(
+      dir: ltr, spacing: 12pt,
+      box(
+        fill: fg, inset: (x: 4pt, y: 6pt),
+        text(fill: bg, size: 16pt, weight: "semibold")[FAFA56]
+      ),
+      align(horizon, text(size: 20pt)[
+        Concepts in Quantum Physics
+      ])
+    ),
+    // text(size: 20pt, weight: "medium", tracking: -0.02em)[
+    //    Concepts in Quantum Physics
+    // ],
+    grid.cell(colspan: 1)[
+      #let r = 1pt
+      #let pat = pattern(size: (2 * r, 2 * r), spacing: (5mm - 2 * r, 5mm - 2 * r))[
+        #circle(radius: r, fill: fg, stroke: none)
+      ]
 
-  #v(.5fr)
-
-  *F1.02 Åke Amcoff, (Amadeus Bernmark)*
-
-  #v(.5fr)
-
-  *Lab supervisor: unknown*\
-  *Intro session teacher: Fernando Omlov*
-
-  December 2024
-
-  #pagebreak(weak: true)
+      #rect(fill: pat, width: 100%, height: 1fr)
+    ],
+    grid.cell[],
+    [Fernando Omlor\ Supervisor],
+    [Harald Havir\ Lab Instructor]
+  )
 ]
 
-// #show outline.entry.where(level: 1): it => {
-//   v(12pt, weak: true)
-//   strong(it)
-// }
+#show heading: set text(font: "Plus Jakarta Sans")
+
+#pagebreak(weak: true)
 
 #outline(indent: 2em, fill: repeat[.])
 
 #pagebreak(weak: true)
-
-// glöm inte att multiplicera med 0,3 på något ställe
-
 
 #set par(justify: true)
 #set page(numbering: "1")
@@ -55,8 +77,10 @@ voltage bias is applied.
 
 = Background
 
+== Single barriers
+
 A single potential barrier can be formed by sandwiching a material B between
-to layers of material A. The potential landscape of such a strucutre is shown
+two layers of material A. The potential landscape of such a structure is shown
 in @single-barrier.
 
 #let default-plot-style = {
@@ -133,7 +157,7 @@ in @single-barrier.
           content((0.5, (1 + V0) / 2), anchor: "east", $V_0$)
 
           line((1, 1), (1, 0.5))
-          content((0.87, 1.5 / 2), anchor: "west", $q U$)
+          content((0.87, 1.5 / 2), anchor: "west", $gamma q U$)
 
           line((-0.5, 2.1), (0.5, 2.1))
           content((0, 2.1), anchor: "north", $a$)
@@ -153,7 +177,19 @@ in @single-barrier.
   }),
 ) <single-barrier>
 
-A double potential barrier can be constructed by alternating layers of two different semiconductor materials. Applying a voltage bias $U$ across the structure creates a potential difference $q U$ across the barriers, as shown in @double-barrier.
+The transmission probability of a particle through a single barrier (without a voltage bias) is, according to #cite(<ohlen>, form: "prose"), given by
+
+$ T approx exp(-2 a sqrt(2m(V_0-E) slash hbar^2)) $
+
+where $a$ is the width of the barrier, $m$ is the particle's mass, $V_0$ is the height of the barrier, $E$ is the particle's energy and $hbar$ is the reduced Planck constant. When a voltage bias $gamma q U$ is applied to the structure, the barrier height can be approximated as the average of the left potential, $V_0$, and the right, $V_0+gamma q U$. (The experimentally determined factor $gamma$ corrects for the voltage drop that occurs inside the measured circuit but outside the samples themselves.) Thus, the transmission probability becomes
+
+$ T approx exp(-2 a sqrt(2m(V_0+gamma q U slash 2-E) slash hbar^2)). $ <single-T>
+
+The key takeaway from @single-T is that the transmission probability decreases exponentially with the width of the barrier.
+
+== Double barriers
+
+A double potential barrier can be constructed by alternating layers of two different semiconductor materials. Applying a voltage bias $U$ across the structure creates a potential difference $gamma q U$ across the barriers, as shown in @double-barrier.
 
 #figure(
   caption: [Potential landscape of a typical double barrier heterostructure with and without a voltage bias $U$.],
@@ -220,7 +256,7 @@ A double potential barrier can be constructed by alternating layers of two diffe
           content((-1.1, (1 + V0 + 1) / 2), anchor: "west", $V_0$)
 
           line((2.5, 1), (2.5, 0.5))
-          content((2.43, 1.5 / 2), anchor: "west", $q U$)
+          content((2.43, 1.5 / 2), anchor: "west", $gamma q U$)
 
           line((-0.5, 2.1), (0.5, 2.1))
           content((0, 2.1), anchor: "north", $a$)
@@ -254,7 +290,8 @@ functions satisfy the relationship
 
 $ tan(sqrt((m L^2E)/(2hbar^2)))=sqrt((V_0-E)/(E)), $ <even-vibes>
 
-adapted from #cite(<ohlen>, form: "prose"), where $L$ is the width of the well, $m$ is the particle's mass, $E$ is its energy, $V_0$ is the depth of the well and $hbar$ is the reduced Planck constant. Since the voltage drop across one barrier is half the total voltage drop $U$, the electrons inside the well will have a kinetic energy $E=gamma q U slash 2$.
+adapted from #cite(<ohlen>, form: "prose"), where $L$ is the width of the well, $m$ is the particle's mass, $E$ is its energy, $V_0$ is the depth of the well and $hbar$ is the reduced Planck constant. Since the voltage drop across one barrier is half the total voltage drop $U$, the electrons inside the well will have a kinetic energy $E=q gamma U slash 2$.
+
 
 Rearranging @even-vibes and solving for $L$, we obtain
 
@@ -300,9 +337,9 @@ The constants listed in @constants, conveyed by an oracle#footnote[The lab instr
 
 #figure(
   table(
-    stroke: (
-      x: none,
-      y: .5pt,
+    stroke: (x, y) => (
+      bottom: if y == 0 or y == 4 { .5pt } else { none },
+      top: if y == 0 { .5pt } else { none },
     ),
     columns: 3,
     align: (
@@ -316,7 +353,7 @@ The constants listed in @constants, conveyed by an oracle#footnote[The lab instr
     [Barrier height], $V_0$, $qty("200", "meV")$,
     [Relative voltage drop in samples], $gamma$, $num("0.30")$,
   ),
-  caption: [Lab-specific constants used in the calculations.],
+  caption: [Constants used in the calculations.],
 ) <constants>
 
 = Results
@@ -371,10 +408,19 @@ The results obtained are plotted in the following figures.
         // },
         legend: "inner-north-west",
         {
-          plot.add(points.map(((U, I)) => (U * 1e3, I * calc.pow(1e3, thexponent))), mark: "x", style: (stroke: none), label: [Sample #sample])
+          plot.add(
+            points.map(((U, I)) => (U * 1e3, I * calc.pow(1e3, thexponent))),
+            mark: "x",
+            style: (stroke: none),
+            label: [Sample #sample],
+          )
 
           if interesting-U != none {
-            plot.add-vline(interesting-U * 1e3, style: (stroke: (dash: "dashed")), label: $U_#sample=qty(#str(interesting-U * 1e3), "mV")$)
+            plot.add-vline(
+              interesting-U * 1e3,
+              style: (stroke: (dash: "dashed")),
+              label: $U_#sample=qty(#str(interesting-U * 1e3), "mV")$,
+            )
           }
         },
       )
@@ -408,14 +454,10 @@ $
   L_B&=qty(#str(calc.round(LB * 1e11) / 1e2), "nm").
 $
 
-Samples C and D do not exhibit the same current peaks as A and B, which suggests that they are single barrier structures. Since the current for the same voltage is much lower in D than in C, we can conclude that the barrier in D is higher than in C.
-
 = Discussion
 
-(TODO)
+The graphs of samples A and B display distinct current peaks, just as theory predicts for double barrier structures. They even become linear at higher voltages, indicating that the transmission coefficient there is close to unity and Ohm's law is taking over.
 
-The amperage of sample D is extremely low. Also, it is nonzero with a
-voltage bias of 0 which suggests that there is a significant relative error
-in the measurement.
+Samples C and D do not exhibit the same current peaks as A and B -- instead, the current seems to be an exponential function of voltage, suggesting that they are single barrier structures (per @single-T). Since the current for the same voltage is much lower in D than in C, we can conclude that the barrier in D is higher than in C, in accordance with @single-T. At a first glance, the nonzero current at $U=0$ might be too high for sample D, but this is due to the nanoampere scale of the current. In reality, the zero-voltage current of D is the lowest of all samples. Nevertheless, both C and D show an exponential relationship between current and voltage.
 
 #bibliography("bibliography.bib", style: "american-physics-society")
